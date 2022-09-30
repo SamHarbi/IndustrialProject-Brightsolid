@@ -1,1 +1,0 @@
-# IndustrialProject-Brightsolid | BACKEND
