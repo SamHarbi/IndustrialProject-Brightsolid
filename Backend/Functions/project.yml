@@ -1,17 +1,23 @@
 environment: {}
 parameters: {}
 packages:
-  - name: sample
-    environment: {}
-    parameters: {}
-    annotations: {}
+  - name: Admin
     functions:
       - name: hello
-        binary: false
-        main: ''
         runtime: 'nodejs:default'
-        web: true
-        parameters: {}
-        environment: {}
-        annotations: {}
-        limits: {}
+        web: false
+  - name: Auditor
+    functions:
+      - name: hello
+        runtime: 'nodejs:default'
+        web: false
+  - name: ComplianceManager
+    functions:
+      - name: hello
+        runtime: 'nodejs:default'
+        web: false
+  - name: Shared
+    functions:
+      - name: hello
+        runtime: 'nodejs:default'
+        web: false
