@@ -67,6 +67,14 @@ thead, th {
     width: 500px;
 }
 
+.report-title {
+  font-family: 'Montserrat', sans-serif;
+  padding-top: 10px;
+  text-align: center;
+  color: #195A5F;
+  top:0;
+}
+
 #logo {
     float: left;
     padding-left: 345px;
@@ -102,11 +110,35 @@ thead, th {
 }
 
 #donutchart {
-    width: auto; 
-    height: 500px; 
+    width: auto;
+    height: 500px;
     overflow:hidden;
 }
 
 #list{
     overflow: auto;
+}
+
+#details {
+  padding-left: 25px;
+  padding-top: 10px;
+  padding-right: 25px;
+  padding-bottom: 10px;
+  width: 350px;
+  height: 350px;
+  background-color:#ffffff;
+}
+
+#refresh-report {
+
+}
+
+#report-table {
+  padding-left: 50px;
+  padding-right: 50px;
+}
+
+#return-btn {
+  padding-left: 50px;
+  padding-top: 5px;
 }
