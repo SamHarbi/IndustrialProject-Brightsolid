@@ -1,0 +1,112 @@
+﻿body {
+    background-color: #195A5F;
+}
+
+header {
+    background-color: #F1BA56;
+    height:130px;
+}
+
+p, a, th {
+    font-family: 'Roboto', sans-serif;
+    color: #195A5F;
+}
+
+table {
+    table-layout:fixed;
+    width: 100%;
+}
+
+th, td {
+    padding: 8px;
+}
+
+td{
+    text-overflow: ellipsis;
+    word-wrap: break-word;
+    background-color:#ffffff;
+}
+
+thead, th {
+    background-color: #e8e8e8;
+    text-align: center;
+    position: sticky;
+    top:0;
+}
+
+.logout {
+    line-height:0;
+    float: right;
+    padding-top: 45px;
+    padding-right: 345px;
+    padding-bottom: 5px;
+}
+
+.user {
+    color: #195A5F;
+}
+
+.title {
+    font-family: 'Montserrat', sans-serif;
+    padding-top: 10px;
+    text-align: center;
+    color: #F1BA56;
+}
+
+.section {
+    background-color: #e8e8e8;
+    height: 500px;
+    overflow: hidden;
+}
+
+.btn {
+    color: #195A5F;
+}
+
+.w3-modal-content {
+    width: 500px;
+}
+
+#logo {
+    float: left;
+    padding-left: 345px;
+    padding-top: 45px;
+    padding-bottom: 5px;
+    height: 102px;
+}
+
+#left, #right {
+    width: 925px;
+}
+
+#left {
+    float: left;
+    padding-top: 40px;
+    padding-left: 120px;
+}
+
+#right {
+    float: right;
+    padding-top: 76px;
+    padding-right: 120px;
+}
+
+#refresh {
+    padding-top: 10px;
+    text-align: center;
+}
+
+#righttitle {
+    background-color: #e8e8e8;
+    color: #195A5F;
+}
+
+#donutchart {
+    width: auto; 
+    height: 500px; 
+    overflow:hidden;
+}
+
+#list{
+    overflow: auto;
+}
