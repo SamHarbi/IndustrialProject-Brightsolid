@@ -1,5 +1,242 @@
 <!DOCTYPE html>
-<body>
-    <h1>This is being Hosted on Digital Ocean</h1>
-    <p>Temp page for testing server setup</p>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+
+    <meta charset="utf-8"/>
+    <title>BrightSolid</title>
+
+    
+
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&family=Roboto&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="style.css">
+
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load("current", {packages:["corechart"]});
+      google.charts.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Compliance Status', 'Number of Compliant Resources'],
+          ['Compliant',     90],
+          ['Non-Compliant',      30],
+          
+        ]);
+
+        var options = {
+          pieHole: 0.5,
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
+        chart.draw(data, options);
+      }
+    </script>
+
+</head>
+
+<body id="Font">
+
+    <header id="darkHeader">
+        <img id="logo" src="BrightSolidYellow.png" />
+
+        <div class="logout">
+            <p class="user">Hello *USER*</p>
+            <input class="btn" type="submit" value="Log Out">
+        </div>
+    </header>
+
+    <main>
+        <h1 class="title">Summary Dashboard</h1>
+
+        
+
+
+        <div id="left">
+            <input class="btn btn-light" onclick="document.getElementById('filter').style.display='block'" type="submit" value="Filter">
+
+
+
+            <button class="btn btn-light" onclick="Default()">A</button>
+            <script>
+            function Default(){
+                var element = document.getElementById("Font");
+                element.style.fontSize = "1em";
+                element.style.fontFamily = "Montserrat", sans-serif;
+                element.style.paddingTop = 10;
+                element.style.textAlign = center;
+            }
+            </script>
+
+            <button class="btn btn-light" onclick="Large()">A+</button>
+            <script>
+            function Large(){
+                var element = document.getElementById("Font");
+                element.style.fontSize = "2em";
+                element.style.fontFamily = "Montserrat", sans-serif;
+                element.style.paddingTop = 10;
+                element.style.textAlign = center;
+            }
+            </script>
+
+            <button class="btn btn-light" onclick="ExtraLarge()">A++</button>
+            <script>
+            function ExtraLarge(){
+                var element = document.getElementById("Font");
+                    element.style.fontSize = "3em";
+                    element.style.fontFamily = "Montserrat", sans-serif;
+                    element.style.paddingTop = 10;
+                    element.style.textAlign = center;
+            }
+            </script>
+
+            <button class="btn btn-light" onclick="darkMode()">Toggle dark mode</button>
+	
+            <script>
+            function darkMode() {
+                var body = document.body;
+                body.classList.toggle("dark-modeBody");
+
+                var header = document.getElementById("darkHeader");
+                header.classList.toggle("dark-modeHeader");
+
+                var dataTable= document.getElementById("list");
+                dataTable.classList.toggle("dark-modeTable");
+
+                var chart = document.getElementById("righttitle");
+                chart.classList.toggle("dark-modeChart");
+
+                var Filter = document.getElementById("all")
+                chart.classList.toggle("dark-modeChart");
+            }
+            </script>
+
+
+
+
+
+
+
+            <div class="section" id="list">
+                <table>
+                    <thead>
+                        <tr>
+                            <th width="70%">Rule Name</th>
+                            <th width="30%">Compliance State</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="refresh">
+                <input class="btn btn-light" type="submit" value="Refresh">
+            </div>
+        </div>
+
+        <div id="right">
+
+            <div class="section">
+
+                <h1 class="title" id="righttitle">Total Compliance</h1>
+
+                <div id="donutchart"></div>
+
+            </div>
+        </div>
+
+        <div id="filter" class="w3-modal w3-animate-opacity">
+            <div class="w3-modal-content" id = "filterHeadDark">
+
+                <header class="w3-container" style="background-color:#e8e8e8; height: 70px;">
+                    <span class="w3-button w3-large w3-display-topright close" onclick="document.getElementById('filter').style.display='none'">&times;</span>
+                    <h1 style="padding-left: 20px;">Filter</h1>
+                </header>
+
+                <form>
+                    <div style="height: auto; line-height: 2;">
+            
+                        <div class="filter">
+                            <input type="radio" id="all" name="filter" checked="checked"/>
+                            <label for="all">All Rules</label>
+                        </div>
+
+                        <div class="filter">
+                            <input type="radio" id="com" name="filter"/>
+                            <label for="com">Compliant Rules Only</label>
+                        </div>
+
+                        <div class="filter">
+                            <input type="radio" id="non" name="filter"/>
+                            <label for="non">Non-Compliant Rules Only</label>
+                        </div>
+                    
+                    </div>
+                </form>
+
+
+                <header class="w3-container" style="background-color:#e8e8e8; height: 70px;">
+                    <h1 style="padding-left: 20px;">Sort Items</h1>
+                </header>
+
+                <form>
+                    <div style="line-height: 2;">
+                    
+                        <div class="sort">
+                            <input type="radio" id="none" name="sort" checked="checked"/>
+                            <label for="none">None</label>
+                        </div>
+
+                        <div class="sort">
+                            <input type="radio" id="asc" name="sort"/>
+                            <label for="asc">By ID (Ascending)</label>
+                        </div>
+
+                        <div class="sort">
+                            <input type="radio" id="des" name="sort"/>
+                            <label for="des">By ID (Descending)</label>
+                        </div>
+
+                        <div class="sort">
+                            <input type="radio" id="comnon" name="sort"/>
+                            <label for="comnon">By Compliance</label>
+                        </div>
+
+                        <div class="sort">
+                            <input type="radio" id="noncom" name="sort"/>
+                            <label for="noncom">By Non-Compliance</label>
+                        </div>
+                    </div>
+                
+                </form>
+                
+                <div style="padding-bottom:10px; text-align:center;">
+                    <input class="btn btn-warning" type="submit" value="Apply" onclick="document.getElementById('filter').style.display='none'">
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+
+
+   
+
+
+
+
+
+
+
+
 </body>
+
+</html>

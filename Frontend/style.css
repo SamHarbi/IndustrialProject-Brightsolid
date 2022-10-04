@@ -1,0 +1,172 @@
+body {
+    background-color: #195A5F;
+}
+
+header {
+    background-color: #F1BA56;
+    height:130px;
+}
+
+p, a, th {
+    font-family: 'Roboto', sans-serif;
+    color: #195A5F;
+}
+
+table {
+    table-layout:fixed;
+    width: 100%;
+}
+
+th, td {
+    padding: 8px;
+}
+
+td{
+    text-overflow: ellipsis;
+    word-wrap: break-word;
+    background-color:#ffffff;
+}
+
+thead, th {
+    background-color: #e8e8e8;
+    text-align: center;
+    position: sticky;
+    top:0;
+}
+
+form{
+    max-width: auto;
+    position: relative;
+    margin: 20px auto 10px;
+    font-size: 15px;
+}
+
+.filter, .sort{
+    position: relative;
+    display: block;
+    text-align: left;
+    background-color: #ffffff;
+}
+
+.filter label, .sort label{
+    display: block;
+    background: #ffffff;
+    color:#000000;
+    border-radius: 5px;
+    padding-left: 15px;
+    border: 2px solid #7c7c7c;
+    margin-bottom: 5px;
+    cursor: pointer;
+}
+
+input[type="radio"]{
+    display:none;
+    position:absolute;
+    width: 100%;
+    appearance: none;
+}
+
+input[type="radio"]:checked+label{
+    background: #8fff5b;
+    color: rgb(0, 0, 0);
+}
+
+.logout {
+    line-height:0;
+    float: right;
+    padding-top: 45px;
+    padding-right: 345px;
+    padding-bottom: 5px;
+}
+
+.user {
+    color: #195A5F;
+}
+
+.title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2em;
+    padding-top: 10px;
+    text-align: center;
+    color: #F1BA56;
+}
+
+.section {
+    background-color: #e8e8e8;
+    height: 500px;
+    overflow: hidden;
+}
+
+.btn {
+    color: #195A5F;
+}
+
+.w3-modal-content {
+    width: 500px;
+}
+
+#logo {
+    float: left;
+    padding-left: 345px;
+    padding-top: 45px;
+    padding-bottom: 5px;
+    height: 102px;
+}
+
+#left {
+    float: left;
+    width: 1200px;
+    padding-top: 40px;
+    padding-left: 120px;
+}
+
+#right {
+    float: right;
+    width: 700px;
+    padding-top: 56px;
+    padding-right: 120px;
+}
+
+#refresh {
+    padding-top: 10px;
+    text-align: center;
+}
+
+#righttitle {
+    color: #F1BA56;
+}
+
+#donutchart {
+    width: auto; 
+    height: 500px; 
+    overflow:hidden;
+}
+
+#list{
+    overflow: auto;
+}
+
+.dark-modeBody {
+    background-color: #1a1a1a;
+    color: white;
+  }
+
+.dark-modeHeader {
+    background-color: #181818;
+    color: white;
+  }
+
+  .dark-modeTable {
+    background-color: #181818;
+    color: white;
+  }
+
+  .dark-modeChart {
+    background-color: #181818;
+  }
+
+  .dark-modeFilter {
+    background-color: #181818;
+  }
+
+  
