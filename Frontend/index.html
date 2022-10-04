@@ -3,6 +3,7 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
 
+    <!--Metadata and links-->
     <meta charset="utf-8"/>
     <title>BrightSolid</title>
 
@@ -14,12 +15,15 @@
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="style.css">
 
+    <!--Scripting for Google Charts API-->
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
+        //Variables to insert into graph (in future, the numbers will be pulled from database and inserted into these variable. Right now, they are hard-coded)
         var compliant = 62;
         var noncompliant = 30;
-        var comPercent = parseFloat(((compliant/(compliant+noncompliant))*100).toFixed(0));
+        var comPercent = parseFloat(((compliant/(compliant+noncompliant))*100).toFixed(1)); //Percentage calculation
         
+        //Chart creation
         google.charts.load("current", {packages:["corechart"]});
         google.charts.setOnLoadCallback(drawChart);
         function drawChart() {
@@ -30,14 +34,16 @@
           
             ]);
 
+            //Chart options
             var options = {
                 backgroundColor:'transparent',
                 pieHole: 0.7,
-                colors: ['#3ace50', '#c90000'],
+                colors: ['#3ace50', '#ff0000'],
                 legend: {position: "top", textStyle: {color:"#F1BA56"}},
                 pieSliceText: "none"
             };
 
+            //Insert percentage into percent p element
             document.getElementById("percent").innerHTML = comPercent+"%";
 
             var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
@@ -49,11 +55,14 @@
 
 <body>
 
+    <!--Header containing logo and log out option-->
     <header>
         <img id="logo" src="BrightSolidYellow.png" />
 
         <div class="logout">
             <p class="user">Hello *USER*</p>
+
+            <!--Log out button for a logged in user-->
             <input class="btn" type="submit" value="Log Out">
         </div>
     </header>
@@ -61,42 +70,83 @@
     <main>
         <h1 class="title">Summary Dashboard</h1>
 
+        <!--Left page element, containing filter button, refresh button and a table of rules and their compliance state-->
         <div id="left">
+
+            <!--Sort button to order table-->
             <input class="btn btn-light" onclick="document.getElementById('filter').style.display='block'" type="submit" value="Filter">
 
+            <!--Div for table-->
             <div class="section" id="list">
                 <table>
+
+                    <!--Table headers-->
                     <thead>
                         <tr>
+                            <th width="10%">ID</th>
                             <th width="70%">Rule Name</th>
-                            <th width="30%">Compliance State</th>
+                            <th width="20%">Compliance State</th>
                         </tr>
                     </thead>
 
+                    <!--Table contents-->
                     <tbody>
-                        
+
+
+
+                        <!--For Testing. Delete when done.-->
+                        <tr>
+                            <td>1</td>
+                            <td>Hello</td>
+                            <td style="background-color:#3ace50">Goodbye</td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>Hello</td>
+                            <td style="background-color:#3ace50">Goodbye</td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>Hello</td>
+                            <td style="background-color:#ff0000">Goodbye</td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>Hello</td>
+                            <td style="background-color:#3ace50">Goodbye</td>
+                        </tr>
+                        <!--Delete-->
+
+
+
                     </tbody>
                 </table>
             </div>
 
+            <!--Refresh button to fetch latest version of table-->
             <div id="refresh">
                 <input class="btn btn-light" type="submit" value="Refresh">
             </div>
         </div>
 
+        <!--Right page element containing compliance graph-->
         <div id="right">
 
             <h1 class="title" id="righttitle">Total Compliance</h1>
 
+            <!--Percentage label-->
             <div id="label">
                 <p id="percent">0%</p>
                 <p id="overall">Overall Compliance</p>
             </div>
+
+            <!--Donut Chart of Total Complaince-->
             <div id="donutchart"></div>
             
 
         </div>
 
+        <!--Modal created when the user presses 'Filter'-->
         <div id="filter" class="w3-modal w3-animate-opacity">
             <div class="w3-modal-content" style="background-color:#ffffff">
 
@@ -108,6 +158,7 @@
                 <form>
                     <div style="height: auto; line-height: 2;">
             
+                        <!--Radio buttons to filter compliance states-->
                         <div class="filter">
                             <input type="radio" id="all" name="filter" checked="checked"/>
                             <label for="all">All Rules</label>
@@ -134,6 +185,7 @@
                 <form>
                     <div style="line-height: 2;">
                     
+                        <!--Radio buttons to sort by ID or Compliance-->
                         <div class="sort">
                             <input type="radio" id="none" name="sort" checked="checked"/>
                             <label for="none">None</label>
@@ -163,6 +215,8 @@
                 </form>
                 
                 <div style="padding-bottom:10px; text-align:center;">
+
+                    <!--Apply button to submit sort/filter options-->
                     <input class="btn btn-warning" type="submit" value="Apply" onclick="document.getElementById('filter').style.display='none'">
                 </div>
             </div>
