@@ -146,17 +146,17 @@
 
         </div>
 
-        <!--Modal created when the user presses 'Filter'-->
+        <!--Modal that appears when the user presses 'Filter'-->
         <div id="filter" class="w3-modal w3-animate-opacity">
-            <div class="w3-modal-content" style="background-color:#ffffff">
+            <div class="w3-modal-content">
 
-                <header class="w3-container" style="background-color:#e8e8e8; height: 70px;">
+                <header class="w3-container">
                     <span class="w3-button w3-large w3-display-topright close" onclick="document.getElementById('filter').style.display='none'">&times;</span>
-                    <h1 style="padding-left: 20px;">Filter</h1>
+                    <h1 class="modalHeader">Filter</h1>
                 </header>
 
                 <form>
-                    <div style="height: auto; line-height: 2;">
+                    <div class="modalBody">
             
                         <!--Radio buttons to filter compliance states-->
                         <div class="filter">
@@ -178,12 +178,12 @@
                 </form>
 
 
-                <header class="w3-container" style="background-color:#e8e8e8; height: 70px;">
-                    <h1 style="padding-left: 20px;">Sort Items</h1>
+                <header class="w3-container">
+                    <h1 class="modalHeader">Sort Items</h1>
                 </header>
 
                 <form>
-                    <div style="line-height: 2;">
+                    <div class="modalBody">
                     
                         <!--Radio buttons to sort by ID or Compliance-->
                         <div class="sort">
@@ -214,7 +214,7 @@
                 
                 </form>
                 
-                <div style="padding-bottom:10px; text-align:center;">
+                <div class="modalFooter">
 
                     <!--Apply button to submit sort/filter options-->
                     <input class="btn btn-warning" type="submit" value="Apply" onclick="document.getElementById('filter').style.display='none'">
