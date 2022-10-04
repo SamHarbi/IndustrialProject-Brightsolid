@@ -1,40 +1,55 @@
+
+
+/*Styling for Base Tags*/
+
+
+
+/*Body of page*/
 body {
     background-color: #195A5F;
 }
 
+/*Header of page*/
 header {
     background-color: #F1BA56;
     height:130px;
 }
 
+/*Paragraphs, clickable elements and table headers*/
 p, a, th {
     font-family: 'Roboto', sans-serif;
     color: #195A5F;
 }
 
+/*Table*/
 table {
     table-layout:fixed;
     width: 100%;
 }
 
+/*Table header and table cells*/
 th, td {
     padding: 8px;
 }
 
+/*Table Cells*/
 td{
     text-overflow: ellipsis;
     word-wrap: break-word;
     border: 1px solid black;
 }
 
+/*Even numbered data cells*/
 tr:nth-child(even){
     background-color: #e8e8e8;
 }
 
+/*Odd numbered data cells*/
 tr:nth-child(odd){
     background-color: #ffffff;
 }
 
+/*Head of table and table headers*/
 thead, th {
     background-color: #e8e8e8;
     text-align: center;
@@ -42,6 +57,7 @@ thead, th {
     top:0;
 }
 
+/*Form*/
 form{
     max-width: auto;
     position: relative;
@@ -49,12 +65,20 @@ form{
     font-size: 15px;
 }
 
+
+
+/*Styling for Classes*/
+
+
+
+/*Radio buttons in Filter modal, split between two groups for filtering Compliance State and sorting table*/
 .filter, .sort{
     position: relative;
     display: block;
     text-align: left;
 }
 
+/*Text for radio buttons*/
 .filter label, .sort label{
     display: block;
     background: #ffffff;
@@ -66,6 +90,7 @@ form{
     cursor: pointer;
 }
 
+/*Clickable element of radio buttons*/
 input[type="radio"]{
     display:none;
     position:absolute;
@@ -73,11 +98,13 @@ input[type="radio"]{
     appearance: none;
 }
 
+/*Clickable element of radio buttons that have been selected*/
 input[type="radio"]:checked+label{
     background: #8fff5b;
     color: rgb(0, 0, 0);
 }
 
+/*Log-Out section (Username and Log-Out button)*/
 .logout {
     line-height:0;
     float: right;
@@ -86,10 +113,12 @@ input[type="radio"]:checked+label{
     padding-bottom: 5px;
 }
 
+/*Username*/
 .user {
     color: #195A5F;
 }
 
+/*Title of page*/
 .title {
     font-family: 'Montserrat', sans-serif;
     padding-top: 10px;
@@ -97,40 +126,54 @@ input[type="radio"]:checked+label{
     color: #F1BA56;
 }
 
+/*Section containing the table*/
 .section {
     background-color: #e8e8e8;
     height: 500px;
     overflow: hidden;
 }
 
+/*Bootstrap Buttons*/
 .btn {
     color: #195A5F;
 }
 
+/*Modal*/
 .w3-modal-content {
     width: 500px;
     background-color:#ffffff;
 }
 
+/*Content held within modal*/
 .w3-container{
     background-color:#e8e8e8; 
     height: 70px;
 }
 
+/*Headers of modal*/
 .modalHeader{
     padding-left: 20px;
 }
 
+/*Bodies of modal*/
 .modalBody{
     height: auto; 
     line-height: 2;
 }
 
+/*Footer/Bottom of modal*/
 .modalFooter{
     padding-bottom:10px; 
     text-align:center;
 }
 
+
+
+/*Styling for IDs*/
+
+
+
+/*Logo of company*/
 #logo {
     float: left;
     padding-left: 345px;
@@ -139,6 +182,7 @@ input[type="radio"]:checked+label{
     height: 102px;
 }
 
+/*Left div containing table, refresh and sort*/
 #left {
     float: left;
     width: 1300px;
@@ -146,6 +190,7 @@ input[type="radio"]:checked+label{
     padding-left: 100px;
 }
 
+/*Right div containing graph*/
 #right {
     float: right;
     width: 600px;
@@ -153,25 +198,30 @@ input[type="radio"]:checked+label{
     padding-right: 60px;
 }
 
+/*Refresh button*/
 #refresh {
     padding-top: 10px;
     text-align: center;
 }
 
+/*Title for graph*/
 #righttitle {
     color: #F1BA56;
 }
 
+/*Graph*/
 #donutchart {
     width: auto; 
     height: 650px; 
     overflow:hidden;
 }
 
-#list{
+/*Table containing rules*/
+#table{
     overflow: auto;
 }
 
+/*Div containing percentage of compliant resources*/
 #label{
     margin: auto;
     text-align: center;
@@ -182,12 +232,14 @@ input[type="radio"]:checked+label{
     line-height: 1;
 }
 
+/*Paragraph with percentage*/
 #percent{
     color: #F1BA56;
     font-size:xx-large;
     
 }
 
+/*Paragraph that couples with percentage*/
 #overall{
     color: #f3c87a;
     font-size:medium;
