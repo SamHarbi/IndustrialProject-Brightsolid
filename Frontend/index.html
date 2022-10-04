@@ -58,8 +58,8 @@
                 <table>
                     <thead>
                         <tr>
-                            <th width="75%">Rule Name</th>
-                            <th width="25%">Compliance State</th>
+                            <th width="70%">Rule Name</th>
+                            <th width="30%">Compliance State</th>
                         </tr>
                     </thead>
 
@@ -93,34 +93,65 @@
                     <h1 style="padding-left: 20px;">Filter</h1>
                 </header>
 
-                <div style="height: 120px; line-height: 2; padding-top: 15px; padding-left: 10px;">
-                    <input type="radio" name="filter" value="HTML" checked="checked">
-                    <label for="all">All</label><br>
-                    <input type="radio" name="filter" value="HTML">
-                    <label for="com">Compliant Only</label><br>
-                    <input type="radio" name="filter" value="HTML">
-                    <label for="noncom">Non-Compliant Only</label><br>
-                </div>
+                <form>
+                    <div style="height: auto; line-height: 2;">
+            
+                        <div class="filter">
+                            <input type="radio" id="all" name="filter" checked="checked"/>
+                            <label for="all">All Rules</label>
+                        </div>
+
+                        <div class="filter">
+                            <input type="radio" id="com" name="filter"/>
+                            <label for="com">Compliant Rules Only</label>
+                        </div>
+
+                        <div class="filter">
+                            <input type="radio" id="non" name="filter"/>
+                            <label for="non">Non-Compliant Rules Only</label>
+                        </div>
+                    
+                    </div>
+                </form>
+
 
                 <header class="w3-container" style="background-color:#e8e8e8; height: 70px;">
                     <h1 style="padding-left: 20px;">Sort Items</h1>
                 </header>
 
-                <div style="height: 190px; line-height: 2; padding-top: 15px; padding-left: 10px;">
-                    <input type="radio" name="sort" value="HTML" checked="checked">
-                    <label for="none">None</label><br>
-                    <input type="radio" name="sort" value="HTML">
-                    <label for="IDAsc">ID - Ascending</label><br>
-                    <input type="radio" name="sort" value="HTML">
-                    <label for="IDDes">ID - Descending</label><br>
-                    <input type="radio" name="sort" value="HTML">
-                    <label for="com">Compliant - Non-Compliant</label><br>
-                    <input type="radio" name="sort" value="HTML">
-                    <label for="noncom">Non-Compliant - Compliant</label><br>
-                </div>
+                <form>
+                    <div style="line-height: 2;">
+                    
+                        <div class="sort">
+                            <input type="radio" id="none" name="sort" checked="checked"/>
+                            <label for="none">None</label>
+                        </div>
+
+                        <div class="sort">
+                            <input type="radio" id="asc" name="sort"/>
+                            <label for="asc">By ID (Ascending)</label>
+                        </div>
+
+                        <div class="sort">
+                            <input type="radio" id="des" name="sort"/>
+                            <label for="des">By ID (Descending)</label>
+                        </div>
+
+                        <div class="sort">
+                            <input type="radio" id="comnon" name="sort"/>
+                            <label for="comnon">By Compliance</label>
+                        </div>
+
+                        <div class="sort">
+                            <input type="radio" id="noncom" name="sort"/>
+                            <label for="noncom">By Non-Compliance</label>
+                        </div>
+                    </div>
+                
+                </form>
                 
                 <div style="padding-bottom:10px; text-align:center;">
-                    <input class="btn btn-warning" type="submit" value="Apply">
+                    <input class="btn btn-warning" type="submit" value="Apply" onclick="document.getElementById('filter').style.display='none'">
                 </div>
             </div>
         </div>
