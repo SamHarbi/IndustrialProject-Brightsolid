@@ -111,20 +111,18 @@ input[type="radio"]:checked+label{
     height: 102px;
 }
 
-#left, #right {
-    width: 925px;
-}
-
 #left {
     float: left;
+    width: 1300px;
     padding-top: 40px;
-    padding-left: 120px;
+    padding-left: 100px;
 }
 
 #right {
     float: right;
-    padding-top: 76px;
-    padding-right: 120px;
+    width: 600px;
+    padding-top: 56px;
+    padding-right: 60px;
 }
 
 #refresh {
@@ -133,16 +131,36 @@ input[type="radio"]:checked+label{
 }
 
 #righttitle {
-    background-color: #e8e8e8;
-    color: #195A5F;
+    color: #F1BA56;
 }
 
 #donutchart {
     width: auto; 
-    height: 500px; 
+    height: 650px; 
     overflow:hidden;
 }
 
 #list{
     overflow: auto;
+}
+
+#label{
+    margin: auto;
+    text-align: center;
+    position:relative;
+    text-align: center;
+    margin-top: 240px;
+    margin-bottom:-370px;
+    line-height: 1;
+}
+
+#percent{
+    color: #F1BA56;
+    font-size:xx-large;
+    
+}
+
+#overall{
+    color: #f3c87a;
+    font-size:medium;
 }
