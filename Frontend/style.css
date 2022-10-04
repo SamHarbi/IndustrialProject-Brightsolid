@@ -109,6 +109,26 @@ input[type="radio"]:checked+label{
 
 .w3-modal-content {
     width: 500px;
+    background-color:#ffffff;
+}
+
+.w3-container{
+    background-color:#e8e8e8; 
+    height: 70px;
+}
+
+.modalHeader{
+    padding-left: 20px;
+}
+
+.modalBody{
+    height: auto; 
+    line-height: 2;
+}
+
+.modalFooter{
+    padding-bottom:10px; 
+    text-align:center;
 }
 
 #logo {
