@@ -1,4 +1,4 @@
-﻿body {
+body {
     background-color: #195A5F;
 }
 
@@ -32,6 +32,42 @@ thead, th {
     text-align: center;
     position: sticky;
     top:0;
+}
+
+form{
+    max-width: auto;
+    position: relative;
+    margin: 20px auto 10px;
+    font-size: 15px;
+}
+
+.filter, .sort{
+    position: relative;
+    display: block;
+    text-align: left;
+}
+
+.filter label, .sort label{
+    display: block;
+    background: #ffffff;
+    color:#000000;
+    border-radius: 5px;
+    padding-left: 15px;
+    border: 2px solid #7c7c7c;
+    margin-bottom: 5px;
+    cursor: pointer;
+}
+
+input[type="radio"]{
+    display:none;
+    position:absolute;
+    width: 100%;
+    appearance: none;
+}
+
+input[type="radio"]:checked+label{
+    background: #8fff5b;
+    color: rgb(0, 0, 0);
 }
 
 .logout {
