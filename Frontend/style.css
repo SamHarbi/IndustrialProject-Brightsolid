@@ -35,9 +35,13 @@ thead, th {
 }
 
 h2{
-  font-size: 15px;
+  font-size: 20px;
   font-family: 'Roboto', sans-serif;
   color: #195A5F;
+  text-align: center;
+}
+
+h4 {
   text-align: center;
 }
 
