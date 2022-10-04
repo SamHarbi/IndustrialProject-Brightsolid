@@ -54,17 +54,17 @@
 
 </head>
 
-<body>
+<body id="Font">
 
     <!--Header containing logo and log out option-->
-    <header>
+    <header id="darkHeader">
         <img id="logo" src="BrightSolidYellow.png" />
 
         <div class="logout">
             <p class="user">Hello *USER*</p>
 
             <!--Log out button for a logged in user-->
-            <input class="btn" type="submit" value="Log Out">
+            <input id="logout" class="btn" type="submit" value="Log Out">
         </div>
     </header>
 
@@ -76,6 +76,60 @@
 
             <!--Sort button to order table-->
             <input class="btn btn-light" onclick="document.getElementById('filter').style.display='block'" type="submit" value="Filter">
+
+            <button class="btn btn-light" onclick="Default()">A</button>
+            <script>
+            function Default(){
+                var element = document.getElementById("Font");
+                element.style.fontSize = "1em";
+                element.style.fontFamily = "Montserrat", sans-serif;
+                element.style.paddingTop = 10;
+                element.style.textAlign = center;
+            }
+            </script>
+
+            <button class="btn btn-light" onclick="Large()">A+</button>
+            <script>
+            function Large(){
+                var element = document.getElementById("Font");
+                element.style.fontSize = "2em";
+                element.style.fontFamily = "Montserrat", sans-serif;
+                element.style.paddingTop = 10;
+                element.style.textAlign = center;
+            }
+            </script>
+
+            <button class="btn btn-light" onclick="ExtraLarge()">A++</button>
+            <script>
+            function ExtraLarge(){
+                var element = document.getElementById("Font");
+                    element.style.fontSize = "3em";
+                    element.style.fontFamily = "Montserrat", sans-serif;
+                    element.style.paddingTop = 10;
+                    element.style.textAlign = center;
+            }
+            </script>
+
+            <button class="btn btn-light" onclick="darkMode()">Toggle dark mode</button>
+	
+            <script>
+            function darkMode() {
+                var body = document.body;
+                body.classList.toggle("dark-modeBody");
+
+                var header = document.getElementById("darkHeader");
+                header.classList.toggle("dark-modeHeader");
+
+                var dataTable= document.getElementById("table");
+                dataTable.classList.toggle("dark-modeTable");
+
+                var chart = document.getElementById("righttitle");
+                chart.classList.toggle("dark-modeChart");
+
+                var Filter = document.getElementById("all")
+                chart.classList.toggle("dark-modeChart");
+            }
+            </script>
 
             <!--Div for table-->
             <div class="section" id="table">
