@@ -37,7 +37,35 @@
 
 </head>
 
-<body>
+<!-- This code was taken and adapted for our project from the google charts API -->
+ <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['bar']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Compliance Status', 'Compliant Resources', 'Non-Compliant Resources'],
+          ['Rule 8', 30, 60],
+        ]);
+
+        var options = {
+          chart: {
+            title: 'Total Compliance of Resources: Rule 8'
+
+          },
+		  bar: { groupWidth: '50%' }, // change width here
+        };
+
+        var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
+
+        chart.draw(data, google.charts.Bar.convertOptions(options));
+      }
+    </script>
+  </head>
+  <body>
+
+
 
     <header>
         <img id="logo" src="BrightSolidYellow.png" />
@@ -154,12 +182,12 @@
               </div>
               <div class="col-sm">
                 <div id="details" class="section">
-                  <p>Exception Management</p>
+                  <h2><b><u>Exception Management</u></b></h2>
                 </div>
               </div>
               <div class="col-sm">
                 <div id="details" class="section">
-                  <p>Some graph</p>
+                  <div id="columnchart_material" style="width: 300px; height: 300px;"></div>
                 </div>
               </div>
             </div>
@@ -169,6 +197,7 @@
 
     </main>
 
-</body>
+
+  </body>
 
 </html>
