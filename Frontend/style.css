@@ -167,10 +167,32 @@ input[type="radio"]:checked+label{
     text-align:center;
 }
 
+.dark-modeBody {
+    background-color: #1a1a1a;
+    color: white;
+  }
+
+.dark-modeHeader {
+    background-color: #181818;
+    color: white;
+  }
+
+  .dark-modeTable {
+    background-color: #181818;
+    color: white;
+  }
+
+  .dark-modeChart {
+    background-color: #181818;
+  }
+
+  .dark-modeFilter {
+    background-color: #181818;
+  }
+
 
 
 /*Styling for IDs*/
-
 
 
 /*Logo of company*/
