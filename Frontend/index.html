@@ -41,7 +41,6 @@
                 colors: ['#3ace50', '#ff0000'],
                 legend: {position: "top", textStyle: {color:"#F1BA56"}},
                 pieSliceText: "none",
-                tooltip: {trigger: 'none'}
             };
 
             //Insert percentage into percent p element
@@ -58,7 +57,7 @@
 
     <!--Header containing logo and log out option-->
     <header id="darkHeader">
-        <img id="logo" src="BrightSolidYellow.png" />
+        <img id="logo" src="BrightSolid.png" />
 
         <div class="logout">
             <p class="user">Hello *USER*</p>
@@ -69,75 +68,38 @@
     </header>
 
     <main>
-        <h1 class="title">Summary Dashboard</h1>
+
+        <!--Head of page, just under website header-->
+        <div>
+
+            <!--Dark Mode Toggle Button-->
+            <button id="tog" class="access btn btn-light" onclick="darkMode()">Toggle dark mode</button>
+
+            <!--Font Resizing Buttons-->
+            <span id="FontSizeTog">
+                <button id="a3" class="access btn btn-light" onclick="ExtraLarge()">A++</button>
+                <button id="a2" class="access btn btn-light" onclick="Large()">A+</button>
+                <button id="a1" class="access btn btn-light" onclick="Default()">A</button>
+            </span>
+
+            <br>
+
+            <h1 class="title">Summary Dashboard</h1>
+        </div>
 
         <!--Left page element, containing filter button, refresh button and a table of rules and their compliance state-->
         <div id="left">
 
             <!--Sort button to order table-->
-            <input class="btn btn-light" onclick="document.getElementById('filter').style.display='block'" type="submit" value="Filter">
-
-            <button class="btn btn-light" onclick="Default()">A</button>
-            <script>
-            function Default(){
-                var element = document.getElementById("Font");
-                element.style.fontSize = "1em";
-                element.style.fontFamily = "Montserrat", sans-serif;
-                element.style.paddingTop = 10;
-                element.style.textAlign = center;
-            }
-            </script>
-
-            <button class="btn btn-light" onclick="Large()">A+</button>
-            <script>
-            function Large(){
-                var element = document.getElementById("Font");
-                element.style.fontSize = "2em";
-                element.style.fontFamily = "Montserrat", sans-serif;
-                element.style.paddingTop = 10;
-                element.style.textAlign = center;
-            }
-            </script>
-
-            <button class="btn btn-light" onclick="ExtraLarge()">A++</button>
-            <script>
-            function ExtraLarge(){
-                var element = document.getElementById("Font");
-                    element.style.fontSize = "3em";
-                    element.style.fontFamily = "Montserrat", sans-serif;
-                    element.style.paddingTop = 10;
-                    element.style.textAlign = center;
-            }
-            </script>
-
-            <button class="btn btn-light" onclick="darkMode()">Toggle dark mode</button>
-	
-            <script>
-            function darkMode() {
-                var body = document.body;
-                body.classList.toggle("dark-modeBody");
-
-                var header = document.getElementById("darkHeader");
-                header.classList.toggle("dark-modeHeader");
-
-                var dataTable= document.getElementById("table");
-                dataTable.classList.toggle("dark-modeTable");
-
-                var chart = document.getElementById("righttitle");
-                chart.classList.toggle("dark-modeChart");
-
-                var Filter = document.getElementById("all")
-                chart.classList.toggle("dark-modeChart");
-            }
-            </script>
+            <input id="fil" class="btn btn-light" onclick="document.getElementById('filter').style.display='block'" type="submit" value="Filter">
 
             <!--Div for table-->
             <div class="section" id="table">
-                <table>
+                <table id="cells">
 
                     <!--Table headers-->
                     <thead>
-                        <tr>
+                        <tr class="cell">
                             <th width="5%">ID</th>
                             <th width="65%">Rule Name</th>
                             <th width="30%">Compliance State</th>
@@ -170,6 +132,11 @@
                             <td>Hello</td>
                             <td style="background-color:#3ace50">Goodbye</td>
                         </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>Hello</td>
+                            <td style="background-color:#3ace50">Goodbye</td>
+                        </tr>
                         <!--Delete-->
 
 
@@ -180,14 +147,14 @@
 
             <!--Refresh button to fetch latest version of table-->
             <div id="refresh">
-                <input class="btn btn-light" type="submit" value="Refresh">
+                <input id="ref" class="btn btn-light" type="submit" value="Refresh">
             </div>
         </div>
 
         <!--Right page element containing compliance graph-->
         <div id="right">
 
-            <h1 class="title" id="righttitle">Total Compliance</h1>
+            <h1 class="totalTitle">Total Compliance</h1>
 
             <!--Percentage label-->
             <div id="label">
@@ -203,17 +170,16 @@
 
         <!--Modal that appears when the user presses 'Filter'-->
         <div id="filter" class="w3-modal w3-animate-opacity">
-            <div class="w3-modal-content">
+            <div id="modalDark" class="w3-modal-content">
 
                 <header class="w3-container">
                     <span class="w3-button w3-large w3-display-topright close" onclick="document.getElementById('filter').style.display='none'">&times;</span>
                     <h1 class="modalHeader">Filter</h1>
                 </header>
 
-                <form>
                     <div class="modalBody">
             
-                        <!--Radio buttons to filter compliance states-->
+                        <!--Radio buttons to filter Compliance States-->
                         <div class="filter">
                             <input type="radio" id="all" name="filter" checked="checked"/>
                             <label for="all">All Rules</label>
@@ -230,14 +196,14 @@
                         </div>
                     
                     </div>
-                </form>
+
 
 
                 <header class="w3-container">
                     <h1 class="modalHeader">Sort Items</h1>
                 </header>
 
-                <form>
+
                     <div class="modalBody">
                     
                         <!--Radio buttons to sort by ID or Compliance-->
@@ -266,8 +232,7 @@
                             <label for="noncom">By Non-Compliance</label>
                         </div>
                     </div>
-                
-                </form>
+
                 
                 <div class="modalFooter">
 
@@ -278,6 +243,82 @@
         </div>
 
     </main>
+
+    <!--Scripts for functions-->
+    <script>
+
+        //Default font size script
+        function Default(){
+                var element = document.getElementById("Font");
+                element.style.fontSize = "1em";
+                element.style.fontFamily = "Roboto", sans-serif;
+                element.style.paddingTop = 10;
+                element.style.textAlign = center;
+        }
+
+        //Large font size script
+        function Large(){
+            var element = document.getElementById("Font");
+            element.style.fontSize = "2em";
+            element.style.fontFamily = "Roboto", sans-serif;
+            element.style.paddingTop = 10;
+            element.style.textAlign = center;
+        }
+
+        //Extra large font size script
+        function ExtraLarge(){
+            var element = document.getElementById("Font");
+            element.style.fontSize = "3em";
+            element.style.fontFamily = "Roboto", sans-serif;
+            element.style.paddingTop = 10;
+            element.style.textAlign = center;
+        }
+
+        //Dark Mode script
+        function darkMode() {
+            var body = document.body;
+            body.classList.toggle("dark-modeBody");
+
+            var body = document.getElementById("logo");
+            body.classList.toggle("dark-modeLogo");
+
+            var header = document.getElementById("darkHeader");
+            header.classList.toggle("dark-modeHeader");
+
+            var dataTable= document.getElementById("table");
+            dataTable.classList.toggle("dark-modeTable");
+
+            var toggle = document.getElementById("tog");
+            toggle.classList.toggle("dark-modeButtons");
+
+            var filter = document.getElementById("fil");
+            filter.classList.toggle("dark-modeButtons");
+
+            var logout = document.getElementById("logout");
+            logout.classList.toggle("dark-modeLogOut");
+
+            var a1 = document.getElementById("a1");
+            a1.classList.toggle("dark-modeButtons");
+
+            var a2 = document.getElementById("a2");
+            a2.classList.toggle("dark-modeButtons");
+
+            var a3 = document.getElementById("a3");
+            a3.classList.toggle("dark-modeButtons");
+
+            var refresh = document.getElementById("ref");
+            refresh.classList.toggle("dark-modeButtons");
+
+            var cell = document.getElementById('cells');
+            cell.classList.toggle("dark-modeCell");
+
+            var modal = document.getElementById('modalDark');
+            modal.classList.toggle("dark-modeModal");
+
+        }
+
+
+    </script>
 
 </body>
 
