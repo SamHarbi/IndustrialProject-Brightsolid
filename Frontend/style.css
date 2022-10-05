@@ -49,6 +49,12 @@ tr:nth-child(odd){
     background-color: #ffffff;
 }
 
+/*Styling for mouse hover event*/
+tr:hover{
+    background-color: #616161;
+    color: #ffffff;
+}
+
 /*Head of table and table headers*/
 thead, th {
     background-color: #e8e8e8;
@@ -207,6 +213,12 @@ input[type="radio"]:checked+label{
 /*Dark mode styling for table cells*/
 .dark-modeCell tr{
     background-color: #696969;
+}
+
+/*Dark mode styling for hovering over cells*/
+.dark-modeCell tr:hover{
+    background-color: #adadad;
+    color: #000000;
 }
 
 /*Dark mode styling for buttons*/
