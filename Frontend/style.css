@@ -86,7 +86,6 @@ form{
     border-radius: 5px;
     padding-left: 15px;
     border: 2px solid #7c7c7c;
-    margin-bottom: 5px;
     cursor: pointer;
 }
 
@@ -121,9 +120,21 @@ input[type="radio"]:checked+label{
 /*Title of page*/
 .title {
     font-family: 'Montserrat', sans-serif;
-    padding-top: 10px;
+    padding-top: 5px;
+    position: relative;
     text-align: center;
     color: #F1BA56;
+    font-size: 2em;
+}
+
+/*Title of Graph*/
+.totalTitle {
+    font-family: 'Montserrat', sans-serif;
+    padding-top: 5px;
+    position: relative;
+    text-align: center;
+    color: #F1BA56;
+    font-size: 1.5em;
 }
 
 /*Section containing the table*/
@@ -163,37 +174,79 @@ input[type="radio"]:checked+label{
 
 /*Footer/Bottom of modal*/
 .modalFooter{
-    padding-bottom:10px; 
     text-align:center;
 }
 
+/*Dark mode styling for page body*/
 .dark-modeBody {
     background-color: #1a1a1a;
     color: white;
-  }
+}
 
+/*Dark mode styling for logo*/
+.dark-modeLogo {
+    content:url(BrightSolidDark.png);
+}
+
+/*Dark mode styling for header*/
 .dark-modeHeader {
     background-color: #181818;
-    color: white;
-  }
+    color: #F1BA56;
+}
 
-  .dark-modeTable {
-    background-color: #181818;
-    color: white;
-  }
+/*Dark mode styling for paragraphs*/
+.dark-modeHeader p{
+    color: #F1BA56;
+}
 
-  .dark-modeChart {
-    background-color: #181818;
-  }
+/*Dark mode styling for table*/
+.dark-modeTable {
+    background-color: #3f3f3f;
+}
 
-  .dark-modeFilter {
-    background-color: #181818;
-  }
+/*Dark mode styling for table cells*/
+.dark-modeCell tr{
+    background-color: #696969;
+}
+
+/*Dark mode styling for buttons*/
+.dark-modeButtons {
+    background-color: #3f3f3f !important;
+    color: #ffffff !important;
+}
+
+/*Dark mode styling for logout button*/
+.dark-modeLogOut{
+    background-color: none;
+    color: #F1BA56;
+}
+
+/*Dark mode styling for modal header*/
+.dark-modeModal header{
+    background-color: #424242;
+}
+
+/*Dark mode styling for modal div*/
+.dark-modeModal div{
+    background-color: #6e6e6e;
+}
+
+/*Styling for accessibility buttons (Font Resizer and Dark Mode Toggle)*/
+.access{
+    float: right;
+
+}
 
 
 
 /*Styling for IDs*/
 
+
+
+/*Styling for span tag containing Font Resizer buttons*/
+#FontSizeTog{
+    padding-right: 10px;
+}
 
 /*Logo of company*/
 #logo {
@@ -204,31 +257,30 @@ input[type="radio"]:checked+label{
     height: 102px;
 }
 
+#logout{
+    display: center;
+}
+
 /*Left div containing table, refresh and sort*/
 #left {
     float: left;
-    width: 1300px;
-    padding-top: 40px;
-    padding-left: 100px;
+    width: 1100px;
+    padding-top: 20px;
+    padding-left: 50px;
 }
 
 /*Right div containing graph*/
 #right {
     float: right;
-    width: 600px;
-    padding-top: 56px;
-    padding-right: 60px;
+    width: 800px;
+    padding-top: 36px;
+    padding-right: 120px;
 }
 
 /*Refresh button*/
 #refresh {
     padding-top: 10px;
     text-align: center;
-}
-
-/*Title for graph*/
-#righttitle {
-    color: #F1BA56;
 }
 
 /*Graph*/
