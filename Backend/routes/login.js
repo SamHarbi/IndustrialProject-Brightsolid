@@ -2,18 +2,10 @@ var express = require('express');
 const mysql = require('mysql2');
 var router = express.Router();
 
+import {connection} from '../database.js';
+
 /* GET users listing. */
 router.get('/', function(req, res, next) {
-
-
-//Database Connection
-const connection = mysql.createConnection({
-  host: process.env.HOST,
-  port: 25060,
-  user: process.env.USERNAME,
-  password: process.env.PASSWORD,
-  database:  'defaultdb'
-});
 
 connection.connect();
 
