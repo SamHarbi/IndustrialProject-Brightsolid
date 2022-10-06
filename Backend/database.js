@@ -1,7 +1,8 @@
-const mysql = require('mysql2');
+//Unified Source for connecting to the database packaged as a module that can be imported and called by each route 
+exports.databaseSetup = function ()  {
+    
+    const mysql = require('mysql2');
 
-function setConnection()
-{
     //Database Connection
     const connection = mysql.createConnection({
     host: process.env.HOST,
@@ -12,7 +13,9 @@ function setConnection()
     });
 
     return connection;
-}
+};
+    
+    
 
 
 

@@ -6,7 +6,8 @@ var logger = require('morgan');
 const mysql = require('mysql2');
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/login');
+var loginRouter = require('./routes/login');
+var testRouter = require('./routes/test');
 
 var app = express();
 
@@ -21,7 +22,8 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/login', usersRouter);
+app.use('/login', loginRouter);
+app.use('/test', testRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
