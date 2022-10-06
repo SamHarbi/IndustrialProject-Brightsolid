@@ -27,6 +27,14 @@ table {
     width: 100%;
 }
 
+/*Head of table and table headers*/
+thead, th {
+    background-color: #e8e8e8;
+    text-align: center;
+    position: sticky;
+    top:0;
+}
+
 /*Table header and table cells*/
 th, td {
     padding: 8px;
@@ -50,17 +58,10 @@ tr:nth-child(odd){
 }
 
 /*Styling for mouse hover event*/
-tr:hover{
+tbody tr:hover{
+    cursor: pointer;
     background-color: #616161;
     color: #ffffff;
-}
-
-/*Head of table and table headers*/
-thead, th {
-    background-color: #e8e8e8;
-    text-align: center;
-    position: sticky;
-    top:0;
 }
 
 
@@ -71,6 +72,7 @@ thead, th {
 
 /*Log-Out section (Username and Log-Out button)*/
 .logout {
+    text-align: center;
     line-height:0;
     float: right;
     padding-top: 45px;
@@ -85,27 +87,12 @@ thead, th {
 
 /*Title of page*/
 .title {
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Montserrat';
     padding-top: 5px;
     position: relative;
     text-align: center;
     color: #F1BA56;
-    font-size: 2em;
-}
-
-/*Styling for accessibility buttons (Font Resizer and Dark Mode Toggle)*/
-.access{
-    float: right;
-}
-
-/*Title of Graph*/
-.totalTitle {
-    font-family: 'Montserrat', sans-serif;
-    padding-top: 5px;
-    position: relative;
-    text-align: center;
-    color: #F1BA56;
-    font-size: 1.5em;
+    font-size: 3em;
 }
 
 /*Section containing the table*/
@@ -118,6 +105,7 @@ thead, th {
 /*Bootstrap Buttons*/
 .btn {
     color: #195A5F;
+    transition: none;
 }
 
 /*Modal*/
@@ -182,7 +170,7 @@ input[type="radio"]:checked+label{
 
 /*Dark mode styling for page body*/
 .dark-modeBody {
-    background-color: #1a1a1a;
+    background-color: #383838;
     color: white;
 }
 
@@ -207,14 +195,25 @@ input[type="radio"]:checked+label{
     background-color: #3f3f3f;
 }
 
-/*Dark mode styling for table cells*/
-.dark-modeCell tr{
+/*Dark mode styling for table head*/
+.dark-modeCell th{
     background-color: #696969;
+    color: #ffffff;
+}
+
+/*Dark mode styling for even-numbered table cells*/
+.dark-modeCell tr:nth-child(even){
+    background-color: #696969;
+}
+
+/*Dark mode styling for odd-numbered table cells*/
+.dark-modeCell tr:nth-child(odd){
+    background-color: #4b4b4b;
 }
 
 /*Dark mode styling for hovering over cells*/
 .dark-modeCell tr:hover{
-    background-color: #adadad;
+    background-color: #c0c0c0;
     color: #000000;
 }
 
@@ -246,11 +245,6 @@ input[type="radio"]:checked+label{
 
 
 
-/*Styling for span tag containing Font Resizer buttons*/
-#FontSizeTog{
-    padding-right: 10px;
-}
-
 /*Logo of company*/
 #logo {
     float: left;
@@ -260,24 +254,28 @@ input[type="radio"]:checked+label{
     height: 102px;
 }
 
+/*LogOut Button*/
 #logout{
     display: center;
+    font-weight: 600;
+}
+
+/*Styling for span tag containing Font Resizer buttons*/
+#Toggles{
+    float: right;
 }
 
 /*Left div containing table, refresh and sort*/
 #left {
     float: left;
-    width: 1100px;
+    width: 1200px;
     padding-top: 20px;
     padding-left: 100px;
 }
 
-/*Right div containing graph*/
-#right {
-    float: right;
-    width: 800px;
-    padding-top: 36px;
-    padding-right: 10px;
+/*Table containing rules*/
+#table{
+    overflow: auto;
 }
 
 /*Refresh button*/
@@ -286,16 +284,24 @@ input[type="radio"]:checked+label{
     text-align: center;
 }
 
+/*Right div containing graph*/
+#right {
+    float: right;
+    width: 700px;
+    padding-top: 36px;
+    padding-right: 10px;
+}
+
+/*Title of graph*/
+#totalTitle{
+    font-size: 2em;
+}
+
 /*Graph*/
 #donutchart {
     width: auto; 
     height: 650px; 
     overflow:hidden;
-}
-
-/*Table containing rules*/
-#table{
-    overflow: auto;
 }
 
 /*Div containing percentage of compliant resources*/
@@ -318,5 +324,5 @@ input[type="radio"]:checked+label{
 /*Paragraph that couples with percentage*/
 #overall{
     color: #f3c87a;
-    font-size:medium;
+    font-size:large;
 }
