@@ -86,6 +86,72 @@ h4 {
   top:0;
 }
 
+/*Styling for accessibility buttons (Font Resizer and Dark Mode Toggle)*/
+.access{
+    float: right;
+}
+
+/*Dark mode styling for page body*/
+.dark-modeBody {
+    background-color: #1a1a1a;
+    color: white;
+}
+
+/*Dark mode styling for logo*/
+.dark-modeLogo {
+    content:url(BrightSolidDark.png);
+}
+
+/*Dark mode styling for header*/
+.dark-modeHeader {
+    background-color: #181818;
+    color: #F1BA56;
+}
+
+/*Dark mode styling for paragraphs*/
+.dark-modeHeader p{
+    color: #F1BA56;
+}
+
+/*Dark mode styling for table*/
+.dark-modeTable {
+    background-color: #3f3f3f;
+}
+
+/*Dark mode styling for table cells*/
+.dark-modeCell tr{
+    background-color: #696969;
+}
+
+/*Dark mode styling for hovering over cells*/
+.dark-modeCell tr:hover{
+    background-color: #adadad;
+    color: #000000;
+}
+
+/*Dark mode styling for buttons*/
+.dark-modeButtons {
+    background-color: #3f3f3f !important;
+    color: #ffffff !important;
+}
+
+/*Dark mode styling for logout button*/
+.dark-modeLogOut{
+    background-color: none;
+    color: #F1BA56;
+}
+
+/*Dark mode styling for modal header*/
+.dark-modeModal header{
+    background-color: #424242;
+}
+
+/*Dark mode styling for modal div*/
+.dark-modeModal div{
+    background-color: #6e6e6e;
+}
+
+
 #logo {
     float: left;
     padding-left: 345px;
