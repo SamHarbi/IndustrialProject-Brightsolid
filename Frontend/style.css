@@ -63,51 +63,11 @@ thead, th {
     top:0;
 }
 
-/*Form*/
-form{
-    max-width: auto;
-    position: relative;
-    margin: 20px auto 10px;
-    font-size: 15px;
-}
-
 
 
 /*Styling for Classes*/
 
 
-
-/*Radio buttons in Filter modal, split between two groups for filtering Compliance State and sorting table*/
-.filter, .sort{
-    position: relative;
-    display: block;
-    text-align: left;
-}
-
-/*Text for radio buttons*/
-.filter label, .sort label{
-    display: block;
-    background: #ffffff;
-    color:#000000;
-    border-radius: 5px;
-    padding-left: 15px;
-    border: 2px solid #7c7c7c;
-    cursor: pointer;
-}
-
-/*Clickable element of radio buttons*/
-input[type="radio"]{
-    display:none;
-    position:absolute;
-    width: 100%;
-    appearance: none;
-}
-
-/*Clickable element of radio buttons that have been selected*/
-input[type="radio"]:checked+label{
-    background: #8fff5b;
-    color: rgb(0, 0, 0);
-}
 
 /*Log-Out section (Username and Log-Out button)*/
 .logout {
@@ -131,6 +91,11 @@ input[type="radio"]:checked+label{
     text-align: center;
     color: #F1BA56;
     font-size: 2em;
+}
+
+/*Styling for accessibility buttons (Font Resizer and Dark Mode Toggle)*/
+.access{
+    float: right;
 }
 
 /*Title of Graph*/
@@ -181,6 +146,38 @@ input[type="radio"]:checked+label{
 /*Footer/Bottom of modal*/
 .modalFooter{
     text-align:center;
+}
+
+/*Radio buttons in Filter modal, split between two groups for filtering Compliance State and sorting table*/
+.filter, .sort{
+    position: relative;
+    display: block;
+    text-align: left;
+}
+
+/*Text for radio buttons*/
+.filter label, .sort label{
+    display: block;
+    background: #ffffff;
+    color:#000000;
+    border-radius: 5px;
+    padding-left: 15px;
+    border: 2px solid #7c7c7c;
+    cursor: pointer;
+}
+
+/*Clickable element of radio buttons*/
+input[type="radio"]{
+    display:none;
+    position:absolute;
+    width: 100%;
+    appearance: none;
+}
+
+/*Clickable element of radio buttons that have been selected*/
+input[type="radio"]:checked+label{
+    background: #8fff5b;
+    color: rgb(0, 0, 0);
 }
 
 /*Dark mode styling for page body*/
@@ -243,12 +240,6 @@ input[type="radio"]:checked+label{
     background-color: #6e6e6e;
 }
 
-/*Styling for accessibility buttons (Font Resizer and Dark Mode Toggle)*/
-.access{
-    float: right;
-
-}
-
 
 
 /*Styling for IDs*/
@@ -278,7 +269,7 @@ input[type="radio"]:checked+label{
     float: left;
     width: 1100px;
     padding-top: 20px;
-    padding-left: 50px;
+    padding-left: 100px;
 }
 
 /*Right div containing graph*/
@@ -286,7 +277,7 @@ input[type="radio"]:checked+label{
     float: right;
     width: 800px;
     padding-top: 36px;
-    padding-right: 120px;
+    padding-right: 10px;
 }
 
 /*Refresh button*/
@@ -322,7 +313,6 @@ input[type="radio"]:checked+label{
 #percent{
     color: #F1BA56;
     font-size:xx-large;
-    
 }
 
 /*Paragraph that couples with percentage*/
