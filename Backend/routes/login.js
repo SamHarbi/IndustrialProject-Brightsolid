@@ -8,6 +8,7 @@ connection = require('../database.js');
 /* GET users listing. */
 router.get('/', function(req, res, next) {
 
+connection = setConnection();
 connection.connect();
 
 connection.query('SELECT 1 + 1 AS solution', (err, rows, fields) => {
