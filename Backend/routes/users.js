@@ -1,5 +1,5 @@
 var express = require('express');
-const mysql = require('mysql');
+const mysql = require('mysql2');
 var router = express.Router();
 
 /* GET users listing. */
