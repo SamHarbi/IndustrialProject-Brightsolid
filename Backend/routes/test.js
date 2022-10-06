@@ -2,7 +2,7 @@ var express = require('express');
 const mysql = require('mysql2');
 var router = express.Router();
 
-import {connection} from '../database.js';
+connection = require('../database.js');
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
