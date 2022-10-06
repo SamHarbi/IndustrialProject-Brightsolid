@@ -18,7 +18,8 @@
     <!--Scripting for Google Charts API-->
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
-        //Variables to insert into graph (in future, the numbers will be pulled from database and inserted into these variable. Right now, they are hard-coded)
+
+        //Variables to insert into graph (in future, the numbers will be pulled from database and inserted into these variables. Right now, they are hard-coded)
         var compliant = 62;
         var noncompliant = 30;
         var comPercent = parseFloat(((compliant/(compliant+noncompliant))*100).toFixed(1)); //Percentage calculation
@@ -29,8 +30,8 @@
         function drawChart() {
             var data = google.visualization.arrayToDataTable([
                 ['Compliance Status', 'Number of Compliant Resources'],
-                ['Compliant',     compliant],
-                ['Non-Compliant',      noncompliant],
+                ['Compliant', compliant],
+                ['Non-Compliant', noncompliant],
           
             ]);
 
@@ -39,13 +40,14 @@
                 backgroundColor:'transparent',
                 pieHole: 0.7,
                 colors: ['#3ace50', '#ff0000'],
-                legend: {position: "top", textStyle: {color:"#F1BA56"}},
+                legend: {position: "bottom", textStyle: {color:"#F1BA56", fontSize: 20}},
                 pieSliceText: "none",
             };
 
             //Insert percentage into percent p element
             document.getElementById("percent").innerHTML = comPercent+"%";
 
+            //Add Google Chart to page
             var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
             chart.draw(data, options);
         }
@@ -57,7 +59,7 @@
 
     <!--Header containing logo and log out option-->
     <header id="darkHeader">
-        <img id="logo" src="BrightSolid.png" />
+        <img id="logo" src="BrightSolid.png" alt="BrightSolid Logo"/>
 
         <div class="logout">
             <p class="user">Hello *USER*</p>
@@ -72,15 +74,15 @@
         <!--Head of page, just under website header-->
         <div>
 
-            <!--Dark Mode Toggle Button-->
-            <button id="tog" class="access btn btn-light" onclick="darkMode()">Toggle dark mode</button>
+            <div id="Toggles">
+                <!--Font Resizing Buttons-->
+                <button id="a1" class="btn btn-light" onclick="Default()">A</button>
+                <button id="a2" class="btn btn-light" onclick="Large()">A+</button>
+                <button id="a3" class="btn btn-light" onclick="ExtraLarge()">A++</button>
 
-            <!--Font Resizing Buttons-->
-            <span id="FontSizeTog">
-                <button id="a3" class="access btn btn-light" onclick="ExtraLarge()">A++</button>
-                <button id="a2" class="access btn btn-light" onclick="Large()">A+</button>
-                <button id="a1" class="access btn btn-light" onclick="Default()">A</button>
-            </span>
+                <!--Dark Mode Toggle Button-->
+                <button id="tog" class="btn btn-light" onclick="darkMode()">Toggle dark mode</button>
+            </div>
 
             <br>
 
@@ -99,7 +101,7 @@
 
                     <!--Table headers-->
                     <thead>
-                        <tr class="cell">
+                        <tr>
                             <th width="5%">ID</th>
                             <th width="65%">Rule Name</th>
                             <th width="30%">Compliance State</th>
@@ -115,27 +117,68 @@
                         <tr>
                             <td>1</td>
                             <td>Hello</td>
-                            <td style="background-color:#3ace50">Goodbye</td>
+                            <td>Compliant</td>
+                        </tr>
+
+                        <tr>
+                            <td>1</td>
+                            <td>Hello</td>
+                            <td>Compliant</td>
                         </tr>
                         <tr>
                             <td>1</td>
                             <td>Hello</td>
-                            <td style="background-color:#3ace50">Goodbye</td>
+                            <td>Non-Compliant</td>
                         </tr>
                         <tr>
                             <td>1</td>
                             <td>Hello</td>
-                            <td style="background-color:#ff0000">Goodbye</td>
+                            <td>Compliant</td>
                         </tr>
                         <tr>
                             <td>1</td>
                             <td>Hello</td>
-                            <td style="background-color:#3ace50">Goodbye</td>
+                            <td>Compliant</td>
                         </tr>
                         <tr>
                             <td>1</td>
                             <td>Hello</td>
-                            <td style="background-color:#3ace50">Goodbye</td>
+                            <td>Compliant</td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>Hello</td>
+                            <td>Compliant</td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>Hello</td>
+                            <td>Compliant</td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>Hello</td>
+                            <td>Compliant</td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>Hello</td>
+                            <td>Compliant</td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>Hello</td>
+                            <td>Compliant</td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>Hello</td>
+                            <td>Compliant</td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>Hello</td>
+                            <td>Compliant</td>
                         </tr>
                         <!--Delete-->
 
@@ -154,7 +197,7 @@
         <!--Right page element containing compliance graph-->
         <div id="right">
 
-            <h1 class="totalTitle">Total Compliance</h1>
+            <h1 id="totalTitle" class="title">Total Compliance</h1>
 
             <!--Percentage label-->
             <div id="label">
@@ -203,7 +246,6 @@
                     <h1 class="modalHeader">Sort Items</h1>
                 </header>
 
-
                     <div class="modalBody">
                     
                         <!--Radio buttons to sort by ID or Compliance-->
@@ -251,27 +293,18 @@
         function Default(){
                 var element = document.getElementById("Font");
                 element.style.fontSize = "1em";
-                element.style.fontFamily = "Roboto", sans-serif;
-                element.style.paddingTop = 10;
-                element.style.textAlign = center;
         }
 
         //Large font size script
         function Large(){
             var element = document.getElementById("Font");
-            element.style.fontSize = "2em";
-            element.style.fontFamily = "Roboto", sans-serif;
-            element.style.paddingTop = 10;
-            element.style.textAlign = center;
+            element.style.fontSize = "1.5em";
         }
 
         //Extra large font size script
         function ExtraLarge(){
             var element = document.getElementById("Font");
-            element.style.fontSize = "3em";
-            element.style.fontFamily = "Roboto", sans-serif;
-            element.style.paddingTop = 10;
-            element.style.textAlign = center;
+            element.style.fontSize = "2em";
         }
 
         //Dark Mode script
