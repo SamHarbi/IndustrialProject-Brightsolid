@@ -1,3 +1,5 @@
+require('dotenv').config() //remove on git bush
+
 var express = require('express');
 const mysql = require('mysql2');
 
@@ -22,21 +24,21 @@ passport.use(new LocalStrategy(function verify(username, password, cb) {
 
   connection.query('SELECT * FROM users WHERE username = ?', (err, row, fields) => { 
     if (err) { res.send('Something went wrong :(');}
-    if (!row) { return cb(null, false, { message: 'Incorrect username or password.' }); }
+    if (!row) { res.send('Incorrect Username or Password'); }
 
     crypto.pbkdf2(password, row.salt, 310000, 32, 'sha256', function(err, hashedPassword) {
       if (err) { return cb(err); }
       if (!crypto.timingSafeEqual(row.hashed_password, hashedPassword)) {
-        return cb(null, false, { message: 'Incorrect username or password.' });
+        res.send('Incorrect Username or Password');
       }
-      return cb(null, row);
+      res.send('Logged in!');
     });
   });
 }));
 
 connection.end();
 
-res.send('respond with a resource');
+//res.send('respond with a resource');
 });
 
 module.exports = router;
