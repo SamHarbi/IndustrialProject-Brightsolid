@@ -19,7 +19,7 @@ passport.use(new LocalStrategy(function verify(username, password, cb) {
   connection.connect();
 
   connection.query('SELECT * FROM users WHERE username = ?', (err, row, fields) => { 
-    if (err) { res.send('Something went wrong :(');}
+    if (err) { return cb(err);}
     if (!row) { return cb(null, false, { message: 'Incorrect username or password.' }); }
 
     crypto.pbkdf2(password, row.salt, 310000, 32, 'sha256', function(err, hashedPassword) {
