@@ -1,3 +1,5 @@
+require('dotenv').config() //.env files for local testing
+
 var express = require('express');
 const mysql = require('mysql2');
 var router = express.Router();
