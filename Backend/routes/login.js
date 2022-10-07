@@ -14,6 +14,10 @@ connectionSetup = require('../database.js');
 //From the Passport.js Documentation
 passport.use(new LocalStrategy(function verify(username, password, cb) {
 
+  //Setup DB Connection and Connect
+  connection = connectionSetup.databaseSetup();
+  connection.connect();
+
   connection.query('SELECT * FROM users WHERE username = ?', (err, row, fields) => { 
     if (err) { res.send('Something went wrong :(');}
     if (!row) { return cb(null, false, { message: 'Incorrect username or password.' }); }
@@ -28,22 +32,10 @@ passport.use(new LocalStrategy(function verify(username, password, cb) {
   });
 }));
 
-/* GET users listing. */
-router.post('/', function(req, res, next) {
-
-//Setup DB Connection and Connect
-connection = connectionSetup.databaseSetup();
-
-connection.connect();
-
-passport.authenticate('local', {
-  successRedirect: '/',
-  failureRedirect: '/login'
-});
-
-connection.end();
-
-//res.send('respond with a resource');
-});
+/* POST users listing. */
+router.post('/', passport.authenticate('local', {
+  successRedirect: '/success',
+  failureRedirect: '/fail'
+}));
 
 module.exports = router;
