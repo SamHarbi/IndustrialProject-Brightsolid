@@ -51,7 +51,7 @@ router.post('/', function (req, res, next) {
 
                 console.log("I Should not be running unless it's all good above");
 
-                connection.query('INSERT INTO customer (customer_name, password, salt) VALUES (?, ?, ?);', [req.body.username, hashedPassword.toString('hex'), salt], function (err, results) {
+                connection.query('INSERT INTO customer (customer_name, password, salt) VALUES (?, ?, ?);', [req.body.username, hashedPassword.toString('hex'), salt.toString('hex')], function (err, results) {
                     if (err) { //Query didn't run
                         console.log(err);
                         return res.send('Something went wrong :(');
