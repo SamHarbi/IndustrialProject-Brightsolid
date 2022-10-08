@@ -7,6 +7,7 @@ var passport = require('passport');
 var LocalStrategy = require('passport-local');
 var crypto = require('crypto');
 
+
 var router = express.Router();
 
 connectionSetup = require('../database.js');
@@ -26,13 +27,13 @@ router.post('/', function (req, res, next) {
 
     let salt = crypto.randomBytes(32); //This would be better to run async
 
-    HashPass(req.password, salt)
+    HashPass(req.body.password, salt)
         .then((hashedPassword) => {
             //Setup DB Connection and Connect
             connection = connectionSetup.databaseSetup();
             connection.connect();
 
-            connection.query('SELECT * FROM customer WHERE customer_name = ?', [req.username], function (err, results, fields) {
+            connection.query('SELECT * FROM customer WHERE customer_name = ?', [req.body.username], function (err, results, fields) {
                 if (err) { //Query didn't run
                     console.log("not good 1");
                     return res.send('Something went wrong :(');
@@ -45,7 +46,7 @@ router.post('/', function (req, res, next) {
 
                 console.log("I Should not be running unless it's all good above");
 
-                connection.query('INSERT INTO customer (customer_name, password, salt) VALUES (?, ?, ?);', [req.username, hashedPassword, salt], function (err, results) {
+                connection.query('INSERT INTO customer (customer_name, password, salt) VALUES (?, ?, ?);', [req.body.username, hashedPassword, salt], function (err, results) {
                     if (err) { //Query didn't run
                         console.log("not good 3");
                         return res.send('Something went wrong :(');
