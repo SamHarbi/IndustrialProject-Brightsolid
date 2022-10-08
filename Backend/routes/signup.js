@@ -59,10 +59,11 @@ router.post('/', function (req, res, next) {
 
             });
 
-            console.log("Connection Closed");
-            connection.end();
-
         });
+
+    console.log("Connection Closed");
+    connection.end();
+
 });
 
 
