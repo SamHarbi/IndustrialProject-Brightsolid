@@ -37,11 +37,16 @@ router.post('/', function (req, res, next) {
                 if (err) { //Query didn't run
                     console.log("not good 1");
                     return res.send('Something went wrong :(');
+                    console.log("Connection Closed");
+                    connection.end();
                 }
 
                 if (results.length > 0) {
                     console.log("not good 2");
                     return res.send('User Already Exists');
+
+                    console.log("Connection Closed");
+                    connection.end();
                 }
 
                 console.log("I Should not be running unless it's all good above");
@@ -50,18 +55,21 @@ router.post('/', function (req, res, next) {
                     if (err) { //Query didn't run
                         console.log(err);
                         return res.send('Something went wrong :(');
+
+                        console.log("Connection Closed");
+                        connection.end();
                     }
                     else {
                         console.log("All Good");
                         return res.send('User Created');
+
+                        console.log("Connection Closed");
+                        connection.end();
                     }
                 });
 
             });
 
-        }).then(() => { //After all queries are done
-            console.log("Connection Closed");
-            connection.end();
         });
 });
 
