@@ -48,7 +48,7 @@ router.post('/', function (req, res, next) {
 
                 connection.query('INSERT INTO customer (customer_name, password, salt) VALUES (?, ?, ?);', [req.body.username, hashedPassword, salt], function (err, results) {
                     if (err) { //Query didn't run
-                        console.log("not good 3");
+                        console.log(err);
                         return res.send('Something went wrong :(');
                     }
                     else {
