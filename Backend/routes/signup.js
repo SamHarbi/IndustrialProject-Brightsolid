@@ -6,6 +6,7 @@ const mysql = require('mysql2/promise');
 var passport = require('passport');
 var LocalStrategy = require('passport-local');
 var crypto = require('crypto');
+const bcrypt = require('bcrypt');
 
 
 var router = express.Router();
@@ -13,11 +14,11 @@ var router = express.Router();
 connectionSetup = require('../database.js');
 
 //This Function takes heavy inspiration from https://stackoverflow.com/questions/61900412/how-is-nodes-crypto-pbkdf2-supposed-to-work
-function HashPass(password, salt) {
+function HashPass(password) {
     return new Promise((resolve, reject) => {
-        crypto.pbkdf2(password, salt, 310000, 32, 'sha256', (err, hashedPassword) => {
-            if (err) { reject(err); } else { resolve(hashedPassword); }
-        })
+        bcrypt.hash(password, 10).then(function (hash) {
+            resolve(hash);
+        });
     })
 }
 

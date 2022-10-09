@@ -8,6 +8,8 @@ var passport = require('passport');
 var LocalStrategy = require('passport-local');
 var crypto = require('crypto');
 
+const bcrypt = require('bcrypt');
+
 var router = express.Router();
 
 connectionSetup = require('../database.js');
