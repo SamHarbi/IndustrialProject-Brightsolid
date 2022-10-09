@@ -27,11 +27,11 @@ function login(username, password) {
       crypto.pbkdf2(password, row[0].salt, 310000, 32, 'sha256', function (err, hashedPassword) {
         if (err) { reject('Something went wrong, try again'); }
         if (row[0].password == hashedPassword.toString('hex')) {
-          reject('Incorrect username or password');
-        }
-        else {
           console.log("Resolved");
           resolve(row);
+        }
+        else {
+          reject('Incorrect username or password');
         }
       });
     });
