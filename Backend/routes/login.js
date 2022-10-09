@@ -22,7 +22,7 @@ function login(username, password) {
       if (err) { reject(err); }
       if (!row) { reject('Incorrect username or password'); }
 
-      console.log(row[0].salt);
+      //console.log(row[0].salt);
 
       crypto.pbkdf2(password, row[0].salt, 310000, 32, 'sha256', function (err, hashedPassword) {
         if (err) { reject('Something went wrong, try again'); }
