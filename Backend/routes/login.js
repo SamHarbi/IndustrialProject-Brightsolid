@@ -2,7 +2,7 @@ require('dotenv').config() //.env files for local testing
 
 var express = require('express');
 var session = require('express-session');
-const mysql = require('mysql2');
+const mysql = require('mysql2/promise');
 
 var passport = require('passport');
 var LocalStrategy = require('passport-local');
@@ -46,17 +46,21 @@ function isAuthenticated(req, res, next) {
 
 /* POST users listing. */
 router.post('/', express.urlencoded({ extended: false }), function (req, res, next) {
-  login(req.body.username, req.body.password).then((value) => {
-    console.log(value);
-    req.session.regenerate(function (err) {
-      if (err) { next(err); }
-      req.session.user = req.body.user
-      req.session.save(function (err) {
-        if (err) { return next(err) }
-        res.send("Done");
+  try {
+    login(req.body.username, req.body.password).then((value) => {
+      console.log(value);
+      req.session.regenerate(function (err) {
+        if (err) { next(err); }
+        req.session.user = req.body.user
+        req.session.save(function (err) {
+          if (err) { return next(err) }
+          res.send("Done");
+        })
       })
-    })
-  });
+    });
+  } catch (err) {
+    res.send(err);
+  }
 });
 
 module.exports = router;
