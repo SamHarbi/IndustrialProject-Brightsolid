@@ -25,17 +25,8 @@ function login(username, password) {
       if (row.length < 1) {
         reject('Incorrect username or password 1');
       } else {
-        crypto.pbkdf2(password, row[0].salt, 310000, 32, 'sha256', function (err, hashedPassword) {
-          if (err) { reject('Something went wrong, try again'); }
-          console.log(row[0].password);
-          console.log(hashedPassword.toString('hex'));
-          if (row[0].password == hashedPassword.toString('hex')) {
-            console.log("Resolved");
-            resolve(row);
-          }
-          else {
-            reject('Incorrect username or password 2');
-          }
+        bcrypt.compare(password, row[0].password, function (err, result) {
+          if (result == true) { res.send("Logged in"); } else { res.send("Not Same"); }
         });
       }
       //console.log(row[0].salt);
