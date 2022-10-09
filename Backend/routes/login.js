@@ -26,8 +26,7 @@ passport.use(new LocalStrategy(function verify(username, password, cb) {
 
     crypto.pbkdf2(password, row[0].salt, 310000, 32, 'sha256', function (err, hashedPassword) {
       if (err) { return cb(err); }
-      hashedPassword = hashedPassword.toString('hex');
-      if (!crypto.timingSafeEqual(Buffer.from(row[0].password, "utf-8"), Buffer.from(hashedPassword, "utf-8"))) {
+      if (row[0].password == hashedPassword.toString('hex')) {
         return cb(null, false, { message: 'Incorrect username or password.' });
       }
       return cb(null, row);
