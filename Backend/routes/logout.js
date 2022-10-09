@@ -8,7 +8,7 @@ var router = express.Router();
 
 //Code adapted from https://www.npmjs.com/package/express-session user login example
 /* GET users listing. */
-router.get('/logout', function (req, res, next) {
+router.get('/', function (req, res, next) {
     // logout logic
     req.session.user = null
     req.session.save(function (err) {
