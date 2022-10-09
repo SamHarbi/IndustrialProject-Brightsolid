@@ -46,7 +46,7 @@ router.post('/', express.urlencoded({ extended: false }), function (req, res, ne
     console.log(value);
     req.session.regenerate(function (err) {
       if (err) { next(err); }
-      req.session.user = req.body.user
+      req.session.user = req.body.username
       req.session.save(function (err) {
         if (err) { return next(err) }
         res.send("Done");
