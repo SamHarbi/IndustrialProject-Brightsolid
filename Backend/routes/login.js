@@ -26,7 +26,7 @@ function login(username, password) {
         reject('Incorrect username or password 1');
       } else {
         bcrypt.compare(password, row[0].password, function (err, result) {
-          if (result == true) { res.send("Logged in"); } else { res.send("Not Same"); }
+          if (result == true) { resolve("Logged in"); } else { reject("Not Same"); }
         });
       }
       //console.log(row[0].salt);
