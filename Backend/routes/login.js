@@ -50,7 +50,7 @@ router.post('/', express.urlencoded({ extended: false }), function (req, res, ne
       req.session.user = req.body.user
       req.session.save(function (err) {
         if (err) { return next(err) }
-        res.return("Done")
+        res.send("Done");
       })
     })
   });
