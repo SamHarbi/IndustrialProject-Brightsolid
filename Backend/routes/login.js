@@ -29,6 +29,7 @@ function login(username, password) {
         if (row[0].password == hashedPassword.toString('hex')) {
           reject('Incorrect username or password');
         }
+        console.log("Resolved");
         resolve(row);
       });
     });
@@ -49,7 +50,7 @@ router.post('/', express.urlencoded({ extended: false }), function (req, res, ne
       req.session.user = req.body.user
       req.session.save(function (err) {
         if (err) { return next(err) }
-        //res.redirect('/')
+        res.return("Done")
       })
     })
   });
