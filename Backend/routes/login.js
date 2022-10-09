@@ -20,7 +20,7 @@ function login(username, password) {
 
     connection.query("SELECT * FROM customer WHERE customer_name = ?;", [username], function (err, row, fields) {
       if (err) { reject(err); }
-      if (!row) { reject('Incorrect username or password'); }
+      if (row.length < 1) { reject('Incorrect username or password'); }
 
       //console.log(row[0].salt);
 
@@ -58,6 +58,7 @@ router.post('/', express.urlencoded({ extended: false }), function (req, res, ne
     })
   }).catch(function () {
     console.log("Error");
+    res.send("Error")
   });
 });
 
