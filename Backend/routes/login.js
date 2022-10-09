@@ -57,8 +57,8 @@ router.post('/', express.urlencoded({ extended: false }), function (req, res, ne
         res.send("Done");
       })
     })
-  }).catch(function () {
-    console.log("Error");
+  }).catch(function (err) {
+    console.log(err);
     res.send("Error")
   });
 });
