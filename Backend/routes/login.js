@@ -25,7 +25,7 @@ function login(username, password) {
       console.log(row[0].salt);
 
       crypto.pbkdf2(password, row[0].salt, 310000, 32, 'sha256', function (err, hashedPassword) {
-        if (err) { return cb(err); }
+        if (err) { reject('Something went wrong, try again'); }
         if (row[0].password == hashedPassword.toString('hex')) {
           reject('Incorrect username or password');
         }
@@ -46,7 +46,8 @@ function isAuthenticated(req, res, next) {
 
 /* POST users listing. */
 router.post('/', express.urlencoded({ extended: false }), function (req, res, next) {
-  login(req.body.username, req.body.password).then(() => {
+  login(req.body.username, req.body.password).then((value) => {
+    console.log(value);
     req.session.regenerate(function (err) {
       if (err) { next(err); }
       req.session.user = req.body.user
