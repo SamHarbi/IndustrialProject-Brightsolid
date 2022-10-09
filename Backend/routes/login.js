@@ -18,9 +18,7 @@ passport.use(new LocalStrategy(function verify(username, password, cb) {
   connection = connectionSetup.databaseSetup();
   connection.connect();
 
-  username = "'" + username + "'";
-
-  connection.query('SELECT * FROM customer WHERE customer_name = ?;', [username], function (err, row, fields) {
+  connection.query("SELECT * FROM customer WHERE customer_name = ?;", [username], function (err, row, fields) {
     if (err) { return cb(err); }
     if (!row) { return cb(null, false, { message: 'Incorrect username or password.' }); }
 
