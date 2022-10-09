@@ -29,8 +29,10 @@ function login(username, password) {
         if (row[0].password == hashedPassword.toString('hex')) {
           reject('Incorrect username or password');
         }
-        console.log("Resolved");
-        resolve(row);
+        else {
+          console.log("Resolved");
+          resolve(row);
+        }
       });
     });
   });
