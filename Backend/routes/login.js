@@ -20,20 +20,21 @@ function login(username, password) {
 
     connection.query("SELECT * FROM customer WHERE customer_name = ?;", [username], function (err, row, fields) {
       if (err) { reject(err); }
-      if (row.length < 1) { reject('Incorrect username or password'); }
-
+      if (row.length < 1) {
+        reject('Incorrect username or password');
+      } else {
+        crypto.pbkdf2(password, row[0].salt, 310000, 32, 'sha256', function (err, hashedPassword) {
+          if (err) { reject('Something went wrong, try again'); }
+          if (row[0].password === hashedPassword.toString('hex')) {
+            console.log("Resolved");
+            resolve(row);
+          }
+          else {
+            reject('Incorrect username or password');
+          }
+        });
+      }
       //console.log(row[0].salt);
-
-      crypto.pbkdf2(password, row[0].salt, 310000, 32, 'sha256', function (err, hashedPassword) {
-        if (err) { reject('Something went wrong, try again'); }
-        if (row[0].password === hashedPassword.toString('hex')) {
-          console.log("Resolved");
-          resolve(row);
-        }
-        else {
-          reject('Incorrect username or password');
-        }
-      });
     });
   });
 }
