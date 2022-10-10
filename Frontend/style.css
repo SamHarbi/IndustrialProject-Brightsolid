@@ -151,6 +151,24 @@ h4 {
     background-color: #6e6e6e;
 }
 
+.dark-modeDetails {
+    padding-left: 25px;
+    padding-top: 10px;
+    padding-right: 25px;
+    padding-bottom: 10px;
+    width: 350px;
+    height: 350px;
+    background-color: #3f3f3f;
+}
+
+.dark-modeDetails p{
+  color: #F1BA56
+}
+
+.dark-modeDetails h2{
+  color: #F1BA56
+}
+
 
 #logo {
     float: left;
@@ -206,16 +224,12 @@ h4 {
   background-color:#ffffff;
 }
 
-#refresh-report {
-
-}
-
 #report-table {
   padding-left: 50px;
   padding-right: 50px;
 }
 
 #return-btn {
-  padding-left: 50px;
+  padding-left: 5px;
   padding-top: 5px;
 }

@@ -74,25 +74,23 @@
 
 <body id="Font">
 
-
-
   <header id="darkHeader">
     <img id="logo" src="BrightSolid.png" />
 
     <div class="logout">
-      <p class="user">Hello *USER*</p>
-      <a class="btn btn-warning" href="">Log Out</a>
-    </div>
+            <p class="user">Hello *USER*</p>
+
+            <!--Log out button for a logged in user-->
+            <input id="logout" class="btn" type="submit" value="Log Out">
+        </div>
   </header>
 
   <main>
 
-    <!-- Return Button -->
-    <div id="return-btn">
-      <a href="index.html" input class="btn btn-light btn-lg" type="button" value="Return">Return</a>
-    </div>
-
     <div>
+      <!-- Return Button -->
+      <a href="index.html" input class="btn btn-light btn-lg" type="button" value="Return" id="return-btn">Return</a>
+
       <!--Dark Mode Toggle Button-->
       <button id="tog" class="access btn btn-light" onclick="darkMode()">Toggle dark mode</button>
 
@@ -111,7 +109,7 @@
     <div class="section" id="report-table">
       <table id="cells">
         <thead>
-          <tr class="cell">
+          <tr>
             <th width="5%">ID</th>
             <th width="15%">Resource</th>
             <th width="15%">Compliance</th>
@@ -453,9 +451,8 @@
     </div>
 
     <div id="report-btn">
-      <input class="btn btn-light" type="submit" value="Refresh">
-      <input class="btn btn-light" type="reset" value="Reset Sort">
-    </div>
+      <input id="ref" class="btn btn-light" type="submit" value="Refresh">
+      <input id="res" class="btn btn-light" type="reset" value="Reset Sort">
     </div>
 
     <br>
@@ -463,12 +460,12 @@
 
       <div class="row">
         <div class="col-lg">
-          <div id="details" class="section">
+          <div id="exception-history" class="section">
             <p>Some graph/Exception History</p>
           </div>
         </div>
         <div class="col-sm">
-          <div id="details" class="section">
+          <div id="exception-management" class="section">
             <h2><b><u>Exception Management</u></b></h2>
 
             <!-- Create Exception -->
@@ -483,7 +480,7 @@
           </div>
         </div>
         <div class="col-sm">
-          <div id="details" class="section">
+          <div id="exception-graph" class="section">
             <div id="columnchart_material" style="width: 300px; height: 300px;"></div>
           </div>
         </div>
@@ -502,27 +499,18 @@
   function Default() {
     var element = document.getElementById("Font");
     element.style.fontSize = "1em";
-    element.style.fontFamily = "Roboto", sans - serif;
-    element.style.paddingTop = 10;
-    element.style.textAlign = center;
   }
 
   //Large font size script
   function Large() {
     var element = document.getElementById("Font");
-    element.style.fontSize = "2em";
-    element.style.fontFamily = "Roboto", sans - serif;
-    element.style.paddingTop = 10;
-    element.style.textAlign = center;
+    element.style.fontSize = "1.5em";
   }
 
   //Extra large font size script
   function ExtraLarge() {
     var element = document.getElementById("Font");
-    element.style.fontSize = "3em";
-    element.style.fontFamily = "Roboto", sans - serif;
-    element.style.paddingTop = 10;
-    element.style.textAlign = center;
+    element.style.fontSize = "2em";
   }
 
   //Dark Mode script
@@ -536,14 +524,20 @@
     var header = document.getElementById("darkHeader");
     header.classList.toggle("dark-modeHeader");
 
-    var dataTable = document.getElementById("table");
-    dataTable.classList.toggle("dark-modeTable");
+    var reportTable = document.getElementById("report-table");
+    reportTable.classList.toggle("dark-modeTable");
 
     var toggle = document.getElementById("tog");
     toggle.classList.toggle("dark-modeButtons");
 
-    var filter = document.getElementById("fil");
-    filter.classList.toggle("dark-modeButtons");
+    var reset = document.getElementById("res");
+    reset.classList.toggle("dark-modeButtons");
+
+    var refresh = document.getElementById("ref");
+    refresh.classList.toggle("dark-modeButtons");
+
+    var returnButton = document.getElementById("return-btn");
+    returnButton.classList.toggle("dark-modeButtons");
 
     var logout = document.getElementById("logout");
     logout.classList.toggle("dark-modeLogOut");
@@ -557,11 +551,20 @@
     var a3 = document.getElementById("a3");
     a3.classList.toggle("dark-modeButtons");
 
-    var refresh = document.getElementById("ref");
-    refresh.classList.toggle("dark-modeButtons");
+    var reportButtons = document.getElementById("report-btn");
+    reportButtons.classList.toggle("dark-modeButtons");
 
     var cell = document.getElementById('cells');
     cell.classList.toggle("dark-modeCell");
+
+    var exceptionHistory = document.getElementById('exception-history');
+    exceptionHistory.classList.toggle("dark-modeDetails");
+
+    var exceptionManagement = document.getElementById('exception-management');
+    exceptionManagement.classList.toggle("dark-modeDetails");
+
+    var exceptionGraph = document.getElementById('exception-graph');
+    exceptionGraph.classList.toggle("dark-modeDetails");
 
     var modal = document.getElementById('modalDark');
     modal.classList.toggle("dark-modeModal");
