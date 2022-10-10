@@ -23,7 +23,7 @@ router.get('/', function (req, res, next) {
   connection.end();
 
   //Query has run 
-  res.send('Server responded :)');
+  res.json({ 'response': 'Server responded :)' });
 
 });
 
