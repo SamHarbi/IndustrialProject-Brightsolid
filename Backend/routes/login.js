@@ -60,7 +60,7 @@ function getAccountData(customerID) {
       if (row.length < 1) {
         reject('An Error Occured 2');
       } else {
-        resolve(row[0]);
+        resolve(row[0]); //Add multi account support
       }
     });
   });

@@ -16,7 +16,7 @@ function isAuthenticated(req, res, next) {
 /* GET users listing. */
 router.get('/', isAuthenticated, function (req, res) {
     // this is only called when there is an authentication user due to isAuthenticated
-    res.send('hello, ' + escapeHtml(req.session.user) + '!' +
+    res.send('hello, ' + escapeHtml(req.session.user) + '!' + escapeHtml(req.session.accountID) +
         ' <a href="/">Logout</a>')
 })
 
