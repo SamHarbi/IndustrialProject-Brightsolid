@@ -33,7 +33,7 @@
             
             alert(response);
             for (i = 0; i < array.length; i++) {
-                txt += "<tr><td>" + array[i].id + "</td><td>" + array[i].name + "</td><td>" + array[i].comp + "</td></tr>"
+                txt += "<tr><td>" + array[i][0]+ "</td><td>" + array[i][1] + "</td><td>" + array[i][2] + "</td></tr>"
             }
             document.getElementById("insert").innerHTML = txt;
         })
