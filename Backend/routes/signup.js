@@ -26,7 +26,7 @@ function HashPass(password) {
 /* POST users listing. */
 router.post('/', function (req, res, next) {
 
-    HashPass(req.body.password, salt)
+    HashPass(req.body.password)
         .then((hashedPassword) => {
             //Setup DB Connection and Connect
             connection = connectionSetup.databaseSetup();
