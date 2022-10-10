@@ -83,10 +83,11 @@ router.post('/', express.urlencoded({ extended: false }), function (req, res, ne
       getCustomerID().then((result) => {
         getAccountData().then((result) => {
           accountData = result;
+          console.log(result);
         })
       });
 
-      console.log(result);
+
 
       req.session.user = req.body.username
       req.session.save(function (err) {
