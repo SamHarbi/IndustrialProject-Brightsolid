@@ -19,19 +19,24 @@
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
 
-        fetch("https://brightsolid-monoserver-7q9js.ondigitalocean.app/test").then(function (response) {
-            alert(response);
-        })
-
         //Variables to insert into graph (in future, the numbers will be pulled from database and inserted into these variables. Right now, they are hard-coded)
         var compliant = 62;
         var noncompliant = 30;
         var comPercent = parseFloat(((compliant / (compliant + noncompliant)) * 100).toFixed(1)); //Percentage calculation
+        
+        fetch("https://brightsolid-monoserver-7q9js.ondigitalocean.app/test").then(function (response) {
 
-        //Varaibles for insertion into the table
-        var array = JSON.parse(response);
-        var i;
-        var txt = "";
+            //Varaibles for insertion into the table
+            var array = JSON.parse(response);
+            var i;
+            var txt = "";
+            
+            alert(response);
+            for (i = 0; i < array.length; i++) {
+                txt += "<tr><td>" + array[i].id + "</td><td>" + array[i].name + "</td><td>" + array[i].comp + "</td></tr>"
+            }
+            document.getElementById("insert").innerHTML = txt;
+        })
 
         //Chart creation
         google.charts.load("current", { packages: ["corechart"] });
@@ -60,11 +65,6 @@
             var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
             chart.draw(data, options);
         }
-
-        for (i = 0; i < array.length; i++) {
-            txt += "<tr><td>" + array[i].id + "</td><td>" + array[i].ruleName + "</td><td>" + array[i].complianceState+"</td></tr>"
-        }
-        document.getElementById("insert").innerHTML = txt;
     </script>
 
 </head>
