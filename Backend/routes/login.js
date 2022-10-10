@@ -85,8 +85,8 @@ router.post('/', express.urlencoded({ extended: false }), function (req, res, ne
         getAccountData(result).then((result2) => {
           accountData = result2;
           console.log(result2.account_ref);
-        })
-      });
+        }).catch((err) => { res.send("Error"); });
+      }).catch((err) => { res.send("Error"); });
 
 
 
