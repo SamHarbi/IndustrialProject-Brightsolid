@@ -1,9 +1,10 @@
 <!DOCTYPE html>
+
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
 
     <!--Metadata and links-->
-    <meta charset="utf-8"/>
+    <meta charset="utf-8" />
     <title>BrightSolid</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -17,38 +18,48 @@
     <!--Scripting for Google Charts API-->
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
-        
-        fetch("https://brightsolid-monoserver-7q9js.ondigitalocean.app/Backend/test").then((response) => response.json()).then(function (data) {
-            alert(data.response);
-        })
 
         //Variables to insert into graph (in future, the numbers will be pulled from database and inserted into these variables. Right now, they are hard-coded)
         var compliant = 62;
         var noncompliant = 30;
-        var comPercent = parseFloat(((compliant/(compliant+noncompliant))*100).toFixed(1)); //Percentage calculation
+        var comPercent = parseFloat(((compliant / (compliant + noncompliant)) * 100).toFixed(1)); //Percentage calculation
         
+        fetch("https://brightsolid-monoserver-7q9js.ondigitalocean.app/Backend/test").then(function (response) {
+
+            //Varaibles for insertion into the table
+            var array = JSON.parse(response);
+            var i;
+            var txt = "";
+            
+            alert(response);
+            for (i = 0; i < array.length; i++) {
+                txt += "<tr><td>" + array[i].id + "</td><td>" + array[i].name + "</td><td>" + array[i].comp + "</td></tr>"
+            }
+            document.getElementById("insert").innerHTML = txt;
+        })
+
         //Chart creation
-        google.charts.load("current", {packages:["corechart"]});
+        google.charts.load("current", { packages: ["corechart"] });
         google.charts.setOnLoadCallback(drawChart);
         function drawChart() {
             var data = google.visualization.arrayToDataTable([
                 ['Compliance Status', 'Number of Compliant Resources'],
                 ['Compliant', compliant],
                 ['Non-Compliant', noncompliant],
-          
+
             ]);
 
             //Chart options
             var options = {
-                backgroundColor:'transparent',
+                backgroundColor: 'transparent',
                 pieHole: 0.7,
                 colors: ['#3ace50', '#ff0000'],
-                legend: {position: "bottom", textStyle: {color:"#F1BA56", fontSize: 20}},
+                legend: { position: "bottom", textStyle: { color: "#F1BA56", fontSize: 20 } },
                 pieSliceText: "none",
             };
 
             //Insert percentage into percent p element
-            document.getElementById("percent").innerHTML = comPercent+"%";
+            document.getElementById("percent").innerHTML = comPercent + "%";
 
             //Add Google Chart to page
             var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
@@ -62,7 +73,7 @@
 
     <!--Header containing logo and log out option-->
     <header id="darkHeader">
-        <img id="logo" src="BrightSolid.png" alt="BrightSolid Logo"/>
+        <img id="logo" src="BrightSolid.png" alt="BrightSolid Logo" />
 
         <div class="logout">
             <p class="user">Hello *USER*</p>
@@ -112,80 +123,7 @@
                     </thead>
 
                     <!--Table contents-->
-                    <tbody>
-
-
-
-                        <!--For Testing. Delete when done.-->
-                        <tr>
-                            <td>1</td>
-                            <td>Hello</td>
-                            <td>Compliant</td>
-                        </tr>
-
-                        <tr>
-                            <td>1</td>
-                            <td>Hello</td>
-                            <td>Compliant</td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>Hello</td>
-                            <td>Non-Compliant</td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>Hello</td>
-                            <td>Compliant</td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>Hello</td>
-                            <td>Compliant</td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>Hello</td>
-                            <td>Compliant</td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>Hello</td>
-                            <td>Compliant</td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>Hello</td>
-                            <td>Compliant</td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>Hello</td>
-                            <td>Compliant</td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>Hello</td>
-                            <td>Compliant</td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>Hello</td>
-                            <td>Compliant</td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>Hello</td>
-                            <td>Compliant</td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>Hello</td>
-                            <td>Compliant</td>
-                        </tr>
-                        <!--Delete-->
-
-
+                    <tbody id="insert">
 
                     </tbody>
                 </table>
@@ -210,7 +148,7 @@
 
             <!--Donut Chart of Total Complaince-->
             <div id="donutchart"></div>
-            
+
 
         </div>
 
@@ -223,25 +161,25 @@
                     <h1 class="modalHeader">Filter</h1>
                 </header>
 
-                    <div class="modalBody">
-            
-                        <!--Radio buttons to filter Compliance States-->
-                        <div class="filter">
-                            <input type="radio" id="all" name="filter" checked="checked"/>
-                            <label for="all">All Rules</label>
-                        </div>
+                <div class="modalBody">
 
-                        <div class="filter">
-                            <input type="radio" id="com" name="filter"/>
-                            <label for="com">Compliant Rules Only</label>
-                        </div>
-
-                        <div class="filter">
-                            <input type="radio" id="non" name="filter"/>
-                            <label for="non">Non-Compliant Rules Only</label>
-                        </div>
-                    
+                    <!--Radio buttons to filter Compliance States-->
+                    <div class="filter">
+                        <input type="radio" id="all" name="filter" checked="checked" />
+                        <label for="all">All Rules</label>
                     </div>
+
+                    <div class="filter">
+                        <input type="radio" id="com" name="filter" />
+                        <label for="com">Compliant Rules Only</label>
+                    </div>
+
+                    <div class="filter">
+                        <input type="radio" id="non" name="filter" />
+                        <label for="non">Non-Compliant Rules Only</label>
+                    </div>
+
+                </div>
 
 
 
@@ -249,36 +187,36 @@
                     <h1 class="modalHeader">Sort Items</h1>
                 </header>
 
-                    <div class="modalBody">
-                    
-                        <!--Radio buttons to sort by ID or Compliance-->
-                        <div class="sort">
-                            <input type="radio" id="none" name="sort" checked="checked"/>
-                            <label for="none">None</label>
-                        </div>
+                <div class="modalBody">
 
-                        <div class="sort">
-                            <input type="radio" id="asc" name="sort"/>
-                            <label for="asc">By ID (Ascending)</label>
-                        </div>
-
-                        <div class="sort">
-                            <input type="radio" id="des" name="sort"/>
-                            <label for="des">By ID (Descending)</label>
-                        </div>
-
-                        <div class="sort">
-                            <input type="radio" id="comnon" name="sort"/>
-                            <label for="comnon">By Compliance</label>
-                        </div>
-
-                        <div class="sort">
-                            <input type="radio" id="noncom" name="sort"/>
-                            <label for="noncom">By Non-Compliance</label>
-                        </div>
+                    <!--Radio buttons to sort by ID or Compliance-->
+                    <div class="sort">
+                        <input type="radio" id="none" name="sort" checked="checked" />
+                        <label for="none">None</label>
                     </div>
 
-                
+                    <div class="sort">
+                        <input type="radio" id="asc" name="sort" />
+                        <label for="asc">By ID (Ascending)</label>
+                    </div>
+
+                    <div class="sort">
+                        <input type="radio" id="des" name="sort" />
+                        <label for="des">By ID (Descending)</label>
+                    </div>
+
+                    <div class="sort">
+                        <input type="radio" id="comnon" name="sort" />
+                        <label for="comnon">By Compliance</label>
+                    </div>
+
+                    <div class="sort">
+                        <input type="radio" id="noncom" name="sort" />
+                        <label for="noncom">By Non-Compliance</label>
+                    </div>
+                </div>
+
+
                 <div class="modalFooter">
 
                     <!--Apply button to submit sort/filter options-->
@@ -293,19 +231,19 @@
     <script>
 
         //Default font size script
-        function Default(){
-                var element = document.getElementById("Font");
-                element.style.fontSize = "1em";
+        function Default() {
+            var element = document.getElementById("Font");
+            element.style.fontSize = "1em";
         }
 
         //Large font size script
-        function Large(){
+        function Large() {
             var element = document.getElementById("Font");
             element.style.fontSize = "1.5em";
         }
 
         //Extra large font size script
-        function ExtraLarge(){
+        function ExtraLarge() {
             var element = document.getElementById("Font");
             element.style.fontSize = "2em";
         }
@@ -321,7 +259,7 @@
             var header = document.getElementById("darkHeader");
             header.classList.toggle("dark-modeHeader");
 
-            var dataTable= document.getElementById("table");
+            var dataTable = document.getElementById("table");
             dataTable.classList.toggle("dark-modeTable");
 
             var toggle = document.getElementById("tog");
@@ -359,4 +297,3 @@
 </body>
 
 </html>
-
