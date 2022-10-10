@@ -30,7 +30,6 @@ function login(username, password) {
           if (result == true) { resolve("Logged in"); } else { reject("Not Same"); }
         });
       }
-      //console.log(row[0].salt);
     });
   });
 }
