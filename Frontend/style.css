@@ -1,0 +1,328 @@
+
+
+/*Styling for Base Tags*/
+
+
+
+/*Body of page*/
+body {
+    background-color: #195A5F;
+}
+
+/*Header of page*/
+header {
+    background-color: #F1BA56;
+    height:130px;
+}
+
+/*Paragraphs, clickable elements and table headers*/
+p, a, th {
+    font-family: 'Roboto', sans-serif;
+    color: #195A5F;
+}
+
+/*Table*/
+table {
+    table-layout:fixed;
+    width: 100%;
+}
+
+/*Head of table and table headers*/
+thead, th {
+    background-color: #e8e8e8;
+    text-align: center;
+    position: sticky;
+    top:0;
+}
+
+/*Table header and table cells*/
+th, td {
+    padding: 8px;
+}
+
+/*Table Cells*/
+td{
+    text-overflow: ellipsis;
+    word-wrap: break-word;
+    border: 1px solid black;
+}
+
+/*Even numbered data cells*/
+tr:nth-child(even){
+    background-color: #e8e8e8;
+}
+
+/*Odd numbered data cells*/
+tr:nth-child(odd){
+    background-color: #ffffff;
+}
+
+/*Styling for mouse hover event*/
+tbody tr:hover{
+    cursor: pointer;
+    background-color: #616161;
+    color: #ffffff;
+}
+
+
+
+/*Styling for Classes*/
+
+
+
+/*Log-Out section (Username and Log-Out button)*/
+.logout {
+    text-align: center;
+    line-height:0;
+    float: right;
+    padding-top: 45px;
+    padding-right: 345px;
+    padding-bottom: 5px;
+}
+
+/*Username*/
+.user {
+    color: #195A5F;
+}
+
+/*Title of page*/
+.title {
+    font-family: 'Montserrat';
+    padding-top: 5px;
+    position: relative;
+    text-align: center;
+    color: #F1BA56;
+    font-size: 3em;
+}
+
+/*Section containing the table*/
+.section {
+    background-color: #e8e8e8;
+    height: 500px;
+    overflow: hidden;
+}
+
+/*Bootstrap Buttons*/
+.btn {
+    color: #195A5F;
+    transition: none;
+}
+
+/*Modal*/
+.w3-modal-content {
+    width: 500px;
+    background-color:#ffffff;
+}
+
+/*Content held within modal*/
+.w3-container{
+    background-color:#e8e8e8; 
+    height: 70px;
+}
+
+/*Headers of modal*/
+.modalHeader{
+    padding-left: 20px;
+}
+
+/*Bodies of modal*/
+.modalBody{
+    height: auto; 
+    line-height: 2;
+}
+
+/*Footer/Bottom of modal*/
+.modalFooter{
+    text-align:center;
+}
+
+/*Radio buttons in Filter modal, split between two groups for filtering Compliance State and sorting table*/
+.filter, .sort{
+    position: relative;
+    display: block;
+    text-align: left;
+}
+
+/*Text for radio buttons*/
+.filter label, .sort label{
+    display: block;
+    background: #ffffff;
+    color:#000000;
+    border-radius: 5px;
+    padding-left: 15px;
+    border: 2px solid #7c7c7c;
+    cursor: pointer;
+}
+
+/*Clickable element of radio buttons*/
+input[type="radio"]{
+    display:none;
+    position:absolute;
+    width: 100%;
+    appearance: none;
+}
+
+/*Clickable element of radio buttons that have been selected*/
+input[type="radio"]:checked+label{
+    background: #8fff5b;
+    color: rgb(0, 0, 0);
+}
+
+/*Dark mode styling for page body*/
+.dark-modeBody {
+    background-color: #383838;
+    color: white;
+}
+
+/*Dark mode styling for logo*/
+.dark-modeLogo {
+    content:url(BrightSolidDark.png);
+}
+
+/*Dark mode styling for header*/
+.dark-modeHeader {
+    background-color: #181818;
+    color: #F1BA56;
+}
+
+/*Dark mode styling for paragraphs*/
+.dark-modeHeader p{
+    color: #F1BA56;
+}
+
+/*Dark mode styling for table*/
+.dark-modeTable {
+    background-color: #3f3f3f;
+}
+
+/*Dark mode styling for table head*/
+.dark-modeCell th{
+    background-color: #696969;
+    color: #ffffff;
+}
+
+/*Dark mode styling for even-numbered table cells*/
+.dark-modeCell tr:nth-child(even){
+    background-color: #696969;
+}
+
+/*Dark mode styling for odd-numbered table cells*/
+.dark-modeCell tr:nth-child(odd){
+    background-color: #4b4b4b;
+}
+
+/*Dark mode styling for hovering over cells*/
+.dark-modeCell tr:hover{
+    background-color: #c0c0c0;
+    color: #000000;
+}
+
+/*Dark mode styling for buttons*/
+.dark-modeButtons {
+    background-color: #3f3f3f !important;
+    color: #ffffff !important;
+}
+
+/*Dark mode styling for logout button*/
+.dark-modeLogOut{
+    background-color: none;
+    color: #F1BA56;
+}
+
+/*Dark mode styling for modal header*/
+.dark-modeModal header{
+    background-color: #424242;
+}
+
+/*Dark mode styling for modal div*/
+.dark-modeModal div{
+    background-color: #6e6e6e;
+}
+
+
+
+/*Styling for IDs*/
+
+
+
+/*Logo of company*/
+#logo {
+    float: left;
+    padding-left: 345px;
+    padding-top: 45px;
+    padding-bottom: 5px;
+    height: 102px;
+}
+
+/*LogOut Button*/
+#logout{
+    display: center;
+    font-weight: 600;
+}
+
+/*Styling for span tag containing Font Resizer buttons*/
+#Toggles{
+    float: right;
+}
+
+/*Left div containing table, refresh and sort*/
+#left {
+    float: left;
+    width: 1200px;
+    padding-top: 20px;
+    padding-left: 100px;
+}
+
+/*Table containing rules*/
+#table{
+    overflow: auto;
+}
+
+/*Refresh button*/
+#refresh {
+    padding-top: 10px;
+    text-align: center;
+}
+
+/*Right div containing graph*/
+#right {
+    float: right;
+    width: 700px;
+    padding-top: 36px;
+    padding-right: 10px;
+}
+
+/*Title of graph*/
+#totalTitle{
+    font-size: 2em;
+}
+
+/*Graph*/
+#donutchart {
+    width: auto; 
+    height: 650px; 
+    overflow:hidden;
+}
+
+/*Div containing percentage of compliant resources*/
+#label{
+    margin: auto;
+    text-align: center;
+    position:relative;
+    text-align: center;
+    margin-top: 240px;
+    margin-bottom:-370px;
+    line-height: 1;
+}
+
+/*Paragraph with percentage*/
+#percent{
+    color: #F1BA56;
+    font-size:xx-large;
+}
+
+/*Paragraph that couples with percentage*/
+#overall{
+    color: #f3c87a;
+    font-size:large;
+}
