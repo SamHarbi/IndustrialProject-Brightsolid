@@ -82,26 +82,26 @@ router.post('/', express.urlencoded({ extended: false }), function (req, res, ne
 
       getCustomerID(req.body.username).then((result) => {
         getAccountData(result).then((result2) => {
+
           accountData = result2;
           req.session.accountID = result2.account_id;
           console.log(result2.account_id);
+
+          req.session.user = req.body.username;
           req.session.save(function (err) {
             if (err) { return next(err) }
             res.send("Done");
           })
-        }).catch((err) => { console.log(err); });
-      }).catch((err) => { console.log(err); });
+        })
+      }).catch(function (err) {
+        console.log(err);
+        res.send("Error")
+      });
 
-      req.session.user = req.body.username;
-      req.session.save(function (err) {
-        if (err) { return next(err) }
-        res.send("Done");
-      })
-    })
-  }).catch(function (err) {
-    console.log(err);
-    res.send("Error")
-  });
+    }).catch((err) => { console.log(err); });
+  }).catch((err) => { console.log(err); });
+
+
 });
 
 module.exports = router;
