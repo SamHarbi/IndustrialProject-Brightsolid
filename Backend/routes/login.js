@@ -34,6 +34,38 @@ function login(username, password) {
   });
 }
 
+function getCustomerID(customerID) {
+  return new Promise((resolve, reject) => {
+    connection = connectionSetup.databaseSetup();
+    connection.connect();
+
+    connection.query("SELECT * FROM customer WHERE customer_name = ?;", [customerID], function (err, row, fields) {
+      if (err) { reject(err); }
+      if (row.length < 1) {
+        reject('An Error Occured');
+      } else {
+        resolve(row);
+      }
+    });
+  });
+}
+
+function getAccountData() {
+  return new Promise((resolve, reject) => {
+    connection = connectionSetup.databaseSetup();
+    connection.connect();
+
+    connection.query("SELECT * FROM account WHERE customer_id = ?;", [customerID], function (err, row, fields) {
+      if (err) { reject(err); }
+      if (row.length < 1) {
+        reject('An Error Occured');
+      } else {
+        resolve(row);
+      }
+    });
+  });
+}
+
 // middleware to test if authenticated - copied from https://www.npmjs.com/package/express-session example login
 function isAuthenticated(req, res, next) {
   if (req.session.user) next()
@@ -43,9 +75,19 @@ function isAuthenticated(req, res, next) {
 /* POST users listing. */
 router.post('/', express.urlencoded({ extended: false }), function (req, res, next) {
   login(req.body.username, req.body.password).then((value) => {
-    console.log(value);
     req.session.regenerate(function (err) {
       if (err) { next(err); }
+
+      var accountData;
+
+      getCustomerData().then((result) => {
+        getAccountData().then((result) => {
+          accountData = result;
+        })
+      });
+
+      console.log(result);
+
       req.session.user = req.body.username
       req.session.save(function (err) {
         if (err) { return next(err) }
