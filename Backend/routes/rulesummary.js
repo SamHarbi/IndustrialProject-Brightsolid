@@ -15,7 +15,17 @@ function isAuthenticated(req, res, next) {
 //Code adapted from https://www.npmjs.com/package/express-session#compatible-session-stores user login example
 /* GET users listing. */
 router.get('/', isAuthenticated, function (req, res) {
-    // this is only called when there is an authentication user due to isAuthenticated
+
+    connection.query('SELECT * FROM resource WHERE account_id = ?', [req.session.accountID], (err, rows, fields) => {
+        if (err) { //Query didn't run
+            res.send('Something went wrong :(');
+        }
+        if (row.length < 1) {
+            reject('No Resource Found');
+        } else {
+
+        }
+    });
 
 })
 

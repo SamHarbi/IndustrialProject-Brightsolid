@@ -22,24 +22,10 @@ router.get('/', function (req, res, next) {
 
   connection.end();
 
+  var testArray = [["1", "Rule Name 1", "Compliance State 1"], ["2", "Rule Name 2", "Compliance State 2"], ["3", "Rule Name 3", "Compliance State 3"]];
+
   //Query has run 
-  res.json({
-    0: {
-      'id': 0,
-      'ruleName': "Some Name 0",
-      'complianceState': "Some State 0",
-    },
-    1: {
-      'id': 1,
-      'ruleName': "Some Name 1",
-      'complianceState': "Some State 1",
-    },
-    2: {
-      'id': 2,
-      'ruleName': "Some Name 2",
-      'complianceState': "Some State 2",
-    }
-  });
+  res.json(JSON.stringify(testArray));
 
 });
 
