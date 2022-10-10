@@ -23,7 +23,23 @@ router.get('/', function (req, res, next) {
   connection.end();
 
   //Query has run 
-  res.json({ 'response': 'Server responded :)' });
+  res.json({
+    0: {
+      'id': 0,
+      'ruleName': "Some Name 0",
+      'complianceState': "Some State 0",
+    },
+    1: {
+      'id': 1,
+      'ruleName': "Some Name 1",
+      'complianceState': "Some State 1",
+    },
+    2: {
+      'id': 2,
+      'ruleName': "Some Name 2",
+      'complianceState': "Some State 2",
+    }
+  });
 
 });
 
