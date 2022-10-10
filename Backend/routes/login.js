@@ -80,7 +80,7 @@ router.post('/', express.urlencoded({ extended: false }), function (req, res, ne
 
       var accountData;
 
-      getCustomerData().then((result) => {
+      getCustomerID().then((result) => {
         getAccountData().then((result) => {
           accountData = result;
         })
