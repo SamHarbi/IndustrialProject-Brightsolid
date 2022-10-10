@@ -85,6 +85,10 @@ router.post('/', express.urlencoded({ extended: false }), function (req, res, ne
           accountData = result2;
           req.session.accountID = result2.account_id;
           console.log(result2.account_id);
+          req.session.save(function (err) {
+            if (err) { return next(err) }
+            res.send("Done");
+          })
         }).catch((err) => { console.log(err); });
       }).catch((err) => { console.log(err); });
 
