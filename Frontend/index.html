@@ -22,38 +22,48 @@
             alert(data.response);
         })
 
-        //Variables to insert into graph (in future, the numbers will be pulled from database and inserted into these variables. Right now, they are hard-coded)
+       //Variables to insert into graph (in future, the numbers will be pulled from database and inserted into these variables. Right now, they are hard-coded)
         var compliant = 62;
         var noncompliant = 30;
-        var comPercent = parseFloat(((compliant/(compliant+noncompliant))*100).toFixed(1)); //Percentage calculation
-        
+        var comPercent = parseFloat(((compliant / (compliant + noncompliant)) * 100).toFixed(1)); //Percentage calculation
+
+        //Varaibles for insertion into the table
+        var array = JSON.parse(response);
+        var i;
+        var txt = "";
+
         //Chart creation
-        google.charts.load("current", {packages:["corechart"]});
+        google.charts.load("current", { packages: ["corechart"] });
         google.charts.setOnLoadCallback(drawChart);
         function drawChart() {
             var data = google.visualization.arrayToDataTable([
                 ['Compliance Status', 'Number of Compliant Resources'],
                 ['Compliant', compliant],
                 ['Non-Compliant', noncompliant],
-          
+
             ]);
 
             //Chart options
             var options = {
-                backgroundColor:'transparent',
+                backgroundColor: 'transparent',
                 pieHole: 0.7,
                 colors: ['#3ace50', '#ff0000'],
-                legend: {position: "bottom", textStyle: {color:"#F1BA56", fontSize: 20}},
+                legend: { position: "bottom", textStyle: { color: "#F1BA56", fontSize: 20 } },
                 pieSliceText: "none",
             };
 
             //Insert percentage into percent p element
-            document.getElementById("percent").innerHTML = comPercent+"%";
+            document.getElementById("percent").innerHTML = comPercent + "%";
 
             //Add Google Chart to page
             var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
             chart.draw(data, options);
         }
+        
+        for (i = 0; i < array.length; i++) {
+            txt += "<tr><td>" + array[i].id + "</td><td>" + array[i].ruleName + "</td><td>" + array[i].complianceState+"</td></tr>"
+        }
+        document.getElementById("insert").innerHTML = txt;
     </script>
 
 </head>
