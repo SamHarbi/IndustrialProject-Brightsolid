@@ -60,7 +60,7 @@ function getAccountData(customerID) {
       if (row.length < 1) {
         reject('An Error Occured 2');
       } else {
-        resolve(row);
+        resolve(row[0]);
       }
     });
   });
