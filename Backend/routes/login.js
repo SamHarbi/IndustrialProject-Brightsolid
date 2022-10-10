@@ -14,6 +14,7 @@ var router = express.Router();
 
 connectionSetup = require('../database.js');
 
+
 function login(username, password) {
 
   return new Promise((resolve, reject) => {
@@ -34,23 +35,23 @@ function login(username, password) {
   });
 }
 
-function getCustomerID(customerID) {
+function getCustomerID(customerName) {
   return new Promise((resolve, reject) => {
     connection = connectionSetup.databaseSetup();
     connection.connect();
 
-    connection.query("SELECT * FROM customer WHERE customer_name = ?;", [customerID], function (err, row, fields) {
+    connection.query("SELECT * FROM customer WHERE customer_name = ?;", [customerName], function (err, row, fields) {
       if (err) { reject(err); }
       if (row.length < 1) {
         reject('An Error Occured');
       } else {
-        resolve(row);
+        resolve(row[0].customer_id);
       }
     });
   });
 }
 
-function getAccountData() {
+function getAccountData(customerID) {
   return new Promise((resolve, reject) => {
     connection = connectionSetup.databaseSetup();
     connection.connect();
@@ -80,10 +81,10 @@ router.post('/', express.urlencoded({ extended: false }), function (req, res, ne
 
       var accountData;
 
-      getCustomerID().then((result) => {
-        getAccountData().then((result) => {
-          accountData = result;
-          console.log(result);
+      getCustomerID(req.body.username).then((result) => {
+        getAccountData(result).then((result2) => {
+          accountData = result2;
+          console.log(result2.account_ref);
         })
       });
 
