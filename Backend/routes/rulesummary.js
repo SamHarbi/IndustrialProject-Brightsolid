@@ -18,7 +18,7 @@ router.get('/', isAuthenticated, function (req, res) {
 
     var returnData;
 
-    connection.query('SELECT * FROM resource WHERE account_id = ?', [req.session.accountID], (err, rows, fields) => {
+    connection.query('SELECT * FROM resource WHERE account_id = ?', [req.session.accountID], (err, row, fields) => {
         if (err) { //Query didn't run
             res.send('Something went wrong :(');
         }
