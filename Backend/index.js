@@ -10,7 +10,7 @@ var session = require('express-session');
 var indexRouter = require('./routes/index');
 var loginRouter = require('./routes/login');
 var signupRouter = require('./routes/signup');
-var testRouter = require('./routes/test');
+var testRouter = require('./routes/testConn');
 var userRouter = require('./routes/user');
 var logoutRouter = require('./routes/logout');
 var compliantrulesRouter = require('./routes/compliantrules');
@@ -41,7 +41,7 @@ app.use(session({
 app.use('/', indexRouter);
 app.use('/login', loginRouter);
 app.use('/signup', signupRouter);
-app.use('/test', testRouter);
+app.use('/testConn', testRouter);
 app.use('/user', userRouter);
 app.use('/logout', logoutRouter);
 app.use('/compliantrules', compliantrulesRouter);
