@@ -27,12 +27,12 @@
         fetch("https://brightsolid-monoserver-7q9js.ondigitalocean.app/Backend/test").then(function (response) {
 
             //Varaibles for insertion into the table
-            var readin = JSON.stringify(response);
-            var array = JSON.parse(readin);
+            //var readin = JSON.stringify(response);
+            var array = JSON.parse(response);
             var i;
             var txt = "";
 
-            alert(array.data[0][0]);
+            alert(array[0].data[0][0]);
             
             for (i = 0; i < array.length; i++) {
                 txt += "<tr><td>" + array[i][0]+ "</td><td>" + array[i][1] + "</td><td>" + array[i][2] + "</td></tr>"
