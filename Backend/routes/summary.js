@@ -29,7 +29,7 @@ function getNonCompliantRules() {
     });
 }
 
-    //Rules that don't have resources that are not compliant for a given logged in user
+//Rules that don't have resources that are not compliant for a given logged in user
 function getCompliantRules() {
     return new Promise((resolve, reject) => {
         connection.query('SELECT * FROM `rule` WHERE rule_id IN (SELECT rule_id FROM non_compliance WHERE resource_id IN (SELECT resource_id FROM resource WHERE account_id = ?));', [req.session.accountID], (err, row, fields) => {
@@ -49,8 +49,8 @@ function getCompliantRules() {
 /* GET users listing. */
 router.get('/', isAuthenticated, function (req, res) {
 
-    getNonCompliant.then((result) => {
-        getCompliant.then((result, result2) => {
+    getNonCompliantRules.then((result) => {
+        getCompliantRules.then((result, result2) => {
 
             res.json(result + result2);
 
