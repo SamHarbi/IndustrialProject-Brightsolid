@@ -56,7 +56,7 @@ async function processResults(req) {
     //Fill the array with non compliant rules and format the data
     for (let i = 0; i < nonCompliant.length; i++) {
         data.push({
-            id: nonCompliant[i].rule_id,
+            id: (nonCompliant[i].rule_id).toString(),
             ruleName: nonCompliant[i].rule_name,
             complianceState: "Non-Compliant",
             complianceStateID: 0 //Makes it easier to figure out in the frontend for calculation 
@@ -66,7 +66,7 @@ async function processResults(req) {
     //Fill the array with compliant rules and format the data
     for (let i = 0; i < nonCompliant.length; i++) {
         data.push({
-            id: nonCompliant[i].rule_id,
+            id: (nonCompliant[i].rule_id).toString(),
             ruleName: nonCompliant[i].rule_name,
             complianceState: "Compliant",
             complianceStateID: 1 //Makes it easier to figure out in the frontend for calculation 
