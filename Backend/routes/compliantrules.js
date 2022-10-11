@@ -16,9 +16,9 @@ function isAuthenticated(req, res, next) {
 /* GET users listing. */
 router.get('/', isAuthenticated, function (req, res) {
 
-    var returnData;
+    var returnData = [];
 
-    connection.query('SELECT * FROM resource WHERE account_id = ?', [req.session.accountID], (err, row, fields) => {
+    connection.query('SELECT * FROM `resource` WHERE resource_id NOT IN (SELECT resource_id FROM non_compliance) AND account_id = ?; ', [req.session.accountID], (err, row, fields) => {
         if (err) { //Query didn't run
             res.send('Something went wrong :(');
         }
