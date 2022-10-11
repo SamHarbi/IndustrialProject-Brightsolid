@@ -73,16 +73,16 @@ async function processResults() {
         })
     }
 
-    res.json(data);
+    return data;
 
 }
 
 //Code adapted from https://www.npmjs.com/package/express-session#compatible-session-stores user login example
 /* GET users listing. */
 router.get('/', isAuthenticated, function (req, res) {
-
-
-
+    processResults().then((data) => {
+        res.json(data);
+    })
 });
 
 module.exports = router;
