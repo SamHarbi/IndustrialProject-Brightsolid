@@ -26,8 +26,7 @@
         
         fetch("https://brightsolid-monoserver-7q9js.ondigitalocean.app/Backend/test")
         .then(res => res.json())
-        .then(data => console.log(data))
-        .then(function (data) {
+        .then(data => function (data) {
             
             alert(data);
 
