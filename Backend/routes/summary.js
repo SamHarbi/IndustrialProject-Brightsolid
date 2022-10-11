@@ -45,17 +45,43 @@ function getCompliantRules() {
     });
 }
 
+async function processResults() {
+    //Get Data from DB
+    var nonCompliant = await getNonCompliantRules();
+    var compliant = await getCompliantRules();
+
+    //Define a new json response array
+    var data = [];
+
+    //Fill the array with non compliant rules and format the data
+    for (let i = 0; i < nonCompliant.length; i++) {
+        data.push({
+            id: nonCompliant[i].rule_id,
+            ruleName: nonCompliant[i].rule_name,
+            complianceState: "Non-Compliant",
+            complianceStateID: 0 //Makes it easier to figure out in the frontend for calculation 
+        })
+    }
+
+    //Fill the array with compliant rules and format the data
+    for (let i = 0; i < nonCompliant.length; i++) {
+        data.push({
+            id: nonCompliant[i].rule_id,
+            ruleName: nonCompliant[i].rule_name,
+            complianceState: "Compliant",
+            complianceStateID: 1 //Makes it easier to figure out in the frontend for calculation 
+        })
+    }
+
+    res.json(data);
+
+}
+
 //Code adapted from https://www.npmjs.com/package/express-session#compatible-session-stores user login example
 /* GET users listing. */
 router.get('/', isAuthenticated, function (req, res) {
 
-    getNonCompliantRules.then((result) => {
-        getCompliantRules.then((result, result2) => {
 
-            res.json(result + result2);
-
-        }).catch((err) => { console.log(err); });
-    }).catch((err) => { console.log(err); });
 
 });
 
