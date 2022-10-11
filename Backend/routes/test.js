@@ -30,7 +30,7 @@ router.get('/', function (req, res, next) {
                       //]
                     //};
 
-  const testData = '{"id":1, "ruleName":"Rule 1", "complianceState":"Compliant"}'
+  const testData = {"id":1, "ruleName":"Rule 1", "complianceState":"Compliant"}
 
   //Query has run 
   res.json(testData);
