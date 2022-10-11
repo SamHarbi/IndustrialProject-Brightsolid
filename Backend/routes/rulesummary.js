@@ -16,6 +16,8 @@ function isAuthenticated(req, res, next) {
 /* GET users listing. */
 router.get('/', isAuthenticated, function (req, res) {
 
+    var returnData;
+
     connection.query('SELECT * FROM resource WHERE account_id = ?', [req.session.accountID], (err, rows, fields) => {
         if (err) { //Query didn't run
             res.send('Something went wrong :(');
@@ -23,7 +25,7 @@ router.get('/', isAuthenticated, function (req, res) {
         if (row.length < 1) {
             reject('No Resource Found');
         } else {
-
+            res.json(row);
         }
     });
 
