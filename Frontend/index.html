@@ -34,14 +34,14 @@
             var readin = JSON.stringify(data);
             console.log(readin);
             
-            //var array = JSON.parse(readin);
-            //alert(array);
+            var array = JSON.parse(readin);
+            console.log(array);
             
             var i;
             var txt = "";
             
-            for (i = 0; i < readin.length; i++) {
-                var cleanup = readin[i];
+            for (i = 0; i < array.length; i++) {
+                var cleanup = array[i];
                 txt += "<tr><td>" + cleanup.id + "</td><td>" + cleanup.ruleName + "</td><td>" + cleanup.complianceState + "</td></tr>"
             }
             document.getElementById("insert").innerHTML = txt;
