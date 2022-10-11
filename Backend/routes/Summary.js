@@ -13,6 +13,7 @@ function isAuthenticated(req, res, next) {
     else next('/')
 }
 
+//rules that have resources that are not compliant for a given logged in user
 function getNonCompliantRules() {
     return new Promise((resolve, reject) => {
         connection.query('SELECT * FROM `rule` WHERE rule_id IN (SELECT rule_id FROM non_compliance WHERE resource_id IN (SELECT resource_id FROM resource WHERE account_id = ?));', [req.session.accountID], (err, row, fields) => {
@@ -28,6 +29,7 @@ function getNonCompliantRules() {
     });
 }
 
+    //Rules that don't have resources that are not compliant for a given logged in user
 function getCompliantRules() {
     return new Promise((resolve, reject) => {
         connection.query('SELECT * FROM `rule` WHERE rule_id IN (SELECT rule_id FROM non_compliance WHERE resource_id IN (SELECT resource_id FROM resource WHERE account_id = ?));', [req.session.accountID], (err, row, fields) => {
