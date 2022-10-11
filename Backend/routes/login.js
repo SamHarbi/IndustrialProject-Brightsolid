@@ -1,20 +1,18 @@
+/*
+An Open route that allows customers to log into thier accounts and creates a session
+*/
 require('dotenv').config() //.env files for local testing
 
 var express = require('express');
 var session = require('express-session');
 const mysql = require('mysql2/promise');
-
-var passport = require('passport');
-var LocalStrategy = require('passport-local');
 var crypto = require('crypto');
-
 const bcrypt = require('bcrypt');
-
 var router = express.Router();
 
 connectionSetup = require('../database.js');
 
-
+//Get hashed user password from db and compare to hashed input password
 function login(username, password) {
 
   return new Promise((resolve, reject) => {
@@ -34,6 +32,7 @@ function login(username, password) {
   });
 }
 
+//Get the customer's ID based on input name from db
 function getCustomerID(customerName) {
   return new Promise((resolve, reject) => {
     connection = connectionSetup.databaseSetup();
@@ -50,6 +49,7 @@ function getCustomerID(customerName) {
   });
 }
 
+//Get account data for customer
 function getAccountData(customerID) {
   return new Promise((resolve, reject) => {
     connection = connectionSetup.databaseSetup();
@@ -60,7 +60,7 @@ function getAccountData(customerID) {
       if (row.length < 1) {
         reject('An Error Occured 2');
       } else {
-        resolve(row[0]); //Add multi account support
+        resolve(row[0]); //Add multi account support 
       }
     });
   });
@@ -72,30 +72,32 @@ function isAuthenticated(req, res, next) {
   else next('route')
 }
 
-/* POST users listing. */
+/* POST listing. */
 router.post('/', express.urlencoded({ extended: false }), function (req, res, next) {
+
+  //Login User based on input data
   login(req.body.username, req.body.password).then((value) => {
+
+    //Mentioned as best practice to regenerate session in documentation for express-session
     req.session.regenerate(function (err) {
       if (err) { next(err); }
 
-      var accountData;
-
+      //Get customer ID then use it to get account data 
       getCustomerID(req.body.username).then((result) => {
         getAccountData(result).then((result2) => {
 
+          //Save data into session
           accountData = result2;
           req.session.accountID = result2.account_id;
-          console.log(result2.account_id);
-
           req.session.user = req.body.username;
           req.session.save(function (err) {
             if (err) { return next(err) }
-            res.send("Done");
+            res.send("Done"); //User has been logged in successfully
           })
         })
       }).catch(function (err) {
         console.log(err);
-        res.send("Error")
+        res.send("Error") //Something went wrong with login
       });
 
     }).catch((err) => { console.log(err); });

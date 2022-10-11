@@ -1,3 +1,6 @@
+/*
+An Open Route that takes a GET request and returns a JSON response with test data 
+*/
 require('dotenv').config() //.env files for local testing
 
 var express = require('express');
@@ -6,12 +9,11 @@ var router = express.Router();
 
 connection = require('../database.js');
 
-/* GET users listing. */
+/* GET listing. */
 router.get('/', function (req, res, next) {
 
   //Setup DB Connection and Connect
   connection = connectionSetup.databaseSetup();
-
   connection.connect();
 
   connection.query('SELECT 1 + 1 AS solution', (err, rows, fields) => {

@@ -1,3 +1,7 @@
+/*
+A Secured Route that takes a GET request and returns some HTML from the express-session documentation to print the user's name and id
+Can be used to test if a session is active
+*/
 require('dotenv').config() //.env files for local testing
 
 var express = require('express');

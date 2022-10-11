@@ -1,3 +1,6 @@
+/*
+A Secured Route that takes a GET request and returns a JSON Object containing all fields for the rule summary dashboard
+*/
 require('dotenv').config() //.env files for local testing
 
 var express = require('express');
@@ -20,10 +23,10 @@ function getNonCompliantRules(req) {
             if (err) { //Query didn't run
                 reject('Something went wrong :(');
             }
-            if (row.length < 1) {
+            if (row.length < 1) { //No results from query
                 reject('No Resource Found');
             } else {
-                resolve(row);
+                resolve(row); //return result
             }
         });
     });
@@ -36,15 +39,16 @@ function getCompliantRules(req) {
             if (err) { //Query didn't run
                 reject('Something went wrong :(');
             }
-            if (row.length < 1) {
+            if (row.length < 1) { //No results from query
                 reject('No Resource Found');
             } else {
-                resolve(row);
+                resolve(row); //return result
             }
         });
     });
 }
 
+//Create the final JSON return from multiple query data
 async function processResults(req) {
     //Get Data from DB
     var nonCompliant = await getNonCompliantRules(req);
@@ -77,8 +81,7 @@ async function processResults(req) {
 
 }
 
-//Code adapted from https://www.npmjs.com/package/express-session#compatible-session-stores user login example
-/* GET users listing. */
+/* GET listing. */
 router.get('/', isAuthenticated, function (req, res) {
     processResults(req).then((data) => {
         res.json(data);

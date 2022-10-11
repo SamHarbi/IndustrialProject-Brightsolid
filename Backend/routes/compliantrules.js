@@ -1,3 +1,6 @@
+/*
+A Secured Route that takes a GET request and responds with a JSON containing all resources that are compliant
+*/
 require('dotenv').config() //.env files for local testing
 
 var express = require('express');
@@ -12,8 +15,7 @@ function isAuthenticated(req, res, next) {
     else next('/')
 }
 
-//Code adapted from https://www.npmjs.com/package/express-session#compatible-session-stores user login example
-/* GET users listing. */
+/* GET listing. */
 router.get('/', isAuthenticated, function (req, res) {
 
     var returnData = [];
@@ -22,10 +24,10 @@ router.get('/', isAuthenticated, function (req, res) {
         if (err) { //Query didn't run
             res.send('Something went wrong :(');
         }
-        if (row.length < 1) {
+        if (row.length < 1) {//No result from query
             reject('No Resource Found');
         } else {
-            res.json(row);
+            res.json(row);//Return result
         }
     });
 

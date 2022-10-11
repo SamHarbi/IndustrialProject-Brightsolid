@@ -1,3 +1,6 @@
+/*
+An Open route that deletes all session data if any
+*/
 require('dotenv').config() //.env files for local testing
 
 var express = require('express');
@@ -7,10 +10,11 @@ const mysql = require('mysql2');
 var router = express.Router();
 
 //Code adapted from https://www.npmjs.com/package/express-session user login example
-/* GET users listing. */
+/* GET listing. */
 router.get('/', function (req, res, next) {
-    // logout logic
+    // Wipe session by setting all saved values to null
     req.session.user = null
+    req.session.accountID = null
     req.session.save(function (err) {
         if (err) next(err)
 
