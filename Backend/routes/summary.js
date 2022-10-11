@@ -32,7 +32,7 @@ function getNonCompliantRules(req) {
 //Rules that don't have resources that are not compliant for a given logged in user
 function getCompliantRules(req) {
     return new Promise((resolve, reject) => {
-        connection.query('SELECT * FROM `rule` WHERE rule_id IN (SELECT rule_id FROM non_compliance WHERE resource_id IN (SELECT resource_id FROM resource WHERE account_id = ?));', [req.session.accountID], (err, row, fields) => {
+        connection.query('SELECT * FROM `rule` WHERE rule_id NOT IN (SELECT rule_id FROM non_compliance WHERE resource_id IN (SELECT resource_id FROM resource WHERE account_id = ?));', [req.session.accountID], (err, row, fields) => {
             if (err) { //Query didn't run
                 reject('Something went wrong :(');
             }
