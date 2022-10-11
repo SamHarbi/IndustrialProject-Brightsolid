@@ -22,12 +22,8 @@ router.get('/', function (req, res, next) {
 
   connection.end();
 
-  const testData = {
-    data: [["1", "Rule Name 1", "Compliance State 1"], ["2", "Rule Name 2", "Compliance State 2"], ["3", "Rule Name 3", "Compliance State 3"]]
-  };
-
   //Query has run 
-  res.json(testData);
+  res.json({ 0: 'id', 1: 'rule', 2: 'compliance' });
 
 });
 
