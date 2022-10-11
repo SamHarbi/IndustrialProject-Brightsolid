@@ -14,7 +14,7 @@ function isAuthenticated(req, res, next) {
 }
 
 //rules that have resources that are not compliant for a given logged in user
-function getNonCompliantRules() {
+function getNonCompliantRules(req) {
     return new Promise((resolve, reject) => {
         connection.query('SELECT * FROM `rule` WHERE rule_id IN (SELECT rule_id FROM non_compliance WHERE resource_id IN (SELECT resource_id FROM resource WHERE account_id = ?));', [req.session.accountID], (err, row, fields) => {
             if (err) { //Query didn't run
@@ -30,7 +30,7 @@ function getNonCompliantRules() {
 }
 
 //Rules that don't have resources that are not compliant for a given logged in user
-function getCompliantRules() {
+function getCompliantRules(req) {
     return new Promise((resolve, reject) => {
         connection.query('SELECT * FROM `rule` WHERE rule_id IN (SELECT rule_id FROM non_compliance WHERE resource_id IN (SELECT resource_id FROM resource WHERE account_id = ?));', [req.session.accountID], (err, row, fields) => {
             if (err) { //Query didn't run
@@ -45,10 +45,10 @@ function getCompliantRules() {
     });
 }
 
-async function processResults() {
+async function processResults(req) {
     //Get Data from DB
-    var nonCompliant = await getNonCompliantRules();
-    var compliant = await getCompliantRules();
+    var nonCompliant = await getNonCompliantRules(req);
+    var compliant = await getCompliantRules(req);
 
     //Define a new json response array
     var data = [];
@@ -80,7 +80,7 @@ async function processResults() {
 //Code adapted from https://www.npmjs.com/package/express-session#compatible-session-stores user login example
 /* GET users listing. */
 router.get('/', isAuthenticated, function (req, res) {
-    processResults().then((data) => {
+    processResults(req).then((data) => {
         res.json(data);
     })
 });
