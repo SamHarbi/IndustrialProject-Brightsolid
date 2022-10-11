@@ -25,7 +25,7 @@ router.get('/', function (req, res, next) {
   var testArray = [["1", "Rule Name 1", "Compliance State 1"], ["2", "Rule Name 2", "Compliance State 2"], ["3", "Rule Name 3", "Compliance State 3"]];
 
   //Query has run 
-  res.json(testArray);
+  res.send(JSON.stringify(testArray));
 
 });
 
