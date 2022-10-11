@@ -28,16 +28,19 @@
         .then(res => res.json())
         .then(data => console.log(data))
         .then(function (data) {
+            
+            alert(data);
 
             //Varaibles for insertion into the table
             var readin = JSON.stringify(data);
+            alert(readin);
+            
             var array = JSON.parse(readin);
+            alert(array);
+            
             var i;
             var txt = "";
             
-            alert(response);
-            alert(readin);
-            alert(array);
             for (i = 0; i < array.data.length; i++) {
                 var cleanup = array.data[i];
                 txt += "<tr><td>" + cleanup.id + "</td><td>" + cleanup.ruleName + "</td><td>" + cleanup.complianceState + "</td></tr>"
