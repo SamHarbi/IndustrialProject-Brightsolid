@@ -27,8 +27,9 @@
         fetch("https://brightsolid-monoserver-7q9js.ondigitalocean.app/Backend/test").then(function (response) {
 
             //Varaibles for insertion into the table
-            var readin = JSON.stringify(response);
-            var array = JSON.parse(readin);
+            //var readin = JSON.stringify(response);
+            //var array = JSON.parse(readin);
+            var array = JSON.parse(response);
             var i;
             var txt = "";
             
