@@ -85,6 +85,7 @@ async function processResults(req) {
         console.log("Reject 33");
     } catch (err) {
         exception.push({
+            resource_id: "NA",
             exception_value: "No Exceptions",
             justification: "-",
             review_date: "-",
