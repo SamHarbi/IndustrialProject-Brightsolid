@@ -100,7 +100,7 @@ async function processResults(req) {
     }
 
     try {
-        var exception = await getException(req);
+        var exception = await getExceptionResources(req);
         console.log("Reject 33");
     } catch (err) {
         exception.push({
