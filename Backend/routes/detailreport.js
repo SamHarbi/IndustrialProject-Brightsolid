@@ -17,7 +17,7 @@ function isAuthenticated(req, res, next) {
 
 function getNonCompliantResource(req) {
     return new Promise((resolve, reject) => {
-        connection.query('SELECT * FROM `resource` WHERE resource_id IN (SELECT resource_id FROM non_compliance WHERE rule_id = ?) AND account_id = ?; ', [req.body.id], [req.session.accountID], (err, row, fields) => {
+        connection.query('SELECT * FROM `resource` WHERE resource_id IN (SELECT resource_id FROM non_compliance WHERE rule_id = ?) AND account_id = ?;', [req.body.id], [req.session.accountID], (err, row, fields) => {
             if (err) { //Query didn't run
                 reject('Something went wrong :(');
             }
@@ -33,7 +33,7 @@ function getNonCompliantResource(req) {
 //SELECT * FROM `resource` WHERE resource_type_id IN (SELECT resource_type_id FROM rule WHERE rule_id NOT IN (SELECT rule_id FROM non_compliance WHERE rule_id NOT IN (SELECT rule_id FROM exception) ) AND rule_id = ?) AND account_id = ?; 
 function getCompliantResource(req) {
     return new Promise((resolve, reject) => {
-        connection.query('SELECT * FROM `resource` WHERE resource_type_id IN (SELECT resource_type_id FROM rule WHERE rule_id NOT IN (SELECT rule_id FROM non_compliance WHERE rule_id = ?) AND account_id = ?;', [req.body.id], [req.session.accountID], (err, row, fields) => {
+        connection.query('SELECT * FROM `resource` WHERE resource_type_id IN (SELECT resource_type_id FROM rule WHERE rule_id NOT IN (SELECT rule_id FROM non_compliance WHERE rule_id = ?)) AND account_id = ?;', [req.body.id], [req.session.accountID], (err, row, fields) => {
             if (err) { //Query didn't run
                 reject('Something went wrong :(');
             }
