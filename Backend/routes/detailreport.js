@@ -39,7 +39,7 @@ function getNonCompliantResource(req) {
 //SELECT * FROM `resource` WHERE resource_type_id IN (SELECT resource_type_id FROM rule WHERE rule_id NOT IN (SELECT rule_id FROM non_compliance WHERE rule_id NOT IN (SELECT rule_id FROM exception) ) AND rule_id = ?) AND account_id = ?; 
 function getCompliantResource(req) {
     return new Promise((resolve, reject) => {
-        connection.query('SELECT * FROM `resource` WHERE resource_type_id IN (SELECT resource_type_id FROM rule WHERE rule_id NOT IN (SELECT rule_id FROM non_compliance WHERE rule_id = ?)) AND account_id = ?;', [req.body.id, req.session.accountID], (err, row, fields) => {
+        connection.query('SELECT * FROM `resource` WHERE resource_id NOT IN (SELECT resource_id FROM non_compliance) AND resource_id NOT IN (SELECT resource_id FROM exception) AND resource_type_id IN (SELECT resource_type_id FROM rule WHERE rule_id = ?) AND account_id = ?; ', [req.body.id, req.session.accountID], (err, row, fields) => {
             if (err) { //Query didn't run
                 console.log("Reject 3");
                 reject('Something went wrong :(');
@@ -54,9 +54,9 @@ function getCompliantResource(req) {
     });
 }
 
-function getException(req) {
+function getExceptionResources(req) {
     return new Promise((resolve, reject) => {
-        connection.query('SELECT * FROM exception WHERE rule_id = ? AND customer_id IN (SELECT customer_id FROM account WHERE account_id = ?)', [req.body.id, req.session.accountID], (err, row, fields) => {
+        connection.query('SELECT * FROM `resource` WHERE resource_id NOT IN (SELECT resource_id FROM non_compliance) AND resource_id IN (SELECT resource_id FROM exception) AND resource_type_id IN (SELECT resource_type_id FROM rule WHERE rule_id = ?) AND account_id = ?; ', [req.body.id, req.session.accountID], (err, row, fields) => {
             if (err) { //Query didn't run
                 console.log("Reject 5");
                 reject('Something went wrong :(');
@@ -111,18 +111,33 @@ async function processResults(req) {
         })
     }
 
-    //Fill the array with compliant resources and format the data
+    //Fill the array with non compliant resources and format the data
     for (let i = 0; i < compliant.length; i++) {
         data.push({
             id: (compliant[i].resource_id).toString(),
-            ruleName: compliant[i].resource_name,
+            resource: compliant[i].resource_name,
+            complianceState: "Non-Compliant",
+            complianceStateID: 0, //Makes it easier to figure out in the frontend for calculation 
+            exception: "NA",
+            justification: "NA",
+            reviewdate: "NA",
+            lastupdated: "NA",
+            updatedby: "NA"
+        })
+    }
+
+    //Fill the array with compliant resources and format the data
+    for (let i = 0; i < exception.length; i++) {
+        data.push({
+            id: (exception[i].resource_id).toString(),
+            ruleName: exception[i].resource_name,
             complianceState: "Compliant",
             complianceStateID: 1, //Makes it easier to figure out in the frontend for calculation 
-            exception: exception.exception_value,
-            justification: exception.justification,
-            reviewdate: exception.review_date,
-            lastupdated: exception.last_updated,
-            updatedby: exception.last_updated_by
+            exception: exception[i].exception_value,
+            justification: exception[i].justification,
+            reviewdate: exception[i].review_date,
+            lastupdated: exception[i].last_updated,
+            updatedby: exception[i].last_updated_by
         })
     }
 
