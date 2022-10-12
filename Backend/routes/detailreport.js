@@ -9,6 +9,7 @@ var escapeHtml = require('escape-html')
 const mysql = require('mysql2');
 var router = express.Router();
 
+connectionSetup = require('../database.js');
 connection = connectionSetup.databaseSetup();
 
 // middleware to test if authenticated - copied from https://www.npmjs.com/package/express-session user login example
@@ -19,6 +20,7 @@ function isAuthenticated(req, res, next) {
 
 function getNonCompliantResource(req) {
     return new Promise((resolve, reject) => {
+        connection.connect();
         connection.query('SELECT * FROM resource WHERE resource_id IN (SELECT resource_id FROM non_compliance WHERE rule_id = ?) AND account_id = ?;', [req.body.id], [req.session.accountID], (err, row, fields) => {
             if (err) { //Query didn't run
                 console.log("Reject 1");
