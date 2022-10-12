@@ -23,11 +23,9 @@ function getNonCompliantResource(req) {
         connection.connect();
         connection.query('SELECT * FROM resource WHERE resource_id IN (SELECT resource_id FROM non_compliance WHERE rule_id = ?) AND account_id = ?;', [req.body.id, req.session.accountID], (err, row, fields) => {
             if (err) { //Query didn't run
-                console.log("Reject 1");
                 reject('Something went wrong :(');
             }
             if (row.length < 1) {//No result from query
-                console.log("Reject 2");
                 reject('No Resource Found');
             } else {
                 resolve(row); //Return result
@@ -41,11 +39,9 @@ function getCompliantResource(req) {
     return new Promise((resolve, reject) => {
         connection.query('SELECT * FROM `resource` WHERE resource_id NOT IN (SELECT resource_id FROM non_compliance) AND resource_id NOT IN (SELECT resource_id FROM exception) AND resource_type_id IN (SELECT resource_type_id FROM rule WHERE rule_id = ?) AND account_id = ?; ', [req.body.id, req.session.accountID], (err, row, fields) => {
             if (err) { //Query didn't run
-                console.log("Reject 3");
                 reject('Something went wrong :(');
             }
             if (row.length < 1) {//No result from query
-                console.log("Reject 4");
                 reject('No Resource Found');
             } else {
                 resolve(row); //Return result
@@ -58,11 +54,9 @@ function getExceptionResources(req) {
     return new Promise((resolve, reject) => {
         connection.query('SELECT * FROM exception WHERE resource_id IN (SELECT resource_id FROM `resource` WHERE resource_id NOT IN (SELECT resource_id FROM non_compliance) AND resource_id IN (SELECT resource_id FROM exception) AND resource_type_id IN (SELECT resource_type_id FROM rule WHERE rule_id = ?) AND account_id = ?); ', [req.body.id, req.session.accountID], (err, row, fields) => {
             if (err) { //Query didn't run
-                console.log("Reject 5");
                 reject('Something went wrong :(');
             }
             if (row.length < 1) {//No result from query
-                console.log("Reject 6");
                 reject('No Resource Found');
             } else {
                 resolve(row); //Return result
@@ -73,15 +67,14 @@ function getExceptionResources(req) {
 
 async function processResults(req) {
 
+    //Create arrays to be populated
     var exception = [];
     var nonCompliant = [];
     var compliant = [];
 
-    //Get Data from DB
-
+    //Get Data from DB and upon an error add error data
     try {
         var nonCompliant = await getNonCompliantResource(req);
-        console.log("Reject 11");
     } catch (err) {
         nonCompliant.push({
             resource_id: "No Non-Compliant Resources",
@@ -91,7 +84,6 @@ async function processResults(req) {
 
     try {
         var compliant = await getCompliantResource(req);
-        console.log("Reject 22");
     } catch (err) {
         compliant.push({
             resource_id: "No Compliant Resources",
@@ -101,7 +93,6 @@ async function processResults(req) {
 
     try {
         var exception = await getExceptionResources(req);
-        console.log("Reject 33");
     } catch (err) {
         exception.push({
             resource_id: "NA",
@@ -131,7 +122,7 @@ async function processResults(req) {
         })
     }
 
-    //Fill the array with non compliant resources and format the data
+    //Fill the array with compliant resources with no exception and format the data
     for (let i = 0; i < compliant.length; i++) {
         data.push({
             id: (compliant[i].resource_id).toString(),
@@ -146,7 +137,7 @@ async function processResults(req) {
         })
     }
 
-    //Fill the array with compliant resources and format the data
+    //Fill the array with compliant resources that have an exception and format the data
     for (let i = 0; i < exception.length; i++) {
         data.push({
             id: (exception[i].resource_id).toString(),
