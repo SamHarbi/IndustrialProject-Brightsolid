@@ -150,7 +150,7 @@ async function processResults(req) {
     for (let i = 0; i < exception.length; i++) {
         data.push({
             id: (exception[i].resource_id).toString(),
-            ruleName: exception[i].resource_name,
+            resource: exception[i].exception_value,
             complianceState: "Compliant",
             complianceStateID: 1, //Makes it easier to figure out in the frontend for calculation 
             exception: exception[i].exception_value,
