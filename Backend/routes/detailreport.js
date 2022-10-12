@@ -98,8 +98,8 @@ async function processResults(req) {
     //Fill the array with non compliant resources and format the data
     for (let i = 0; i < nonCompliant.length; i++) {
         data.push({
-            id: (nonCompliant[i].rule_id).toString(),
-            resource: nonCompliant[i].rule_name,
+            id: (nonCompliant[i].resource_id).toString(),
+            resource: nonCompliant[i].resource_name,
             complianceState: "Non-Compliant",
             complianceStateID: 0, //Makes it easier to figure out in the frontend for calculation 
             exception: "NA",
@@ -113,8 +113,8 @@ async function processResults(req) {
     //Fill the array with compliant resources and format the data
     for (let i = 0; i < compliant.length; i++) {
         data.push({
-            id: (compliant[i].rule_id).toString(),
-            ruleName: compliant[i].rule_name,
+            id: (compliant[i].resource_id).toString(),
+            ruleName: compliant[i].resource_name,
             complianceState: "Compliant",
             complianceStateID: 1, //Makes it easier to figure out in the frontend for calculation 
             exception: exception.exception_value,
