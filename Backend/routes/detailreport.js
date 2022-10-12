@@ -62,6 +62,9 @@ function getException(req) {
 }
 
 async function processResults(req) {
+
+    console.log(req.body.id);
+
     //Get Data from DB
     var nonCompliant = await getNonCompliantResource(req);
     var compliant = await getCompliantResource(req);
