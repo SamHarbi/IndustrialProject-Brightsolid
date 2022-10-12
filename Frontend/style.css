@@ -123,6 +123,10 @@ h4 {
     background-color: #696969;
 }
 
+.dark-modeCellReport {
+  background-color: #696969;
+}
+
 /*Dark mode styling for hovering over cells*/
 .dark-modeCell tr:hover{
     background-color: #adadad;
