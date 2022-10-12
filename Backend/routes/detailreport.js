@@ -56,7 +56,7 @@ function getCompliantResource(req) {
 
 function getExceptionResources(req) {
     return new Promise((resolve, reject) => {
-        connection.query('SELECT * FROM `resource` WHERE resource_id NOT IN (SELECT resource_id FROM non_compliance) AND resource_id IN (SELECT resource_id FROM exception) AND resource_type_id IN (SELECT resource_type_id FROM rule WHERE rule_id = ?) AND account_id = ?; ', [req.body.id, req.session.accountID], (err, row, fields) => {
+        connection.query('SELECT * FROM exception WHERE resource_id IN (SELECT resource_id FROM `resource` WHERE resource_id NOT IN (SELECT resource_id FROM non_compliance) AND resource_id IN (SELECT resource_id FROM exception) AND resource_type_id IN (SELECT resource_type_id FROM rule WHERE rule_id = ?) AND account_id = ?); ', [req.body.id, req.session.accountID], (err, row, fields) => {
             if (err) { //Query didn't run
                 console.log("Reject 5");
                 reject('Something went wrong :(');
