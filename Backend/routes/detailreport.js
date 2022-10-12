@@ -84,10 +84,8 @@ async function processResults(req) {
         console.log("Reject 11");
     } catch (err) {
         nonCompliant.push({
-            id: "No Non-Compliant Resources",
-            resource: "-",
-            complianceState: "-",
-            complianceStateID: -1,
+            resource_id: "No Non-Compliant Resources",
+            resource_name: "-",
         })
     }
 
@@ -96,10 +94,8 @@ async function processResults(req) {
         console.log("Reject 22");
     } catch (err) {
         compliant.push({
-            id: "No Compliant Resources",
-            resource: "-",
-            complianceState: "-",
-            complianceStateID: -1,
+            resource_id: "No Compliant Resources",
+            resource_name: "-",
         })
     }
 
