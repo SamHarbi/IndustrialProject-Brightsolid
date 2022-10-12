@@ -18,6 +18,10 @@
     <!--Scripting for Google Charts API-->
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
+        
+        fetch("https://brightsolid-monoserver-7q9js.ondigitalocean.app/Backend/compliantrules")
+        .then(res => res.json())
+        .then(data => console.log(data));
 
         //Variables to insert into graph (in future, the numbers will be pulled from database and inserted into these variables. Right now, they are hard-coded)
         var compliant = 62;
