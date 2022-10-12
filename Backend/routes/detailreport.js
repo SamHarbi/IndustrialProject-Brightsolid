@@ -73,6 +73,8 @@ function getException(req) {
 
 async function processResults(req) {
 
+    var exception = [];
+
     //Get Data from DB
     try {
         var nonCompliant = await getNonCompliantResource(req);
@@ -82,7 +84,7 @@ async function processResults(req) {
         var exception = await getException(req);
         console.log("Reject 33");
     } catch (err) {
-        var exception = [];
+        exception = [];
         exception.push({
             exception_value: "No Exceptions",
             justification: "-",
