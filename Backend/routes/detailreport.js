@@ -21,7 +21,7 @@ function isAuthenticated(req, res, next) {
 function getNonCompliantResource(req) {
     return new Promise((resolve, reject) => {
         connection.connect();
-        connection.query('SELECT * FROM resource WHERE resource_id IN (SELECT resource_id FROM non_compliance WHERE rule_id = ?) AND account_id = ?;', [req.body.id], [req.session.accountID], (err, row, fields) => {
+        connection.query('SELECT * FROM resource WHERE resource_id IN (SELECT resource_id FROM non_compliance WHERE rule_id = 1) AND account_id = ?;', [req.session.accountID], (err, row, fields) => {
             if (err) { //Query didn't run
                 console.log("Reject 1");
                 reject('Something went wrong :(');
