@@ -71,8 +71,11 @@ async function processResults(req) {
 
     //Get Data from DB
     var nonCompliant = await getNonCompliantResource(req);
+    console.log("Reject 11");
     var compliant = await getCompliantResource(req);
+    console.log("Reject 22");
     var exception = await getException(req);
+    console.log("Reject 33");
 
     //Define a new json response array
     var data = [];
