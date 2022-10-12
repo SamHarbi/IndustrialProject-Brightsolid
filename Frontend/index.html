@@ -28,21 +28,18 @@
         .then(res => res.json())
         .then(data => {
             
-            console.log(data);
 
-            //Varaibles for insertion into the table
+            //Variables for insertion into the table
             var readin = JSON.stringify(data);
-            console.log(readin);
-            
             var array = JSON.parse(readin);
-            console.log(array);
             
             var i;
             var txt = "";
+            var jumpTo = '"document.location = &quot; test.html &quot;;"'
             
             for (i = 0; i < array.length; i++) {
                 var cleanup = array[i];
-                txt += "<tr><td>" + cleanup.id + "</td><td>" + cleanup.ruleName + "</td><td>" + cleanup.complianceState + "</td></tr>"
+                txt += "<tr onclick=" + jumpTo + "><td>" + cleanup.id + "</td><td>" + cleanup.ruleName + "</td><td>" + cleanup.complianceState + "</td></tr>"
             }
             document.getElementById("insert").innerHTML = txt;
         })
