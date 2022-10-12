@@ -21,7 +21,7 @@ function isAuthenticated(req, res, next) {
 function getNonCompliantResource(req) {
     return new Promise((resolve, reject) => {
         connection.connect();
-        connection.query('SELECT * FROM resource WHERE resource_id IN (SELECT resource_id FROM non_compliance WHERE rule_id = ?) AND account_id = ?;', [req.body.id], [req.session.accountID], (err, row, fields) => {
+        connection.query('SELECT * FROM resource WHERE resource_id IN (SELECT resource_id FROM non_compliance WHERE rule_id = ?) AND account_id = ?;', [req.body.id, req.session.accountID], (err, row, fields) => {
             if (err) { //Query didn't run
                 console.log("Reject 1");
                 reject('Something went wrong :(');
@@ -39,7 +39,7 @@ function getNonCompliantResource(req) {
 //SELECT * FROM `resource` WHERE resource_type_id IN (SELECT resource_type_id FROM rule WHERE rule_id NOT IN (SELECT rule_id FROM non_compliance WHERE rule_id NOT IN (SELECT rule_id FROM exception) ) AND rule_id = ?) AND account_id = ?; 
 function getCompliantResource(req) {
     return new Promise((resolve, reject) => {
-        connection.query('SELECT * FROM `resource` WHERE resource_type_id IN (SELECT resource_type_id FROM rule WHERE rule_id NOT IN (SELECT rule_id FROM non_compliance WHERE rule_id = ?)) AND account_id = ?;', [req.body.id], [req.session.accountID], (err, row, fields) => {
+        connection.query('SELECT * FROM `resource` WHERE resource_type_id IN (SELECT resource_type_id FROM rule WHERE rule_id NOT IN (SELECT rule_id FROM non_compliance WHERE rule_id = ?)) AND account_id = ?;', [req.body.id, req.session.accountID], (err, row, fields) => {
             if (err) { //Query didn't run
                 console.log("Reject 3");
                 reject('Something went wrong :(');
@@ -56,7 +56,7 @@ function getCompliantResource(req) {
 
 function getException(req) {
     return new Promise((resolve, reject) => {
-        connection.query('SELECT * FROM exception WHERE rule_id = ? AND customer_id IN (SELECT customer_id FROM account WHERE account_id = ?)', [req.body.id], [req.session.accountID], (err, row, fields) => {
+        connection.query('SELECT * FROM exception WHERE rule_id = ? AND customer_id IN (SELECT customer_id FROM account WHERE account_id = ?)', [req.body.id, req.session.accountID], (err, row, fields) => {
             if (err) { //Query didn't run
                 console.log("Reject 5");
                 reject('Something went wrong :(');
