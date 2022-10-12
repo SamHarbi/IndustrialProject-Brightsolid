@@ -84,7 +84,6 @@ async function processResults(req) {
         var exception = await getException(req);
         console.log("Reject 33");
     } catch (err) {
-        exception = [];
         exception.push({
             exception_value: "No Exceptions",
             justification: "-",
