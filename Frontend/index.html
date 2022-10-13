@@ -20,19 +20,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript">
         
-        fetch("https://brightsolid-monoserver-7q9js.ondigitalocean.app/Backend/noncompliantresources")
-                .then(res => res.json())
-                .then(data => console.log(data));
-
-        fetch("https://brightsolid-monoserver-7q9js.ondigitalocean.app/Backend/compliantresources")
-                .then(res => res.json())
-                .then(data => console.log(data));
-
-        //Variables to insert into graph (in future, the numbers will be pulled from database and inserted into these variables. Right now, they are hard-coded)
-        var compliant = 62;
-        var noncompliant = 30;
-        var comPercent = parseFloat(((compliant / (compliant + noncompliant)) * 100).toFixed(1)); //Percentage calculation
-        
         //Call for createTable function
         createTable();
         
@@ -61,6 +48,33 @@
                     //Once finished adding cells to 'txt', innerHTML is used to add to the table's body
                     document.getElementById("insert").innerHTML = txt;
                 })
+            
+            //Variables to insert into graph
+            var compliant;
+            var noncompliant;
+            
+            fetch("https://brightsolid-monoserver-7q9js.ondigitalocean.app/Backend/noncompliantresources")
+                .then(res => res.json())
+                .then(data => {
+                
+                    var readin = JSON.stringify(data);
+                    var array = JSON.parse(readin);
+                
+                    noncompliant = array.length;
+            })
+            
+            fetch("https://brightsolid-monoserver-7q9js.ondigitalocean.app/Backend/compliantresources")
+                .then(res => res.json())
+                .then(data => {
+                
+                    var readin = JSON.stringify(data);
+                    var array = JSON.parse(readin);
+                
+                    compliant = array.length;
+            })
+            
+            var comPercent = parseFloat(((compliant / (compliant + noncompliant)) * 100).toFixed(1)); //Percentage calculation
+            
         }
 
         //Chart creation
