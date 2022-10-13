@@ -5,8 +5,9 @@ Can be used to test if a session is active
 require('dotenv').config() //.env files for local testing
 
 var express = require('express');
-var session = require('express-session')
-var escapeHtml = require('escape-html')
+var session = require('express-session');
+var escapeHtml = require('escape-html');
+const dayjs = require('dayjs')
 const mysql = require('mysql2');
 var router = express.Router();
 
@@ -28,7 +29,15 @@ function createException(req) {
                 reject(err);
             }
             else { //Then add exception
-                connection.query('INSERT INTO exception (customer_id, rule_id, last_updated_by, exception_value, justification, resource_id) VALUES ((SELECT customer_id FROM account WHERE account_id = ? ), ?, ?, (SELECT resource_name FROM resource WHERE resource_id = ?), ?, ?);', [req.session.accountID, req.body.ruleID, req.session.accountID, req.body.resourceID, req.body.justification, req.body.resourceID], (err, row, fields) => {
+
+                let lastUpdate = dayjs();
+                lastUpdate = lastupdate.format("YYYY-MM-DD HH:MM:SS");
+
+                dayjs.extend(customParseFormat);
+                reviewDate = dayjs(req.body.date, "YYYY-MM-DD 00:00:00");
+
+
+                connection.query('INSERT INTO exception (customer_id, rule_id, last_updated_by, exception_value, justification, resource_id, review_date, last_updated) VALUES ((SELECT customer_id FROM account WHERE account_id = ? ), ?, ?, (SELECT resource_name FROM resource WHERE resource_id = ?), ?, ?, ?, ?);', [req.session.accountID, req.body.ruleID, req.session.accountID, req.body.resourceID, req.body.justification, req.body.resourceID], (err, row, fields) => {
                     if (err) { //Query didn't run
                         reject(err);
                     }
@@ -41,14 +50,37 @@ function createException(req) {
     });
 }
 
+function createAudit(req) {
+    return new Promise((resolve, reject) => { //First check that exception is not compliant and then delete it
+        connection.query('', [req.session.accountID, req.body.ruleID, req.session.accountID, req.body.resourceID, req.body.justification, req.body.resourceID], (err, row, fields) => {
+            if (err) { //Query didn't run
+                reject(err);
+            }
+            else {
+                resolve("Exception Created");
+            }
+        });
+    });
+}
+
 async function processResults(req) {
+
+    var data = "Done";
+
     try {
         var exception = await createException(req);
     } catch (err) {
+        data = "Error in Exception";
         console.log(err);
     }
 
-    var data = "Done";
+    try {
+        //var audit = await createAudit(req);
+    } catch (err) {
+        data = "Error in Audit";
+        console.log(err);
+    }
+
     return data;
 }
 
