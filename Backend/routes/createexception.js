@@ -51,9 +51,32 @@ function createException(req) {
     });
 }
 
-function createAudit(req) {
+function getNewExceptionData(req) {
+    return new Promise((resolve, reject) => { //The customer should be banned from the service for DOS attacking if they send requests so fast that this somehow returns the wrong exception
+        connection.query('SELECT * FROM exception WHERE exception_id=(SELECT max(exception_id) FROM exception WHERE account_id = ?)', [req.session.accountID], (err, row, fields) => {
+            if (err) { //Query didn't run
+                reject(err);
+            }
+            else {
+                resolve(row);
+            }
+        });
+    });
+}
+
+function createAudit(req, exep) {
     return new Promise((resolve, reject) => { //First check that exception is not compliant and then delete it
-        connection.query('', [req.session.accountID, req.body.ruleID, req.session.accountID, req.body.resourceID, req.body.justification, req.body.resourceID], (err, row, fields) => {
+
+        const que = ` INSERT INTO exception_audit
+         (exception_id, user_id, customer_id, rule_id, action, action_dt, old_exception_value, new_exception_value, old_justification, new_justification, old_review_date, new_review_date) 
+         VALUES (?, (SELECT user_id FROM user WHERE customer_id IN (SELECT customer_id FROM account WHERE account_id = 1), (SELECT customer_id FROM account WHERE account_id = 1), 1, "CREATE", ?, ?, ?, ?, ?, ?, ?) `
+
+        let lastUpdate = dayjs();
+        lastUpdate = lastUpdate.format("YYYY-MM-DD hh:mm:ss");
+        reviewDate = dayjs().add(req.body.addedTime, 'month');
+        reviewDate = reviewDate.format("YYYY-MM-DD hh:mm:ss");
+
+        connection.query(que, [exep[0].exception_id, req.body.ruleID, lastUpdate, exep[0].justification, req.body.justification, exep[0].reviewDate, reviewDate], (err, row, fields) => {
             if (err) { //Query didn't run
                 reject(err);
             }
@@ -67,16 +90,26 @@ function createAudit(req) {
 async function processResults(req) {
 
     var data = "Done";
+    var exception = "";
+    var exceptionData = [];
+    var audit = "";
 
     try {
-        var exception = await createException(req);
+        exception = await createException(req);
     } catch (err) {
         data = "Error in Exception";
         console.log(err);
     }
 
     try {
-        //var audit = await createAudit(req);
+        exceptionData = await getNewExceptionData(req);
+    } catch (err) {
+        data = "Error in getting Exception";
+        console.log(err);
+    }
+
+    try {
+        audit = await createAudit(req, exceptionData);
     } catch (err) {
         data = "Error in Audit";
         console.log(err);
