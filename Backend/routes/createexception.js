@@ -31,7 +31,7 @@ function createException(req) {
             else { //Then add exception
 
                 let lastUpdate = dayjs();
-                lastUpdate = lastupdate.format("YYYY-MM-DD HH:MM:SS");
+                lastUpdate = lastUpdate.format("YYYY-MM-DD HH:MM:SS");
 
                 dayjs.extend(customParseFormat);
                 reviewDate = dayjs(req.body.date, "YYYY-MM-DD 00:00:00");
