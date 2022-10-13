@@ -23,6 +23,7 @@
         //Variables to insert into graph
         var compliant;
         var noncompliant;
+        var comPercent;
         
         //Call for createTable function
         createTable();
@@ -73,7 +74,7 @@
                     compliant = array.length;
             })
             
-            var comPercent = parseFloat(((compliant / (compliant + noncompliant)) * 100).toFixed(1)); //Percentage calculation
+            comPercent = parseFloat(((compliant / (compliant + noncompliant)) * 100).toFixed(1)); //Percentage calculation
             
         }
 
