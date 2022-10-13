@@ -89,6 +89,9 @@
             comPercent = parseFloat(((compliant / (compliant + noncompliant)) * 100).toFixed(1)); //Percentage calculation
             
         }
+        
+        console.log(noncompliant);
+        console.log(compliant);
 
         //Chart creation
         google.charts.load("current", { packages: ["corechart"] });
