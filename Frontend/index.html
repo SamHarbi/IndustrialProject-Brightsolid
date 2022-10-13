@@ -20,6 +20,10 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript">
         
+        //Variables to insert into graph
+        var compliant;
+        var noncompliant;
+        
         //Call for createTable function
         createTable();
         
@@ -48,10 +52,6 @@
                     //Once finished adding cells to 'txt', innerHTML is used to add to the table's body
                     document.getElementById("insert").innerHTML = txt;
                 })
-            
-            //Variables to insert into graph
-            var compliant;
-            var noncompliant;
             
             fetch("https://brightsolid-monoserver-7q9js.ondigitalocean.app/Backend/noncompliantresources")
                 .then(res => res.json())
