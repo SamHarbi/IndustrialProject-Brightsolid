@@ -119,9 +119,7 @@ async function processResults(req) {
     var audit = "";
 
     try {
-        console.log("START");
         exception = await createException(req);
-        console.log("DONE 1");
     } catch (err) {
         data = "Error in Exception";
         console.log(err);
@@ -129,7 +127,6 @@ async function processResults(req) {
 
     try {
         exceptionData = await getNewExceptionData(req);
-        console.log("DONE 2");
     } catch (err) {
         data = "Error in getting Exception";
         console.log(err);
@@ -137,7 +134,6 @@ async function processResults(req) {
 
     try {
         audit = await createAudit(req, exceptionData);
-        console.log("DONE 3");
     } catch (err) {
         data = "Error in Audit";
         console.log(err);
