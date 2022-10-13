@@ -35,11 +35,10 @@ function createException(req) {
 
                 let lastUpdate = dayjs();
                 lastUpdate = lastUpdate.format("YYYY-MM-DD HH:MM:SS");
-
                 reviewDate = dayjs(req.body.date, "YYYY-MM-DD 00:00:00");
 
 
-                connection.query('INSERT INTO exception (customer_id, rule_id, last_updated_by, exception_value, justification, resource_id, review_date, last_updated) VALUES ((SELECT customer_id FROM account WHERE account_id = ? ), ?, ?, (SELECT resource_name FROM resource WHERE resource_id = ?), ?, ?, ?, ?);', [req.session.accountID, req.body.ruleID, req.session.accountID, req.body.resourceID, req.body.justification, req.body.resourceID], (err, row, fields) => {
+                connection.query('INSERT INTO exception (customer_id, rule_id, last_updated_by, exception_value, justification, resource_id, review_date, last_updated) VALUES ((SELECT customer_id FROM account WHERE account_id = ? ), ?, ?, (SELECT resource_name FROM resource WHERE resource_id = ?), ?, ?, ?, ?);', [req.session.accountID, req.body.ruleID, req.session.accountID, req.body.resourceID, req.body.justification, req.body.resourceID, reviewDate, lastUpdate], (err, row, fields) => {
                     if (err) { //Query didn't run
                         reject(err);
                     }
