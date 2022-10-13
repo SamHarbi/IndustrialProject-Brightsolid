@@ -25,6 +25,10 @@
         var noncompliant = 30;
         var comPercent = parseFloat(((compliant / (compliant + noncompliant)) * 100).toFixed(1)); //Percentage calculation
 
+        fetch("https://brightsolid-monoserver-7q9js.ondigitalocean.app/Backend/detailedreport")
+                .then(res => res.json())
+                .then(data => console.log(data));
+        
         //Call for createTable function
         createTable();
         
