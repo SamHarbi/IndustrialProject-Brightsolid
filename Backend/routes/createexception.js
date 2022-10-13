@@ -53,7 +53,7 @@ function createException(req) {
 
 function getNewExceptionData(req) {
     return new Promise((resolve, reject) => { //The customer should be banned from the service for DOS attacking if they send requests so fast that this somehow returns the wrong exception
-        connection.query('SELECT * FROM exception WHERE exception_id=(SELECT max(exception_id) FROM exception WHERE account_id = ?)', [req.session.accountID], (err, row, fields) => {
+        connection.query('SELECT * FROM exception WHERE exception_id IN (SELECT max(exception_id) FROM exception WHERE customer_id IN (SELECT customer_id FROM account WHERE account_id = ? ))', [req.session.accountID], (err, row, fields) => {
             if (err) { //Query didn't run
                 reject(err);
             }
