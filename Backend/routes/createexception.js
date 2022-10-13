@@ -11,6 +11,9 @@ const dayjs = require('dayjs')
 const mysql = require('mysql2');
 var router = express.Router();
 
+var customParseFormat = require('dayjs/plugin/customParseFormat')
+dayjs.extend(customParseFormat)
+
 // middleware to test if authenticated - copied from https://www.npmjs.com/package/express-session user login example
 function isAuthenticated(req, res, next) {
     if (req.session.user) next()
@@ -33,7 +36,6 @@ function createException(req) {
                 let lastUpdate = dayjs();
                 lastUpdate = lastUpdate.format("YYYY-MM-DD HH:MM:SS");
 
-                dayjs.extend(customParseFormat);
                 reviewDate = dayjs(req.body.date, "YYYY-MM-DD 00:00:00");
 
 
