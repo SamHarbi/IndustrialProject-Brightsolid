@@ -13,9 +13,11 @@ var signupRouter = require('./routes/signup');
 var testRouter = require('./routes/testConn');
 var userRouter = require('./routes/user');
 var logoutRouter = require('./routes/logout');
-var compliantrulesRouter = require('./routes/compliantrules');
+var compliantresourcesRouter = require('./routes/compliantresources');
+var noncompliantresourcesRouter = require('./routes/noncompliantresources');
 var detailreportRouter = require('./routes/detailreport');
 var summaryRouter = require('./routes/summary');
+
 
 var app = express();
 
@@ -44,7 +46,8 @@ app.use('/signup', signupRouter);
 app.use('/testConn', testRouter);
 app.use('/user', userRouter);
 app.use('/logout', logoutRouter);
-app.use('/compliantrules', compliantrulesRouter);
+app.use('/compliantresources', compliantresourcesRouter);
+app.use('/noncompliantresources', noncompliantresourcesRouter);
 app.use('/detailreport', detailreportRouter);
 app.use('/summary', summaryRouter);
 
