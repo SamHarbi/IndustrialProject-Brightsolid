@@ -17,36 +17,15 @@
 
     <!--Scripting for Google Charts API-->
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript">
-        
-        fetch("https://brightsolid-monoserver-7q9js.ondigitalocean.app/Backend/compliantrules")
-        .then(res => res.json())
-        .then(data => console.log(data));
 
         //Variables to insert into graph (in future, the numbers will be pulled from database and inserted into these variables. Right now, they are hard-coded)
         var compliant = 62;
         var noncompliant = 30;
         var comPercent = parseFloat(((compliant / (compliant + noncompliant)) * 100).toFixed(1)); //Percentage calculation
-        
-        fetch("https://brightsolid-monoserver-7q9js.ondigitalocean.app/Backend/summary")
-        .then(res => res.json())
-        .then(data => {
-            
 
-            //Variables for insertion into the table
-            var readin = JSON.stringify(data);
-            var array = JSON.parse(readin);
-            
-            var i;
-            var txt = "";
-            var jumpTo = '"document.location = &quot; test.html &quot;;"'
-            
-            for (i = 0; i < array.length; i++) {
-                var cleanup = array[i];
-                txt += "<tr onclick=" + jumpTo + "><td>" + cleanup.id + "</td><td>" + cleanup.ruleName + "</td><td>" + cleanup.complianceState + "</td></tr>"
-            }
-            document.getElementById("insert").innerHTML = txt;
-        })
+        createTable();
 
         //Chart creation
         google.charts.load("current", { packages: ["corechart"] });
@@ -134,7 +113,6 @@
 
                     <!--Table contents-->
                     <tbody id="insert">
-
                     </tbody>
                 </table>
             </div>
@@ -239,6 +217,28 @@
 
     <!--Scripts for functions-->
     <script>
+
+        function createTable() {
+            fetch("https://brightsolid-monoserver-7q9js.ondigitalocean.app/Backend/summary")
+                .then(res => res.json())
+                .then(data => {
+
+
+                    //Variables for insertion into the table
+                    var readin = JSON.stringify(data);
+                    var array = JSON.parse(readin);
+
+                    var i;
+                    var txt = "";
+                    var jumpTo = '"document.location = &quot; test.html &quot;;"'
+
+                    for (i = 0; i < array.length; i++) {
+                        var cleanup = array[i];
+                        txt += "<tr onclick=" + jumpTo + "><td>" + cleanup.id + "</td><td>" + cleanup.ruleName + "</td><td>" + cleanup.complianceState + "</td></tr>"
+                    }
+                    document.getElementById("insert").innerHTML = txt;
+                })
+        }
 
         var element = document.getElementById("Font");
 
