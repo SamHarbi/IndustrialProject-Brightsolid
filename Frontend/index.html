@@ -66,6 +66,8 @@
                     for(i=0; i<array.length; i++){
                         noncompliant +=1;
                     }
+                
+                console.log(noncompliant);
             })
             
             fetch("https://brightsolid-monoserver-7q9js.ondigitalocean.app/Backend/compliantresources")
@@ -81,6 +83,7 @@
                     for(i=0; i<array.length; i++){
                         compliant +=1;
                     }
+                console.log(noncompliant);
             })
             
             comPercent = parseFloat(((compliant / (compliant + noncompliant)) * 100).toFixed(1)); //Percentage calculation
