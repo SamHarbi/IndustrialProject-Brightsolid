@@ -69,14 +69,14 @@ function createAudit(req, exep) {
 
         const que = ` INSERT INTO exception_audit
          (exception_id, user_id, customer_id, rule_id, action, action_dt, old_exception_value, new_exception_value, old_justification, new_justification, old_review_date, new_review_date) 
-         VALUES (?, (SELECT user_id FROM user WHERE customer_id IN (SELECT customer_id FROM account WHERE account_id = ?)), (SELECT customer_id FROM account WHERE account_id = 1), 1, "CREATE", ?, ?, ?, ?, ?, ?) `
+         VALUES (?, (SELECT user_id FROM user WHERE customer_id IN (SELECT customer_id FROM account WHERE account_id = ?)), (SELECT customer_id FROM account WHERE account_id = ?), ?, "CREATE", ?, ?, ?, ?, ?, ?, ?) `
 
         let lastUpdate = dayjs();
         lastUpdate = lastUpdate.format("YYYY-MM-DD hh:mm:ss");
         reviewDate = dayjs().add(req.body.addedTime, 'month');
         reviewDate = reviewDate.format("YYYY-MM-DD hh:mm:ss");
 
-        connection.query(que, [exep[0].exception_id, req.session.accountID, req.body.ruleID, lastUpdate, exep[0].justification, req.body.justification, reviewDate, reviewDate], (err, row, fields) => {
+        connection.query(que, [exep[0].exception_id, req.session.accountID, req.session.accountID, req.body.ruleID, lastUpdate, exep[0].exception_value, exep[0].exception_value, exep[0].justification, req.body.justification, reviewDate, reviewDate], (err, row, fields) => {
             if (err) { //Query didn't run
                 reject(err);
             }
