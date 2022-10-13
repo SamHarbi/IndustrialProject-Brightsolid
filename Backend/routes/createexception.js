@@ -10,7 +10,7 @@ const dayjs = require('dayjs')
 const mysql = require('mysql2');
 var router = express.Router();
 
-var customParseFormat = require('dayjs/plugin/customParseFormat')
+var customParseFormat = require('dayjs/plugin/customParseFormat');
 dayjs.extend(customParseFormat);
 
 /*
@@ -35,12 +35,7 @@ function isAuthenticated(req, res, next) {
 function createException(req) {
     return new Promise((resolve, reject) => { //First check that exception is not compliant and then delete it
 
-        if (exceptionLock == 1) {
-            exceptionLock = 0;
-            reject(err);
-        } else {
-            exceptionLock = 1; //Locked
-        }
+
 
         connection.query('DELETE FROM non_compliance WHERE resource_id = ? AND resource_id IN (SELECT resource_id FROM resource WHERE account_id = ?);', [req.body.resourceID], [req.body.accountID], (err, row, fields) => {
             if (err) { //Query didn't run
