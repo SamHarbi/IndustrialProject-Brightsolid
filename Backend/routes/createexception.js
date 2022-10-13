@@ -42,7 +42,7 @@ function createException(req) {
             exceptionLock = 1; //Locked
         }
 
-        connection.query('DELETE FROM non_compliance WHERE resource_id = ? AND resource_id IN (SELECT resource_id FROM resource WHERE account_id = ?);', [req.body.resourceID], [req.body.accountID1], (err, row, fields) => {
+        connection.query('DELETE FROM non_compliance WHERE resource_id = ? AND resource_id IN (SELECT resource_id FROM resource WHERE account_id = ?);', [req.body.resourceID, req.body.accountID], (err, row, fields) => {
             if (err) { //Query didn't run
                 reject(err);
             }
@@ -54,7 +54,7 @@ function createException(req) {
                 reviewDate = dayjs().add(req.body.addedTime, 'month');
                 reviewDate = reviewDate.format("YYYY-MM-DD hh:mm:ss");
 
-                connection.query('INSERT INTO exception (customer_id, rule_id, last_updated_by, exception_value, justification, resource_id, review_date, last_updated) VALUES ((SELECT customer_id FROM account WHERE account_id = ? ), ?, ?, (SELECT resource_name FROM resource WHERE resource_id = ?), ?, ?, ?, ?);', [req.body.accountID1, req.body.ruleID, req.session.accountID, req.body.resourceID, req.body.justification, req.body.resourceID, reviewDate, lastUpdate], (err, row, fields) => {
+                connection.query('INSERT INTO exception (customer_id, rule_id, last_updated_by, exception_value, justification, resource_id, review_date, last_updated) VALUES ((SELECT customer_id FROM account WHERE account_id = ? ), ?, ?, (SELECT resource_name FROM resource WHERE resource_id = ?), ?, ?, ?, ?);', [req.body.accountID, req.body.ruleID, req.session.accountID, req.body.resourceID, req.body.justification, req.body.resourceID, reviewDate, lastUpdate], (err, row, fields) => {
                     if (err) { //Query didn't run
                         reject(err);
                     }
@@ -73,7 +73,7 @@ This is where exceptionLock comes into play to solve the issue mentioned above. 
 //This function gets the exception that was most recently created for an account
 function getNewExceptionData(req) {
     return new Promise((resolve, reject) => {
-        connection.query('SELECT * FROM exception WHERE exception_id IN (SELECT max(exception_id) FROM exception WHERE customer_id IN (SELECT customer_id FROM account WHERE account_id = ? ))', [req.body.accountID1], (err, row, fields) => {
+        connection.query('SELECT * FROM exception WHERE exception_id IN (SELECT max(exception_id) FROM exception WHERE customer_id IN (SELECT customer_id FROM account WHERE account_id = ? ))', [req.body.accountID], (err, row, fields) => {
             if (err) { //Query didn't run
                 reject(err);
             }
@@ -99,7 +99,7 @@ function createAudit(req, exep) {
 
         ruleAction = "create";
 
-        connection.query(que, [exep[0].exception_id, req.body.accountID1, req.session.accountID, req.body.ruleID, ruleAction, lastUpdate, exep[0].exception_value, exep[0].exception_value, exep[0].justification, req.body.justification, lastUpdate, lastUpdate], (err, row, fields) => {
+        connection.query(que, [exep[0].exception_id, req.body.accountID, req.session.accountID, req.body.ruleID, ruleAction, lastUpdate, exep[0].exception_value, exep[0].exception_value, exep[0].justification, req.body.justification, lastUpdate, lastUpdate], (err, row, fields) => {
             if (err) { //Query didn't run
                 reject(err);
             }
