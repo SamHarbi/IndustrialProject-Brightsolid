@@ -18,7 +18,7 @@ function isAuthenticated(req, res, next) {
 
 function createException(req) {
     return new Promise((resolve, reject) => {
-        connection.query('INSERT INTO exception (customer_id, rule_id, last_updated_by, exception_value, justification, resource_id) VALUES ((SELECT customer_id FROM account WHERE account_id = ? ), ?, ?, (SELECT resource_name FROM resource WHERE resource_id = ?), "Justification", "?");', [req.session.accountID, req.body.ruleID, req.session.accountID, req.body.resourceID, req.body.justification, req.body.resourceID], (err, row, fields) => {
+        connection.query('INSERT INTO exception (customer_id, rule_id, last_updated_by, exception_value, justification, resource_id) VALUES ((SELECT customer_id FROM account WHERE account_id = ? ), ?, ?, (SELECT resource_name FROM resource WHERE resource_id = ?), ?, ?);', [req.session.accountID, req.body.ruleID, req.session.accountID, req.body.resourceID, req.body.justification, req.body.resourceID], (err, row, fields) => {
             if (err) { //Query didn't run
                 reject(err);
             }
