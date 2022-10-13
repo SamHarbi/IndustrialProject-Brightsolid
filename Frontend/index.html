@@ -41,7 +41,7 @@
                     var array = JSON.parse(readin);
                     var i;
                     var txt = "";
-                    var jumpTo = '"document.location = &quot; test.html &quot;;"' //Due to quotations, this is added separately to the table cells (test.html to be replaced)
+                    var jumpTo = '"document.location = &quot; detailed_report.html &quot;;"' //Due to quotations, this is added separately to the table cells (test.html to be replaced)
 
                     //For loop to go through all rules read in and add them to table
                     for (i = 0; i < array.length; i++) {
@@ -74,7 +74,6 @@
                         noncompliant +=1;
                     }
                 
-                    console.log(noncompliant);
                 })
         }
 
@@ -91,8 +90,7 @@
                     for(i=0; i<array.length; i++){
                         compliant +=1;
                     }
-                
-                    console.log(compliant);
+   
                 })
         }
 
@@ -102,7 +100,12 @@
             //Chart creation
             google.charts.load("current", { packages: ["corechart"] });
             google.charts.setOnLoadCallback(drawChart);
-            function drawChart() {
+        }
+        
+        function drawChart() {
+                console.log(noncompliant);
+                console.log(compliant);
+            
                 var data = google.visualization.arrayToDataTable([
                     ['Compliance Status', 'Number of Compliant Resources'],
                     ['Compliant', compliant],
@@ -126,7 +129,6 @@
                 var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
                     chart.draw(data, options);
             }
-        }
 
     </script>
 
