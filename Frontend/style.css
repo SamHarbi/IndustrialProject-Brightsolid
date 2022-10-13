@@ -78,6 +78,7 @@ h4 {
     width: 500px;
 }
 
+/* Styling for the title of the report page */
 .report-title {
   font-family: 'Montserrat', sans-serif;
   padding-top: 10px;
@@ -123,6 +124,7 @@ h4 {
     background-color: #696969;
 }
 
+/* Dark mode styling for table cells in the detailed report */
 .dark-modeCellReport {
   background-color: #696969;
 }
@@ -155,6 +157,7 @@ h4 {
     background-color: #6e6e6e;
 }
 
+/* Dark mode styling for the details section of the detailed report */
 .dark-modeDetails {
     padding-left: 25px;
     padding-top: 10px;
