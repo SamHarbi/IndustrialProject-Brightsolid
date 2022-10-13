@@ -95,11 +95,9 @@ function createAudit(req, exep, oldexep) {
         let lastUpdate = dayjs();
         lastUpdate = lastUpdate.format("YYYY-MM-DD hh:mm:ss");
 
-
-
         if (oldExceptionsPresent == true) {
             ruleAction = "update";
-            connection.query(que, [exep[0].exception_id, req.body.accountID, req.session.accountID, req.body.ruleID, ruleAction, lastUpdate, oldexep[0].exception_value, exep[0].exception_value, oldexep[0].justification, req.body.justification, oldexep[0].new_review_date, lastUpdate], (err, row, fields) => {
+            connection.query(que, [exep[0].exception_id, req.body.accountID, req.session.accountID, req.body.ruleID, ruleAction, lastUpdate, oldexep[0].new_exception_value, exep[0].exception_value, oldexep[0].new_justification, req.body.justification, oldexep[0].new_review_date, lastUpdate], (err, row, fields) => {
                 if (err) { //Query didn't run
                     reject(err);
                 }
