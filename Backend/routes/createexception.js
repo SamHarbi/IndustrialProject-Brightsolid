@@ -16,7 +16,7 @@ function isAuthenticated(req, res, next) {
     else next('/')
 }
 
-function createException() {
+function createException(req) {
     return new Promise((resolve, reject) => {
         connection.query('INSERT INTO exception (customer_id, rule_id, last_updated_by, exception_value, justification, resource_id) VALUES ((SELECT customer_id FROM account WHERE account_id = ? ), ?, ?, (SELECT resource_name FROM resource WHERE resource_id = ?), "Justification", "?");', [req.session.accountID, req.body.ruleID, req.session.accountID, req.body.resourceID, req.body.justification, req.body.resourceID], (err, row, fields) => {
             if (err) { //Query didn't run
@@ -29,9 +29,9 @@ function createException() {
     });
 }
 
-async function processResults() {
+async function processResults(req) {
     try {
-        var exception = await createException();
+        var exception = await createException(req);
     } catch (err) {
         console.log(err);
     }
