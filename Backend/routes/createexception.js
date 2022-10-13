@@ -42,7 +42,7 @@ function createException(req) {
             exceptionLock = 1; //Locked
         }
 
-        connection.query('DELETE FROM non_compliance WHERE resource_id = ? AND account_id IN (SELECT account_id FROM resource WHERE account_id = ?);', [req.body.resourceID], [req.body.accountID], (err, row, fields) => {
+        connection.query('DELETE FROM non_compliance WHERE resource_id = ? AND resource_id IN (SELECT resource_id FROM resource WHERE account_id = ?);', [req.body.resourceID], [req.body.accountID], (err, row, fields) => {
             if (err) { //Query didn't run
                 reject(err);
             }
