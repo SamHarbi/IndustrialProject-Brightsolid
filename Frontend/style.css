@@ -228,6 +228,36 @@ h4 {
   background-color:#ffffff;
 }
 
+#exception-history {
+  padding-left: 25px;
+  padding-top: 10px;
+  padding-right: 25px;
+  padding-bottom: 10px;
+  width: 350px;
+  height: 350px;
+  background-color:#ffffff;
+}
+
+#exception-management {
+  padding-left: 25px;
+  padding-top: 10px;
+  padding-right: 25px;
+  padding-bottom: 10px;
+  width: 350px;
+  height: 350px;
+  background-color:#ffffff;
+}
+
+#exception-graph {
+  padding-left: 25px;
+  padding-top: 10px;
+  padding-right: 25px;
+  padding-bottom: 10px;
+  width: 350px;
+  height: 350px;
+  background-color:#ffffff;
+}
+
 #report-table {
   padding-left: 50px;
   padding-right: 50px;
