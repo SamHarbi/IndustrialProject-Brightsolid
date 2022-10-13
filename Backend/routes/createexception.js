@@ -1,6 +1,5 @@
 /*
-A Secured Route that takes a GET request and returns some HTML from the express-session documentation to print the user's name and id
-Can be used to test if a session is active
+A Secured Route that takes a POST request and creates a new exception for a non compliant rule
 */
 require('dotenv').config() //.env files for local testing
 
@@ -12,7 +11,14 @@ const mysql = require('mysql2');
 var router = express.Router();
 
 var customParseFormat = require('dayjs/plugin/customParseFormat')
-dayjs.extend(customParseFormat)
+dayjs.extend(customParseFormat);
+
+/*
+This variable is essentially a simple security measure for a very very rare but possible edge case where 
+an account pushes two exceptions at almost the same time in such a way that while the server is in the middle of executing the first and halfway executes the 
+second one causing an audit to point to the wrong exception. See below for a pointer on where this happens
+*/
+let exceptionLock = 0;
 
 // middleware to test if authenticated - copied from https://www.npmjs.com/package/express-session user login example
 function isAuthenticated(req, res, next) {
@@ -21,18 +27,28 @@ function isAuthenticated(req, res, next) {
 }
 
 /*
-    It is pretty clear that a non atomic commit kind of event can occur here that is why the frontend autofills all information on the 
+    It is pretty clear that a non atomic commit kind of event can also (exceptionLock is not for this issue, look further below) occur here that is why the frontend autofills all information on the 
     users behalf (gotten from the server beforehand through other routes) to ensure it is correct, the only item dependant on the user, 
     resource_ID is checked by trying to delete it. Information is not autofilled in the testexceptioncreate page
 */
+// This function creates the exception
 function createException(req) {
     return new Promise((resolve, reject) => { //First check that exception is not compliant and then delete it
+
+        if (exceptionLock == 1) {
+            exceptionLock = 0;
+            reject(err);
+        } else {
+            exceptionLock = 1; //Locked
+        }
+
         connection.query('DELETE FROM non_compliance WHERE resource_id = ?;', [req.body.resourceID], (err, row, fields) => {
             if (err) { //Query didn't run
                 reject(err);
             }
             else { //Then add exception
 
+                //Setup Time to be added
                 let lastUpdate = dayjs();
                 lastUpdate = lastUpdate.format("YYYY-MM-DD hh:mm:ss");
                 reviewDate = dayjs().add(req.body.addedTime, 'month');
@@ -51,33 +67,40 @@ function createException(req) {
     });
 }
 
+/*
+The customer should be banned from the service for DOS attacking if they send requests so fast that this somehow returns the wrong exception- but on a 
+more serious note, this is where exceptionLock comes into play to solve the issue mentioned above. createException() should never execute twice 
+*/
+//This function gets the exception that was most recently created for an account
 function getNewExceptionData(req) {
-    return new Promise((resolve, reject) => { //The customer should be banned from the service for DOS attacking if they send requests so fast that this somehow returns the wrong exception
+    return new Promise((resolve, reject) => {
         connection.query('SELECT * FROM exception WHERE exception_id IN (SELECT max(exception_id) FROM exception WHERE customer_id IN (SELECT customer_id FROM account WHERE account_id = ? ))', [req.session.accountID], (err, row, fields) => {
             if (err) { //Query didn't run
                 reject(err);
             }
             else {
+                exceptionLock = 0; //Unlock 
                 resolve(row);
             }
         });
     });
 }
 
+//Creates the audit using exception data gotten with the previous, getNewExceptionData in tandem with post data
 function createAudit(req, exep) {
-    return new Promise((resolve, reject) => { //First check that exception is not compliant and then delete it
+    return new Promise((resolve, reject) => {
 
         const que = ` INSERT INTO exception_audit
          (exception_id, user_id, customer_id, rule_id, action, action_dt, old_exception_value, new_exception_value, old_justification, new_justification, old_review_date, new_review_date) 
          VALUES (?, (SELECT user_id FROM user WHERE customer_id IN (SELECT customer_id FROM account WHERE account_id = ?)), (SELECT customer_id FROM account WHERE account_id = ?), ?, ?, ?, ?, ?, ?, ?, ?, ?) `
 
+        //Setup Time to be added
         let lastUpdate = dayjs();
         lastUpdate = lastUpdate.format("YYYY-MM-DD hh:mm:ss");
-        reviewDate = dayjs().add(req.body.addedTime, 'month');
-        reviewDate = reviewDate.format("YYYY-MM-DD hh:mm:ss");
+
         ruleAction = "create";
 
-        connection.query(que, [exep[0].exception_id, req.session.accountID, req.session.accountID, req.body.ruleID, ruleAction, lastUpdate, exep[0].exception_value, exep[0].exception_value, exep[0].justification, req.body.justification, reviewDate, reviewDate], (err, row, fields) => {
+        connection.query(que, [exep[0].exception_id, req.session.accountID, req.session.accountID, req.body.ruleID, ruleAction, lastUpdate, exep[0].exception_value, exep[0].exception_value, exep[0].justification, req.body.justification, lastUpdate, lastUpdate], (err, row, fields) => {
             if (err) { //Query didn't run
                 reject(err);
             }
@@ -90,6 +113,7 @@ function createAudit(req, exep) {
 
 async function processResults(req) {
 
+    //Setup initial data
     var data = "Done";
     var exception = "";
     var exceptionData = [];
