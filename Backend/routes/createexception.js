@@ -135,6 +135,8 @@ async function processResults(req) {
         oldExceptionData = await getOldExceptionData(req);
         if (oldExceptionData.length > 0) {
             oldExceptionsPresent = true;
+        } else {
+            oldExceptionsPresent = false;
         }
     } catch (err) {
         console.log("No Previous Exceptions");
