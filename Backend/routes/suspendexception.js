@@ -38,7 +38,7 @@ function getException(req) {
 
 function suspendException(exec) {
     return new Promise((resolve, reject) => {
-        connection.query('UPDATE exception SET active = 0 WHERE exception_id = ?', [exec[0].exceptionID], (err, row, fields) => {
+        connection.query('UPDATE exception SET active = 0 WHERE exception_id = ?', [exec[0].exception_id], (err, row, fields) => {
             if (err) { //Query didn't run
                 reject('Something went wrong :(');
             }
