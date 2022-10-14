@@ -30,6 +30,7 @@
 
         //Call for createTable function
         let temp = createTable();
+        let temp2 = createTable();
 
         //Function to fill the table with rules
         async function createTable() {
@@ -311,7 +312,7 @@
                         type: "POST",
                         dataType: "json",
                         data: { id: push },
-                        success: function(data){
+                        success: function (data) {
                             localStorage.setItem(data);
                         }
                     });
