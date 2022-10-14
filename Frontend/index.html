@@ -301,19 +301,19 @@
     <script>
 
         function openDetail() {
+            
+            //JQuery statement to pull ID thejn post
             jQuery($ => {
-                $('table tr').on('click', function () {
-                    var select = $(this);
-                    var push = select.find("td:eq(0)").text();
+                $('table tr').on('click', function(){ //When table cell is clicked
+                    var select = $(this); //Get cell clicked
+                    var push = select.find("td:eq(0)").text(); //Set push to first cell of row
 
+                    //Ajax post request, which will push ID to url provided
                     $.ajax({
                         url:'https://brightsolid-monoserver-7q9js.ondigitalocean.app/Backend/detailreport',
                         type: "POST",
                         dataType: "json",
-                        data: {id : push},
-                        success: function(data){
-                            console.log(data);
-                        }
+                        data: {id : push}
                     });
                 });
             });
