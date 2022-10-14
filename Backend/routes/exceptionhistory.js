@@ -18,10 +18,8 @@ function isAuthenticated(req, res, next) {
 
 async function processResults(req) {
 
-    var data = [];
-
     try {
-        data = await getExceptionHistory(req);
+        var data = await getExceptionHistory(req);
     } catch (err) {
         console.log(err);
     }
