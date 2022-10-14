@@ -16,7 +16,7 @@ function isAuthenticated(req, res, next) {
     else next('/')
 }
 
-function getNonCompliantRules(req) {
+function getNonCompliantResources(req) {
     return new Promise((resolve, reject) => {
         connection.query('SELECT * FROM resource WHERE resource_id = ?;', [req.body.resource_id], (err, row, fields) => {
             if (err) { //Query didn't run
@@ -33,7 +33,7 @@ function getNonCompliantRules(req) {
 
 /* GET users listing. */
 router.get('/', isAuthenticated, function (req, res) {
-    processResults(req).then((data) => {
+    getNonCompliantResources(req).then((data) => {
         res.json(data);
     })
 })
