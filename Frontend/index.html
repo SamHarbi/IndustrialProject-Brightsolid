@@ -310,7 +310,10 @@
                         url: 'https://brightsolid-monoserver-7q9js.ondigitalocean.app/Backend/detailreport',
                         type: "POST",
                         dataType: "json",
-                        data: { id: push }
+                        data: { id: push },
+                        success: function(data){
+                            localStorage.setItem(data);
+                        }
                     });
                 });
             });
