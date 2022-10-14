@@ -18,6 +18,7 @@ var noncompliantresourcesRouter = require('./routes/noncompliantresources');
 var detailreportRouter = require('./routes/detailreport');
 var summaryRouter = require('./routes/summary');
 var createException = require('./routes/createexception');
+var whoami = require('./routes/whoami');
 
 
 var app = express();
@@ -52,6 +53,7 @@ app.use('/noncompliantresources', noncompliantresourcesRouter);
 app.use('/detailreport', detailreportRouter);
 app.use('/summary', summaryRouter);
 app.use('/createexception', createException);
+app.use('/whoami', whoami);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
