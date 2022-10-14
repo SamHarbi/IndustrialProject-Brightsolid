@@ -15,35 +15,61 @@
   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
   <link rel="stylesheet" href="styleReport.css">
 
+  <!-- This code was taken and adapted for our project from the google charts API -->
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
   <script type="text/javascript">
-    
+    createTable();
 
-    google.charts.load("current", {
-      packages: ["corechart"]
+    function createTable() {
+
+      var pull = localStorage.getItem('push');
+
+      console.log(pull);
+
+      //Ajax post request, which will push ID to url provided
+      // $.ajax({
+      //   url: 'https://brightsolid-monoserver-7q9js.ondigitalocean.app/Backend/detailreport',
+      //   type: "POST",
+      //   dataType: "json",
+      //   data: { id: pull },
+      //   success: function(data){
+      //     localStorage.setItem(data);
+      //   }
+      // });
+
+    }
+
+    // This code was taken and adapted for our project from the google charts API
+    google.charts.load('current', {
+      'packages': ['bar']
     });
     google.charts.setOnLoadCallback(drawChart);
 
     function drawChart() {
       var data = google.visualization.arrayToDataTable([
-        ['Compliance Status', 'Number of Compliant Resources'],
-        ['Compliant', 90],
-        ['Non-Compliant', 30],
-
+        ['Compliance Status', 'Compliant Resources', 'Non-Compliant Resources'],
+        ['Rule 8', 30, 60],
       ]);
 
       var options = {
-        pieHole: 0.5,
+        chart: {
+          title: 'Total Compliance of Resources: Rule 8'
+
+        },
+        bar: {
+          groupWidth: '50%'
+        }, // change width here
       };
 
-      var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
-      chart.draw(data, options);
+      var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
+
+      chart.draw(data, google.charts.Bar.convertOptions(options));
     }
+
+    // Code from here on is original
   </script>
 
 </head>
-
-
 
 <body id="Font">
 
