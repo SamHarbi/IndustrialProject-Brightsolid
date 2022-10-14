@@ -19,6 +19,7 @@ var detailreportRouter = require('./routes/detailreport');
 var summaryRouter = require('./routes/summary');
 var createException = require('./routes/createexception');
 var whoami = require('./routes/whoami');
+var exceptionHistory = require('./routes/exceptionhistory');
 
 
 var app = express();
@@ -54,6 +55,7 @@ app.use('/detailreport', detailreportRouter);
 app.use('/summary', summaryRouter);
 app.use('/createexception', createException);
 app.use('/whoami', whoami);
+app.use('/exceptionhistory', exceptionHistory);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
