@@ -306,7 +306,7 @@
                     var select = $(this); //Get cell clicked
                     var push = select.find("td:eq(0)").text(); //Set push to first cell of row
 
-                    localStorage.setItem('id', push);
+                    window.localStorage.setItem('id', push);
                 });
             });
 
