@@ -32,7 +32,7 @@ async function processResults(req) {
 
 function getExceptionHistory(req) {
     return new Promise((resolve, reject) => {
-        connection.query('SELECT * FROM exception_audit WHERE exception_id IN (Select exception_id FROM exception WHERE resource_id = ?)', [req.body.resource_id], (err, row, fields) => {
+        connection.query('SELECT * FROM exception WHERE resource_id = ?;', [req.body.resource_id], (err, row, fields) => {
             if (err) { //Query didn't run
                 reject('Something went wrong :(');
             }
