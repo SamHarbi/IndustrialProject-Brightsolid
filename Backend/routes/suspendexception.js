@@ -5,10 +5,14 @@ Can be used to test if a session is active
 require('dotenv').config() //.env files for local testing
 
 var express = require('express');
-var session = require('express-session')
-var escapeHtml = require('escape-html')
+var session = require('express-session');
+var escapeHtml = require('escape-html');
+const dayjs = require('dayjs');
 const mysql = require('mysql2');
 var router = express.Router();
+
+var customParseFormat = require('dayjs/plugin/customParseFormat');
+dayjs.extend(customParseFormat);
 
 // middleware to test if authenticated - copied from https://www.npmjs.com/package/express-session user login example
 function isAuthenticated(req, res, next) {
@@ -19,12 +23,12 @@ function isAuthenticated(req, res, next) {
 //max(exception_id)
 function getException(req) {
     return new Promise((resolve, reject) => {
-        connection.query('SELECT * FROM exception WHERE exception_id IN (SELECT max(exception_id) FROM exception WHERE resource_id = ? AND rule_id = ? AND customer_id IN (SELECT customer_id FROM account WHERE account_id = ? ));', [req.body.resource_id, req.body.ruleID, req.body.accountID], (err, row, fields) => {
+        connection.query('SELECT * FROM exception WHERE exception_id IN (SELECT max(exception_id) FROM exception WHERE resource_id = ? AND rule_id = ? AND customer_id IN (SELECT customer_id FROM account WHERE account_id = ? ));', [req.body.resourceID, req.body.ruleID, req.body.accountID], (err, row, fields) => {
             if (err) { //Query didn't run
                 reject('Something went wrong :(');
             }
             if (row.length < 1) { //No results from query
-                reject('No Resource Found');
+                reject('No Resource Found 1');
             } else {
                 resolve(row); //return result
             }
@@ -39,7 +43,7 @@ function suspendException(exec) {
                 reject('Something went wrong :(');
             }
             if (row.length < 1) { //No results from query
-                reject('No Resource Found');
+                reject('No Resource Found 2');
             } else {
                 resolve("DONE"); //return result
             }

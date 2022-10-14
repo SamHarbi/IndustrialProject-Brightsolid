@@ -6,7 +6,7 @@ require('dotenv').config() //.env files for local testing
 var express = require('express');
 var session = require('express-session');
 var escapeHtml = require('escape-html');
-const dayjs = require('dayjs')
+const dayjs = require('dayjs');
 const mysql = require('mysql2');
 var router = express.Router();
 
