@@ -46,7 +46,7 @@ function getExceptionHistory(req) {
 }
 
 /* GET users listing. */
-router.get('/', isAuthenticated, function (req, res) {
+router.post('/', isAuthenticated, function (req, res) {
     processResults(req).then((data) => {
         res.json(data);
     })
