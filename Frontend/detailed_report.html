@@ -39,8 +39,8 @@
                 var i;
 
                 //For loop to go through all resources read in and add them to table
-                for (i = 0; i < data.length; i++) {
-                    var cleanup = data[i]; //Cuts down on code in the line below
+                for (i = 0; i < array.length; i++) {
+                    var cleanup = array[i]; //Cuts down on code in the line below
                     txt += "<tr><td>" + cleanup.id + "</td><td>" + cleanup.resource + "</td><td>" + cleanup.complianceState + "</td><td>" + cleanup.exception + "</td><td>" + cleanup.justification + "</td><td>" + cleanup.reviewdate + "</td><td>" + cleanup.lastupdated + "</td><td>" + cleanup.updatedby + "</td></tr>"
                 }
             }
