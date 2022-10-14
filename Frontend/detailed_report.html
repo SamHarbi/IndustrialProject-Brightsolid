@@ -24,26 +24,24 @@
 
       var pull = window.localStorage.getItem('id');
 
-      console.log(pull);
+        //Ajax post request, which will push ID to url provided
+        $.ajax({
+            url: 'https://brightsolid-monoserver-7q9js.ondigitalocean.app/Backend/detailreport',
+            type: "POST",
+            dataType: "json",
+            data: { id: pull },
+            success: function(data){
 
-      //Ajax post request, which will push ID to url provided
+                var txt = "";
+                var i;
 
-        //$.ajax({
-            //url: 'https://brightsolid-monoserver-7q9js.ondigitalocean.app/Backend/detailreport',
-            //type: "POST",
-            //dataType: "json",
-            //data: { id: pull },
-            //success: function(data){
-
-                //var txt = "";
-
-                //For loop to go through all resources read in and add them to table
-                //for (i = 0; i < data.length; i++) {
-                    //var cleanup = data[i]; //Cuts down on code in the line below
-                    //txt += "<tr><td>" + cleanup.id + "</td><td>" + cleanup.resource + "</td><td>" + cleanup.complianceState + "</td><td>" + cleanup.exception + "</td><td>" + cleanup.justification + "</td><td>" + cleanup.reviewdate + "</td><td>" + cleanup.lastupdated + "</td><td>" + cleanup.updatedby + "</td></tr>"
-                //}
-            //}
-        //});
+                For loop to go through all resources read in and add them to table
+                for (i = 0; i < data.length; i++) {
+                    var cleanup = data[i]; //Cuts down on code in the line below
+                    txt += "<tr><td>" + cleanup.id + "</td><td>" + cleanup.resource + "</td><td>" + cleanup.complianceState + "</td><td>" + cleanup.exception + "</td><td>" + cleanup.justification + "</td><td>" + cleanup.reviewdate + "</td><td>" + cleanup.lastupdated + "</td><td>" + cleanup.updatedby + "</td></tr>"
+                }
+            }
+        });
 
     }
 
