@@ -43,6 +43,9 @@
                     var cleanup = array[i]; //Cuts down on code in the line below
                     txt += "<tr><td>" + cleanup.id + "</td><td>" + cleanup.resource + "</td><td>" + cleanup.complianceState + "</td><td>" + cleanup.exception + "</td><td>" + cleanup.justification + "</td><td>" + cleanup.reviewdate + "</td><td>" + cleanup.lastupdated + "</td><td>" + cleanup.updatedby + "</td></tr>"
                 }
+              
+                //Once finished adding cells to 'txt', innerHTML is used to add to the table's body
+                document.getElementById("insert").innerHTML = txt;
             }
         });
 
@@ -129,7 +132,7 @@
           </tr>
         </thead>
 
-        <tbody>
+        <tbody id="insert">
 
 
         </tbody>
