@@ -16,6 +16,20 @@ function isAuthenticated(req, res, next) {
     else next('/')
 }
 
+async function processResults(req) {
+
+    var data = [];
+
+    try {
+        data = await getExceptionHistory(req);
+    } catch (err) {
+        console.log(err);
+    }
+
+    return data;
+
+}
+
 function getExceptionHistory(req) {
     return new Promise((resolve, reject) => {
         connection.query('SELECT * FROM exception WHERE resource_id = ?;', [req.body.resource_id], (err, row, fields) => {
@@ -33,7 +47,7 @@ function getExceptionHistory(req) {
 
 /* GET users listing. */
 router.get('/', isAuthenticated, function (req, res) {
-    getExceptionHistory(req).then((data) => {
+    processResults(req).then((data) => {
         res.json(data);
     })
 })
