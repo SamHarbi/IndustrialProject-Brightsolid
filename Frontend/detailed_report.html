@@ -42,7 +42,7 @@
                 for (i = 0; i < array.length; i++) {
                    if (array[i].id !== "No Non-Compliant Resources" || array[i].id !== "No Compliant Resources" || array[i].id !== "NA"){
                       var cleanup = array[i]; //Cuts down on code in the line below
-                      txt += "<tr onclick=" + jumpTo + "><td>" + cleanup.id + "</td><td>" + cleanup.ruleName + "</td><td>" + cleanup.complianceState + "</td></tr>"
+                      txt += "<tr><td>" + cleanup.id + "</td><td>" + cleanup.resource + "</td><td>" + cleanup.complianceState + "</td><td>" + cleanup.exception + "</td><td>" + cleanup.justification + "</td><td>" + cleanup.reviewdate + "</td><td>" + cleanup.lastupdated + "</td><td>" + cleanup.updatedby + "</td></tr>"
                    }
                 }
               
