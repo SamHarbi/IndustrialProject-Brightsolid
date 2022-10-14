@@ -300,7 +300,7 @@
                     var select = $(this);
                     var push = select.find("td:eq(0)").text();
 
-                    $.post('https://brightsolid-monoserver-7q9js.ondigitalocean.app/Backend/detailreport', push, function(){
+                    $.post('https://brightsolid-monoserver-7q9js.ondigitalocean.app/Backend/detailreport', {id : push}, function(){
                         window.location.href = "https://brightsolid-monoserver-7q9js.ondigitalocean.app/Backend/detailreport";
                     });
                 });
