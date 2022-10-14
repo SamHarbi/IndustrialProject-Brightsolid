@@ -28,8 +28,11 @@
         let noncompliant = 0;
         let comPercent = 0;
 
+        //Chart creation
+        google.charts.load("current", { packages: ["corechart"] });
+        google.charts.setOnLoadCallback(createTable);
+
         //Call for createTable function
-        let temp = createTable();
 
         //Function to fill the table with rules
         async function createTable() {
@@ -96,10 +99,8 @@
 
         async function graphCreation() {
             comPercent = parseFloat(((compliant / (compliant + noncompliant)) * 100).toFixed(1)); //Percentage calculation    
+            drawChart();
 
-            //Chart creation
-            google.charts.load("current", { packages: ["corechart"] });
-            google.charts.setOnLoadCallback(drawChart);
         }
 
         async function drawChart() {
