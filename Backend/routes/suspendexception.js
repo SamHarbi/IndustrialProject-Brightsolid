@@ -91,7 +91,7 @@ async function processResults(req) {
     }
 
     try {
-        data = await suspendException(req, exception);
+        data = await createAudit(req, exception);
     } catch (err) {
         console.log(err);
     }
