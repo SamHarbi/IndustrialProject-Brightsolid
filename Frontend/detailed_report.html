@@ -33,6 +33,8 @@
             data: { id: pull },
             success: function(data){
                 console.log(data);
+                var readin = JSON.stringify(data);
+                var array = JSON.parse(readin);
                 var txt = "";
                 var i;
 
