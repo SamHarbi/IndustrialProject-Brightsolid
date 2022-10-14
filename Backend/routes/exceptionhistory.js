@@ -16,9 +16,9 @@ function isAuthenticated(req, res, next) {
     else next('/')
 }
 
-function getNonCompliantResources(req) {
+function getExceptionHistory(req) {
     return new Promise((resolve, reject) => {
-        connection.query('SELECT * FROM resource WHERE resource_id = ?;', [req.body.resource_id], (err, row, fields) => {
+        connection.query('SELECT * FROM exception WHERE resource_id = ?;', [req.body.resource_id], (err, row, fields) => {
             if (err) { //Query didn't run
                 reject('Something went wrong :(');
             }
@@ -33,7 +33,7 @@ function getNonCompliantResources(req) {
 
 /* GET users listing. */
 router.get('/', isAuthenticated, function (req, res) {
-    getNonCompliantResources(req).then((data) => {
+    getExceptionHistory(req).then((data) => {
         res.json(data);
     })
 })
