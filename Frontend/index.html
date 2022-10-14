@@ -55,11 +55,8 @@
                     //Once finished adding cells to 'txt', innerHTML is used to add to the table's body
                     document.getElementById("insert").innerHTML = txt;
                 })
-
                 .then(getNoncompliant())
-
                 .then(getCompliant())
-
                 .then(graphCreation())
         }
 
@@ -301,19 +298,19 @@
     <script>
 
         function openDetail() {
-            
+
             //JQuery statement to pull ID thejn post
             jQuery($ => {
-                $('table tr').on('click', function(){ //When table cell is clicked
+                $('table tr').on('click', function () { //When table cell is clicked
                     var select = $(this); //Get cell clicked
                     var push = select.find("td:eq(0)").text(); //Set push to first cell of row
 
                     //Ajax post request, which will push ID to url provided
                     $.ajax({
-                        url:'https://brightsolid-monoserver-7q9js.ondigitalocean.app/Backend/detailreport',
+                        url: 'https://brightsolid-monoserver-7q9js.ondigitalocean.app/Backend/detailreport',
                         type: "POST",
                         dataType: "json",
-                        data: {id : push}
+                        data: { id: push }
                     });
                 });
             });
