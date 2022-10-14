@@ -306,16 +306,7 @@
                     var select = $(this); //Get cell clicked
                     var push = select.find("td:eq(0)").text(); //Set push to first cell of row
 
-                    //Ajax post request, which will push ID to url provided
-                    $.ajax({
-                        url: 'https://brightsolid-monoserver-7q9js.ondigitalocean.app/Backend/detailreport',
-                        type: "POST",
-                        dataType: "json",
-                        data: { id: push },
-                        success: function (data) {
-                            localStorage.setItem(data);
-                        }
-                    });
+                    localStorage.setItem(push);
                 });
             });
 
