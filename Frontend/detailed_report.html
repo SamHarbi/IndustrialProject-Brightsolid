@@ -17,6 +17,26 @@
 
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
   <script type="text/javascript">
+    function createTable() {
+
+      var pull = localStorage.getItem('push');
+
+      console.log(pull);
+
+      //Ajax post request, which will push ID to url provided
+      // $.ajax({
+      //   url: 'https://brightsolid-monoserver-7q9js.ondigitalocean.app/Backend/detailreport',
+      //   type: "POST",
+      //   dataType: "json",
+      //   data: { id: pull },
+      //   success: function(data){
+      //     localStorage.setItem(data);
+      //   }
+      // });
+
+    }
+    createTable();
+
     google.charts.load("current", {
       packages: ["corechart"]
     });
@@ -41,36 +61,7 @@
 
 </head>
 
-<!-- This code was taken and adapted for our project from the google charts API -->
-<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-<script type="text/javascript">
-  google.charts.load('current', {
-    'packages': ['bar']
-  });
-  google.charts.setOnLoadCallback(drawChart);
 
-  function drawChart() {
-    var data = google.visualization.arrayToDataTable([
-      ['Compliance Status', 'Compliant Resources', 'Non-Compliant Resources'],
-      ['Rule 8', 30, 60],
-    ]);
-
-    var options = {
-      chart: {
-        title: 'Total Compliance of Resources: Rule 8'
-
-      },
-      bar: {
-        groupWidth: '50%'
-      }, // change width here
-    };
-
-    var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
-
-    chart.draw(data, google.charts.Bar.convertOptions(options));
-  }
-</script>
-</head>
 
 <body id="Font">
 
@@ -78,11 +69,11 @@
     <img id="logo" src="BrightSolid.png" />
 
     <div class="logout">
-            <p class="user">Hello *USER*</p>
+      <p class="user">Hello *USER*</p>
 
-            <!--Log out button for a logged in user-->
-            <input id="logout" class="btn" type="submit" value="Log Out">
-        </div>
+      <!--Log out button for a logged in user-->
+      <input id="logout" class="btn" type="submit" value="Log Out">
+    </div>
   </header>
 
   <main>
@@ -122,86 +113,7 @@
         </thead>
 
         <tbody>
-          <tr>
-            <td>
-              1
-            </td>
-            <td>
-              resource
-            </td>
-            <td>
-              Compliant
-            </td>
-            <td>
-              Exception
-            </td>
-            <td>
-              Justification
-            </td>
-            <td>
-              Review Date
-            </td>
-            <td>
-              Last Updated
-            </td>
-            <td>
-              Updated by
-            </td>
-          </tr>
 
-          <tr>
-            <td>
-              2
-            </td>
-            <td>
-              resource
-            </td>
-            <td>
-              Compliant
-            </td>
-            <td>
-              Exception
-            </td>
-            <td>
-              Justification
-            </td>
-            <td>
-              Review Date
-            </td>
-            <td>
-              Last Updated
-            </td>
-            <td>
-              Updated by
-            </td>
-          </tr>
-
-          <tr>
-            <td>
-              3
-            </td>
-            <td>
-              resource
-            </td>
-            <td>
-              Compliant
-            </td>
-            <td>
-              Exception
-            </td>
-            <td>
-              Justification
-            </td>
-            <td>
-              Review Date
-            </td>
-            <td>
-              Last Updated
-            </td>
-            <td>
-              Updated by
-            </td>
-          </tr>
 
         </tbody>
       </table>
