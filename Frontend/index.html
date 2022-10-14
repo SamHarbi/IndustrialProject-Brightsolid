@@ -306,8 +306,14 @@
                     var select = $(this);
                     var push = select.find("td:eq(0)").text();
 
-                    $.post('https://brightsolid-monoserver-7q9js.ondigitalocean.app/Backend/detailreport', { id: push }, function () {
-                        window.location.href = "https://brightsolid-monoserver-7q9js.ondigitalocean.app/Backend/detailreport";
+                    $.ajax({
+                        url:'https://brightsolid-monoserver-7q9js.ondigitalocean.app/Backend/detailreport',
+                        type: "POST",
+                        dataType: "json",
+                        data: {id : push},
+                        success: function(data){
+                            console.log(data);
+                        }
                     });
                 });
             });
