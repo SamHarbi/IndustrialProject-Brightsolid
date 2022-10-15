@@ -144,8 +144,9 @@ async function processResults(req) {
             })
         }
 
-        return data;
     }
+
+    return data;
 }
 
 /* POST listing. */
