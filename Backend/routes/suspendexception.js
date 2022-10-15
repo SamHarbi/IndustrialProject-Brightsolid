@@ -45,21 +45,20 @@ function suspendException(exec) {
             if (row.length < 1) { //No results from query
                 reject('No Resource Found 2');
             } else {
-                resolve("DONE"); //return result
+                connection.query('INSERT INTO non_compliance (resource_id, rule_id) VALUES (?, ?);', [req.body.resourceID, req.body.ruleID], (err, row, fields) => {
+                    if (err) { //Query didn't run
+                        reject('Something went wrong :(');
+                    }
+                    if (row.length < 1) { //No results from query
+                        reject('No Resource Found 2');
+                    } else {
+                        resolve("DONE"); //return result
+                    }
+                });
             }
         });
     });
 }
-
-function updateResource(exec) {
-    return new Promise((resolve, reject) => {
-        connection.query('UPDATE exception SET active = 0 WHERE exception_id = ?', [exec[0].exception_id], (err, row, fields) => {
-
-        });
-    });
-}
-
-
 
 //Creates the audit using exception data gotten with the previous, getNewExceptionData in tandem with post data
 function createAudit(req, exep) {
