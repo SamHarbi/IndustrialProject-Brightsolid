@@ -192,22 +192,22 @@
 
               <div class ="form-group">
                 <div class="account-id">
-                  <label for="account_id">Account ID</label><br>
-                  <input type="text" id="account_id" name="account_id" />
+                  <label for="accountID">Account ID</label><br>
+                  <input type="text" id="accountID" name="accountID" />
                 </div>
               </div>
 
               <div class ="form-group">
                 <div class="resource-id">
-                  <label for="resource_id">Resource ID</label><br>
-                  <input type="text" id="resource_id" name="resource_id" />
+                  <label for="resourceID">Resource ID</label><br>
+                  <input type="text" id="resourceID" name="resourceID" />
                 </div>
               </div>
 
               <div class ="form-group">
-                <div class="">
-                  <label for="">For How Long (Months)?</label><br>
-                  <input type="text" id="" name="" />
+                <div class="addedTime">
+                  <label for="addedTime">For How Long (Months)?</label><br>
+                  <input type="text" id="addedTime" name="addedTime" />
                 </div>
 
                 <div class ="form-group">
@@ -219,7 +219,7 @@
               </div>
 
               <script> document.getElementById("hiddenRule").value = window.localStorage.getItem('id');  </script>
-              <input  type="text" type="hidden" style="display: none;" value="" id="hiddenRule">
+              <input  type="text" type="hidden" style="display: none;" value="" id="hiddenRule" name="ruleID">
               <button type="submit">Submit</button>
 
             </form>
