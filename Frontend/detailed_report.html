@@ -19,13 +19,13 @@
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script type="text/javascript">
+    var pull;
+    
     createTable();
 
     function createTable() {
 
-      var pull = window.localStorage.getItem('id');
-      
-      document.getElementById("ruleTitle").innerHTML = "Compliance Rule " + pull + ": Detailed Report";
+      pull = window.localStorage.getItem('id');
 
         //Ajax post request, which will push ID to url provided
         $.ajax({
@@ -190,6 +190,8 @@
 </body>
 
 <script>
+  document.getElementById("ruleTitle").innerHTML = "Compliance Rule " + pull + ": Detailed Report";
+  
   //Default font size script
   function Default() {
     var element = document.getElementById("Font");
