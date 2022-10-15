@@ -36,7 +36,7 @@ function getException(req) {
     });
 }
 
-function suspendException(exec) {
+function suspendException(req, exec) {
     return new Promise((resolve, reject) => {
         connection.query('UPDATE exception SET active = 0 WHERE exception_id = ?', [exec[0].exception_id], (err, row, fields) => {
             if (err) { //Query didn't run
@@ -98,7 +98,7 @@ async function processResults(req) {
     }
 
     try {
-        suspend = await suspendException(exception);
+        suspend = await suspendException(req, exception);
     } catch (err) {
         console.log(err);
     }
