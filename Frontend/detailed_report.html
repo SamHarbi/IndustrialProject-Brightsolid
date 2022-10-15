@@ -213,6 +213,7 @@
                 </div>
               </div>
 
+              <input  type="text" type="hidden" value=window.localStorage.getItem("id")>
               <button type="submit">Submit</button>
 
             </form>
@@ -316,17 +317,14 @@
   // Exception Management Scripts
   // Create Exception
   function createException() {
-    alert("Placeholder Popup for Create");
-  }
-
-  // Update Exception
-  function updateException() {
-    alert("Placeholder Popup for Update");
+    var form = document.getElementById("manageException");
+    form.Action = "https://brightsolid-monoserver-7q9js.ondigitalocean.app/Backend/createexception";
   }
 
   // Suspend Exception
   function suspendException() {
-    alert("Placeholder Popup for Suspend");
+    var form = document.getElementById("manageException");
+    form.Action = "https://brightsolid-monoserver-7q9js.ondigitalocean.app/Backend/suspendexception";
   }
 </script>
 
