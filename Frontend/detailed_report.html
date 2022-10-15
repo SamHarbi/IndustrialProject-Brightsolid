@@ -22,11 +22,13 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
   <script type="text/javascript">
+    var pull;
+    
     createTable();
 
     function createTable() {
 
-      var pull = window.localStorage.getItem('id');
+      pull = window.localStorage.getItem('id');
 
       //Ajax post request, which will push ID to url provided
       $.ajax({
@@ -125,7 +127,7 @@
       <br>
     </div>
 
-    <h1 class="report-title">Compliance Rule X: Detailed Report</h1>
+    <h1 id="ruleTitle" class="report-title">Compliance Rule X: Detailed Report</h1>
 
     <div class="section" id="report-table">
       <table id="cells">
@@ -242,6 +244,8 @@
 </body>
 
 <script>
+  document.getElementById("ruleTitle").innerHTML = "Compliance Rule " + pull + ": Detailed Report";
+  
   //Default font size script
   function Default() {
     var element = document.getElementById("Font");

@@ -24,7 +24,7 @@ th, td {
 td{
     text-overflow: ellipsis;
     word-wrap: break-word;
-    background-color:#ffffff;
+    border: 1px solid black;
 }
 
 thead, th {
@@ -267,6 +267,7 @@ h4 {
 #report-table {
   padding-left: 50px;
   padding-right: 50px;
+  overflow: auto;
 }
 
 #return-btn {
