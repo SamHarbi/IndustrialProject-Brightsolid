@@ -117,7 +117,7 @@ async function processResults(req) {
 /* GET users listing. */
 router.post('/', isAuthenticated, function (req, res) {
     processResults(req).then((data) => {
-        res.json(data);
+        res.redirect("https://brightsolid-monoserver-7q9js.ondigitalocean.app/detailed_report.html");
     })
 })
 
