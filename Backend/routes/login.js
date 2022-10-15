@@ -92,7 +92,7 @@ router.post('/', express.urlencoded({ extended: false }), function (req, res, ne
           req.session.user = req.body.username;
           req.session.save(function (err) {
             if (err) { return next(err) }
-            res.send("Done"); //User has been logged in successfully
+            res.redirect("https://brightsolid-monoserver-7q9js.ondigitalocean.app/"); //User has been logged in successfully
           })
         })
       }).catch(function (err) {
