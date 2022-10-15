@@ -117,7 +117,7 @@ async function processResults(req) {
             data.push({
                 id: (compliant[i].resource_id).toString(),
                 resource: compliant[i].resource_name,
-                complianceState: "Non-Compliant",
+                complianceState: "Compliant",
                 complianceStateID: 0, //Makes it easier to figure out in the frontend for calculation 
                 exception: "NA",
                 justification: "NA",

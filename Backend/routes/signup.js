@@ -19,6 +19,20 @@ function HashPass(password) {
     })
 }
 
+function createUser(res) {
+    connection.query('INSERT INTO user (user_name, role_id, customer_id) VALUES (?, ?, ?);', [req.body.username, 0, res.body.customer_id], function (err, results) {
+        if (err) { //Query didn't run
+            console.log(err);
+            return res.send('Something went wrong :(');
+            connection.end();
+        }
+        else {
+            return res.send('User Created');
+            connection.end();
+        }
+    });
+}
+
 /* POST listing. */
 router.post('/', function (req, res, next) {
 
@@ -48,8 +62,7 @@ router.post('/', function (req, res, next) {
                         connection.end();
                     }
                     else {
-                        return res.send('User Created');
-                        connection.end();
+
                     }
                 });
             });
