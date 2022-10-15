@@ -34,6 +34,23 @@ thead, th {
     top:0;
 }
 
+/*Even numbered data cells*/
+tr:nth-child(even){
+    background-color: #e8e8e8;
+}
+
+/*Odd numbered data cells*/
+tr:nth-child(odd){
+    background-color: #ffffff;
+}
+
+/*Styling for mouse hover event*/
+tbody tr:hover{
+    cursor: pointer;
+    background-color: #616161;
+    color: #ffffff;
+}
+
 h2{
   font-size: 20px;
   font-family: 'Roboto', sans-serif;
@@ -159,12 +176,12 @@ h4 {
 
 /* Dark mode styling for the details section of the detailed report */
 .dark-modeDetails {
-    padding-left: 25px;
-    padding-top: 10px;
-    padding-right: 25px;
-    padding-bottom: 10px;
-    width: 350px;
-    height: 350px;
+    padding-left: 5px;
+    padding-top: 5px;
+    padding-right: 5px;
+    padding-bottom: 5px;
+    width: 400px;
+    height: 400px;
     background-color: #3f3f3f;
 }
 
@@ -225,12 +242,12 @@ h4 {
 }
 
 #details {
-  padding-left: 25px;
-  padding-top: 10px;
-  padding-right: 25px;
-  padding-bottom: 10px;
-  width: 350px;
-  height: 350px;
+  padding-left: 5px;
+  padding-top: 5px;
+  padding-right: 5px;
+  padding-bottom: 5px;
+  width: 400px;
+  height: 400px;
   background-color:#ffffff;
 }
 
@@ -239,7 +256,7 @@ h4 {
   padding-top: 5px;
   padding-right: 5px;
   padding-bottom: 5px;
-  width: 400px;
+  width: 800px;
   height: 400px;
   background-color:#ffffff;
 }
