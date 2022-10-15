@@ -12,12 +12,15 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&family=Roboto&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js"></script>
   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
   <link rel="stylesheet" href="styleReport.css">
 
   <!-- This code was taken and adapted for our project from the google charts API -->
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
   <script type="text/javascript">
     createTable();
 
@@ -25,33 +28,36 @@
 
       var pull = window.localStorage.getItem('id');
 
-        //Ajax post request, which will push ID to url provided
-        $.ajax({
-            url: 'https://brightsolid-monoserver-7q9js.ondigitalocean.app/Backend/detailreport',
-            type: "POST",
-            dataType: "json",
-            data: { id: pull },
-            success: function(data){
-                console.log(data);
-                var readin = JSON.stringify(data);
-                var array = JSON.parse(readin);
-                var txt = "";
-                var i;
-              
-                console.log(isNaN(array[0].id));
+      //Ajax post request, which will push ID to url provided
+      $.ajax({
+        url: 'https://brightsolid-monoserver-7q9js.ondigitalocean.app/Backend/detailreport',
+        type: "POST",
+        dataType: "json",
+        data: {
+          id: pull
+        },
+        success: function(data) {
+          console.log(data);
+          var readin = JSON.stringify(data);
+          var array = JSON.parse(readin);
+          var txt = "";
+          var i;
 
-                //For loop to go through all resources read in and add them to table
-                for (i = 0; i < array.length; i++) {
-                   if (!isNaN(array[i].id)){
-                      var cleanup = array[i]; //Cuts down on code in the line below
-                      txt += "<tr><td>" + cleanup.id + "</td><td>" + cleanup.resource + "</td><td>" + cleanup.complianceState + "</td><td>" + cleanup.exception + "</td><td>" + cleanup.justification + "</td><td>" + cleanup.reviewdate + "</td><td>" + cleanup.lastupdated + "</td><td>" + cleanup.updatedby + "</td></tr>"
-                   }
-                }
-              
-                //Once finished adding cells to 'txt', innerHTML is used to add to the table's body
-                document.getElementById("insert").innerHTML = txt;
+          console.log(isNaN(array[0].id));
+
+          //For loop to go through all resources read in and add them to table
+          for (i = 0; i < array.length; i++) {
+            if (!isNaN(array[i].id)) {
+              var cleanup = array[i]; //Cuts down on code in the line below
+              txt += "<tr><td>" + cleanup.id + "</td><td>" + cleanup.resource + "</td><td>" + cleanup.complianceState + "</td><td>" + cleanup.exception + "</td><td>" + cleanup.justification + "</td><td>" + cleanup.reviewdate + "</td><td>" +
+                cleanup.lastupdated + "</td><td>" + cleanup.updatedby + "</td></tr>"
             }
-        });
+          }
+
+          //Once finished adding cells to 'txt', innerHTML is used to add to the table's body
+          document.getElementById("insert").innerHTML = txt;
+        }
+      });
 
     }
 
@@ -159,16 +165,64 @@
         </div>
         <div class="col-sm">
           <div id="exception-management" class="section">
-            <h2><b><u>Exception Management</u></b></h2>
+            <form action="" method="post" id="manageException">
+              <p align="right">rule_id</p>
 
-            <!-- Create Exception -->
+              <div class="form-group">
+                <label for="action">Action</label>
+
+
+                <div class="dropdown">
+                  <button class="btn btn-warning dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                    Dropdown button
+                  </button>
+                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <button class="dropdown-item" type="button" onclick="createException()">Create/Update Exception</button>
+                    <button class="dropdown-item" type="button" onclick="suspendException()">Suspend Exception</button>
+                  </div>
+                </div>
+              </div>
+
+              <div class ="form-group">
+                <div class="account-id">
+                  <label for="account_id">Account ID</label><br>
+                  <input type="text" id="account_id" name="account_id" />
+                </div>
+              </div>
+
+              <div class ="form-group">
+                <div class="resource-id">
+                  <label for="resource_id">Resource ID</label><br>
+                  <input type="text" id="resource_id" name="resource_id" />
+                </div>
+              </div>
+
+              <div class ="form-group">
+                <div class="">
+                  <label for="">For How Long (Months)?</label><br>
+                  <input type="text" id="" name="" />
+                </div>
+
+                <div class ="form-group">
+                  <div class="justification">
+                    <label for="justification">Justification</label><br>
+                    <textarea id="justification" name="justification"></textarea>
+                  </div>
+                </div>
+              </div>
+
+              <button type="submit">Submit</button>
+
+            </form>
+
+            <!-- Create Exception
             <h4><input class="btn btn-warning btn-lg" align="center" type="submit" value="Create Exception" onclick="createException()"></h4>
 
-            <!-- Update Exception -->
+             Update Exception
             <h4><input class="btn btn-warning btn-lg" type="reset" value="Update Exception" onclick="updateException()"></h4>
 
-            <!-- Suspend Exception -->
-            <h4><input class="btn btn-warning btn-lg" type="reset" value="Suspend Exception" onclick="suspendException()"></h4>
+             Suspend Exception
+            <h4><input class="btn btn-warning btn-lg" type="reset" value="Suspend Exception" onclick="suspendException()"></h4> -->
 
           </div>
         </div>
