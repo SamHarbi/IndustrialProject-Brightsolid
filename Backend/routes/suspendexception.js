@@ -51,7 +51,15 @@ function suspendException(exec) {
     });
 }
 
-//All done here (hopefully)- Just push when you wake up
+function updateResource(exec) {
+    return new Promise((resolve, reject) => {
+        connection.query('UPDATE exception SET active = 0 WHERE exception_id = ?', [exec[0].exception_id], (err, row, fields) => {
+
+        });
+    });
+}
+
+
 
 //Creates the audit using exception data gotten with the previous, getNewExceptionData in tandem with post data
 function createAudit(req, exep) {

@@ -218,7 +218,8 @@
                 </div>
               </div>
 
-              <input  type="text" type="hidden" value=window.localStorage.getItem("id")>
+              <script> document.getElementById("hiddenRule").value = window.localStorage.getItem('id');  </script>
+              <input  type="text" type="hidden" style="display: none;" value="" id="hiddenRule">
               <button type="submit">Submit</button>
 
             </form>
