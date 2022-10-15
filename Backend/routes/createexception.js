@@ -120,22 +120,25 @@ function createAudit(req, exep, oldexep) {
         //Setup Time to be added
         let lastUpdate = dayjs();
         lastUpdate = lastUpdate.format("YYYY-MM-DD hh:mm:ss");
+        reviewDate = dayjs().add(req.body.addedTime, 'month');
+        reviewDate = reviewDate.format("YYYY-MM-DD hh:mm:ss");
+
 
         if (exceptionAction == -1) {
             exceptionAction = 0;
             ruleAction = "update";
-            connection.query(que, [exep[0].exception_id, req.body.accountID, req.session.accountID, req.body.ruleID, ruleAction, lastUpdate, oldexep[0].new_exception_value, exep[0].exception_value, oldexep[0].new_justification, req.body.justification, oldexep[0].new_review_date, lastUpdate], (err, row, fields) => {
+            connection.query(que, [exep[0].exception_id, req.body.accountID, req.session.accountID, req.body.ruleID, ruleAction, lastUpdate, oldexep[0].new_exception_value, exep[0].exception_value, oldexep[0].new_justification, req.body.justification, oldexep[0].new_review_date, reviewDate], (err, row, fields) => {
                 if (err) { //Query didn't run
                     reject(err);
                 }
                 else {
-                    resolve("Exception Created");
+                    resolve("Exception Updated");
                 }
             });
         }
         else {
             ruleAction = "create";
-            connection.query(que, [exep[0].exception_id, req.body.accountID, req.session.accountID, req.body.ruleID, ruleAction, lastUpdate, exep[0].exception_value, exep[0].exception_value, exep[0].justification, req.body.justification, lastUpdate, lastUpdate], (err, row, fields) => {
+            connection.query(que, [exep[0].exception_id, req.body.accountID, req.session.accountID, req.body.ruleID, ruleAction, lastUpdate, exep[0].exception_value, exep[0].exception_value, exep[0].justification, req.body.justification, lastUpdate, reviewDate], (err, row, fields) => {
                 if (err) { //Query didn't run
                     reject(err);
                 }
