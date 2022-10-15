@@ -76,83 +76,76 @@ async function processResults(req) {
     try {
         var nonCompliant = await getNonCompliantResource(req);
     } catch (err) {
-        nonCompliant.push({
-            resource_id: "No Non-Compliant Resources",
-            resource_name: "-",
-        })
+        console.log(err);
     }
 
     try {
         var compliant = await getCompliantResource(req);
     } catch (err) {
-        compliant.push({
-            resource_id: "No Compliant Resources",
-            resource_name: "-",
-        })
+        console.log(err);
     }
 
     try {
         var exception = await getExceptionResources(req);
     } catch (err) {
-        exception.push({
-            resource_id: "NA",
-            exception_value: "No Exceptions",
-            justification: "-",
-            review_date: "-",
-            last_updated: "-",
-            updatedby: "-"
-        })
+        console.log(err);
     }
 
     //Define a new json response array
     var data = [];
 
-    //Fill the array with non compliant resources and format the data
-    for (let i = 0; i < nonCompliant.length; i++) {
-        data.push({
-            id: (nonCompliant[i].resource_id).toString(),
-            resource: nonCompliant[i].resource_name,
-            complianceState: "Non-Compliant",
-            complianceStateID: 0, //Makes it easier to figure out in the frontend for calculation 
-            exception: "NA",
-            justification: "NA",
-            reviewdate: "NA",
-            lastupdated: "NA",
-            updatedby: "NA"
-        })
+    if (nonCompliant.length > 0) {
+        //Fill the array with non compliant resources and format the data
+        for (let i = 0; i < nonCompliant.length; i++) {
+            data.push({
+                id: (nonCompliant[i].resource_id).toString(),
+                resource: nonCompliant[i].resource_name,
+                complianceState: "Non-Compliant",
+                complianceStateID: 0, //Makes it easier to figure out in the frontend for calculation 
+                exception: "NA",
+                justification: "NA",
+                reviewdate: "NA",
+                lastupdated: "NA",
+                updatedby: "NA"
+            })
+        }
     }
 
-    //Fill the array with compliant resources with no exception and format the data
-    for (let i = 0; i < compliant.length; i++) {
-        data.push({
-            id: (compliant[i].resource_id).toString(),
-            resource: compliant[i].resource_name,
-            complianceState: "Non-Compliant",
-            complianceStateID: 0, //Makes it easier to figure out in the frontend for calculation 
-            exception: "NA",
-            justification: "NA",
-            reviewdate: "NA",
-            lastupdated: "NA",
-            updatedby: "NA"
-        })
+    if (compliant.length > 0) {
+        //Fill the array with compliant resources with no exception and format the data
+        for (let i = 0; i < compliant.length; i++) {
+            data.push({
+                id: (compliant[i].resource_id).toString(),
+                resource: compliant[i].resource_name,
+                complianceState: "Non-Compliant",
+                complianceStateID: 0, //Makes it easier to figure out in the frontend for calculation 
+                exception: "NA",
+                justification: "NA",
+                reviewdate: "NA",
+                lastupdated: "NA",
+                updatedby: "NA"
+            })
+        }
     }
 
-    //Fill the array with compliant resources that have an exception and format the data
-    for (let i = 0; i < exception.length; i++) {
-        data.push({
-            id: (exception[i].resource_id).toString(),
-            resource: exception[i].exception_value,
-            complianceState: "Compliant",
-            complianceStateID: 1, //Makes it easier to figure out in the frontend for calculation 
-            exception: exception[i].exception_value,
-            justification: exception[i].justification,
-            reviewdate: exception[i].review_date,
-            lastupdated: exception[i].last_updated,
-            updatedby: exception[i].last_updated_by
-        })
-    }
+    if (exception.length > 0) {
+        //Fill the array with compliant resources that have an exception and format the data
+        for (let i = 0; i < exception.length; i++) {
+            data.push({
+                id: (exception[i].resource_id).toString(),
+                resource: exception[i].exception_value,
+                complianceState: "Compliant",
+                complianceStateID: 1, //Makes it easier to figure out in the frontend for calculation 
+                exception: exception[i].exception_value,
+                justification: exception[i].justification,
+                reviewdate: exception[i].review_date,
+                lastupdated: exception[i].last_updated,
+                updatedby: exception[i].last_updated_by
+            })
+        }
 
-    return data;
+        return data;
+    }
 }
 
 /* POST listing. */
