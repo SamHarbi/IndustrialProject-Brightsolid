@@ -38,11 +38,11 @@
                 var txt = "";
                 var i;
               
-                console.log(Number.isInteger(array[0].id));
+                console.log(isNan(array[0].id));
 
                 //For loop to go through all resources read in and add them to table
                 for (i = 0; i < array.length; i++) {
-                   if (array[i].id != "No Non-Compliant Resources" || array[i].id != "No Compliant Resources" || array[i].id != "NA"){
+                   if (!isNaN(array[i].id)){
                       var cleanup = array[i]; //Cuts down on code in the line below
                       txt += "<tr><td>" + cleanup.id + "</td><td>" + cleanup.resource + "</td><td>" + cleanup.complianceState + "</td><td>" + cleanup.exception + "</td><td>" + cleanup.justification + "</td><td>" + cleanup.reviewdate + "</td><td>" + cleanup.lastupdated + "</td><td>" + cleanup.updatedby + "</td></tr>"
                    }
