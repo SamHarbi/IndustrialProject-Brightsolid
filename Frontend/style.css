@@ -273,6 +273,13 @@ input[type="radio"]:checked+label{
     padding-left: 100px;
 }
 
+/*Paragraph containing instructions on how to use the table*/
+#instruct {
+    font-size: 1.2em;
+    text-align: center;
+    color: #F1BA56;
+}
+
 /*Table containing rules*/
 #table{
     overflow: auto;
