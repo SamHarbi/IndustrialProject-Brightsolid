@@ -175,7 +175,7 @@ h4 {
 }
 
 /* Dark mode styling for the details section of the detailed report */
-.dark-modeDetails {
+.dark-modeExceptionManagement {
     padding-left: 5px;
     padding-top: 5px;
     padding-right: 5px;
@@ -185,15 +185,37 @@ h4 {
     background-color: #3f3f3f;
 }
 
-.dark-modeDetails p{
+.dark-modeExceptionHistory {
+  padding-left: 5px;
+  padding-top: 5px;
+  padding-right: 5px;
+  padding-bottom: 5px;
+  width: 800px;
+  height: 400px;
+  background-color: #3f3f3f;
+}
+
+.dark-modeExceptionManagement p{
   color: #F1BA56
 }
 
-.dark-modeDetails h2{
+.dark-modeExceptionManagement h2{
   color: #F1BA56
 }
 
-.dark-modeDetails label{
+.dark-modeExceptionManagement label{
+  color: #F1BA56
+}
+
+.dark-modeExceptionHistory p{
+  color: #F1BA56
+}
+
+.dark-modeExceptionHistory h2{
+  color: #F1BA56
+}
+
+.dark-modeExceptionHistory label{
   color: #F1BA56
 }
 
@@ -241,16 +263,6 @@ h4 {
     overflow: auto;
 }
 
-#details {
-  padding-left: 5px;
-  padding-top: 5px;
-  padding-right: 5px;
-  padding-bottom: 5px;
-  width: 400px;
-  height: 400px;
-  background-color:#ffffff;
-}
-
 #exception-history {
   padding-left: 5px;
   padding-top: 5px;
@@ -262,16 +274,6 @@ h4 {
 }
 
 #exception-management {
-  padding-left: 5px;
-  padding-top: 5px;
-  padding-right: 5px;
-  padding-bottom: 5px;
-  width: 400px;
-  height: 400px;
-  background-color:#ffffff;
-}
-
-#exception-graph {
   padding-left: 5px;
   padding-top: 5px;
   padding-right: 5px;
