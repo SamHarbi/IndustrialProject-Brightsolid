@@ -1,0 +1,23 @@
+#login-card {
+    margin: auto;
+    width: 40%;
+    height: 50%;
+    margin-top: 10%;
+    padding: 2%;
+    background-color: #F1BA56;
+    border-radius: 3%;
+}
+
+label {
+    padding: 1%;
+}
+
+
+form {
+    margin: 3%;
+}
+
+/*Body of page*/
+body {
+    background-color: #195A5F;
+}
