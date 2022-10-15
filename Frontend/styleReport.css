@@ -34,6 +34,23 @@ thead, th {
     top:0;
 }
 
+/*Even numbered data cells*/
+tr:nth-child(even){
+    background-color: #e8e8e8;
+}
+
+/*Odd numbered data cells*/
+tr:nth-child(odd){
+    background-color: #ffffff;
+}
+
+/*Styling for mouse hover event*/
+tbody tr:hover{
+    cursor: pointer;
+    background-color: #616161;
+    color: #ffffff;
+}
+
 h2{
   font-size: 20px;
   font-family: 'Roboto', sans-serif;
@@ -158,25 +175,47 @@ h4 {
 }
 
 /* Dark mode styling for the details section of the detailed report */
-.dark-modeDetails {
-    padding-left: 25px;
-    padding-top: 10px;
-    padding-right: 25px;
-    padding-bottom: 10px;
-    width: 350px;
-    height: 350px;
+.dark-modeExceptionManagement {
+    padding-left: 5px;
+    padding-top: 5px;
+    padding-right: 5px;
+    padding-bottom: 5px;
+    width: 400px;
+    height: 400px;
     background-color: #3f3f3f;
 }
 
-.dark-modeDetails p{
+.dark-modeExceptionHistory {
+  padding-left: 5px;
+  padding-top: 5px;
+  padding-right: 5px;
+  padding-bottom: 5px;
+  width: 800px;
+  height: 400px;
+  background-color: #3f3f3f;
+}
+
+.dark-modeExceptionManagement p{
   color: #F1BA56
 }
 
-.dark-modeDetails h2{
+.dark-modeExceptionManagement h2{
   color: #F1BA56
 }
 
-.dark-modeDetails label{
+.dark-modeExceptionManagement label{
+  color: #F1BA56
+}
+
+.dark-modeExceptionHistory p{
+  color: #F1BA56
+}
+
+.dark-modeExceptionHistory h2{
+  color: #F1BA56
+}
+
+.dark-modeExceptionHistory label{
   color: #F1BA56
 }
 
@@ -224,37 +263,17 @@ h4 {
     overflow: auto;
 }
 
-#details {
-  padding-left: 25px;
-  padding-top: 10px;
-  padding-right: 25px;
-  padding-bottom: 10px;
-  width: 350px;
-  height: 350px;
-  background-color:#ffffff;
-}
-
 #exception-history {
   padding-left: 5px;
   padding-top: 5px;
   padding-right: 5px;
   padding-bottom: 5px;
-  width: 400px;
+  width: 800px;
   height: 400px;
   background-color:#ffffff;
 }
 
 #exception-management {
-  padding-left: 5px;
-  padding-top: 5px;
-  padding-right: 5px;
-  padding-bottom: 5px;
-  width: 400px;
-  height: 400px;
-  background-color:#ffffff;
-}
-
-#exception-graph {
   padding-left: 5px;
   padding-top: 5px;
   padding-right: 5px;

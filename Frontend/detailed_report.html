@@ -89,8 +89,6 @@
 
       chart.draw(data, google.charts.Bar.convertOptions(options));
     }
-
-    // Code from here on is original
   </script>
 
 </head>
@@ -162,9 +160,32 @@
       <div class="row">
         <div class="col-lg">
           <div id="exception-history" class="section">
-            <p>Some graph/Exception History</p>
+
+            <!-- Just display exception history for now -->
+            <h2><b><u>Exception History</u></b></h2>
+
+            <table id="cells">
+              <thead>
+                <tr>
+                  <th width="5%">ID</th>
+                  <th width="15%">Resource</th>
+                  <th width="15%">Compliance</th>
+                  <th width="15%">Exception</th>
+                  <th width="20%">Justification</th>
+                  <th width="10%">Review Date</th>
+                  <th width="10%">Last Updated</th>
+                  <th width="10%">Updated By</th>
+                </tr>
+              </thead>
+
+              <tbody id="insertHistory">
+              </tbody>
+
+            </table>
+
           </div>
         </div>
+
         <div class="col-sm">
           <div id="exception-management" class="section">
             <form action="" method="post" id="manageException">
@@ -178,39 +199,29 @@
                   <option value="1" onclick="createException()">Create/Update Exception</option>
                   <option value="2" onclick="suspendException()">Suspend Exception</option>
                 </select>
-
-                <!-- <div class="dropdown">
-                  <button class="btn btn-warning dropdown-toggle" type="button" data-bs-toggle="dropdown">
-                    Dropdown button
-                  </button>
-                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <button class="dropdown-item" type="button" onclick="createException()">Create/Update Exception</button>
-                    <button class="dropdown-item" type="button" onclick="suspendException()">Suspend Exception</button>
-                  </div>
-                </div> -->
               </div>
 
-              <div class ="form-group">
+              <div class="form-group">
                 <div class="account-id">
                   <label for="accountID">Account ID</label><br>
                   <input type="text" id="accountID" name="accountID" />
                 </div>
               </div>
 
-              <div class ="form-group">
+              <div class="form-group">
                 <div class="resource-id">
                   <label for="resourceID">Resource ID</label><br>
                   <input type="text" id="resourceID" name="resourceID" />
                 </div>
               </div>
 
-              <div class ="form-group">
+              <div class="form-group">
                 <div class="addedTime">
                   <label for="addedTime">For How Long (Months)?</label><br>
                   <input type="text" id="addedTime" name="addedTime" />
                 </div>
 
-                <div class ="form-group">
+                <div class="form-group">
                   <div class="justification">
                     <label for="justification">Justification</label><br>
                     <textarea id="justification" name="justification"></textarea>
@@ -218,17 +229,14 @@
                 </div>
               </div>
 
-              <input  type="text" type="hidden" style="display: none;" value="" id="hiddenRule" name="ruleID">
-              <script> document.getElementById("hiddenRule").value = window.localStorage.getItem('id');  </script>
+              <input type="text" type="hidden" style="display: none;" value="" id="hiddenRule" name="ruleID">
+              <script>
+                document.getElementById("hiddenRule").value = window.localStorage.getItem('id');
+              </script>
               <button type="submit">Submit</button>
 
             </form>
 
-          </div>
-        </div>
-        <div class="col-sm">
-          <div id="exception-graph" class="section">
-            <div id="columnchart_material" style="width: 300px; height: 300px;"></div>
           </div>
         </div>
       </div>
@@ -307,13 +315,10 @@
     cell.classList.toggle("dark-modeCellReport");
 
     var exceptionHistory = document.getElementById('exception-history');
-    exceptionHistory.classList.toggle("dark-modeDetails");
+    exceptionHistory.classList.toggle("dark-modeExceptionHistory");
 
     var exceptionManagement = document.getElementById('exception-management');
-    exceptionManagement.classList.toggle("dark-modeDetails");
-
-    var exceptionGraph = document.getElementById('exception-graph');
-    exceptionGraph.classList.toggle("dark-modeDetails");
+    exceptionManagement.classList.toggle("dark-modeExceptionManagement");
 
     var modal = document.getElementById('modalDark');
     modal.classList.toggle("dark-modeModal");
