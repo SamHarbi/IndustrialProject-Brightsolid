@@ -51,6 +51,8 @@ function suspendException(exec) {
     });
 }
 
+//All done here (hopefully)- Just push when you wake up
+
 //Creates the audit using exception data gotten with the previous, getNewExceptionData in tandem with post data
 function createAudit(req, exep) {
     return new Promise((resolve, reject) => {
@@ -64,7 +66,7 @@ function createAudit(req, exep) {
         lastUpdate = lastUpdate.format("YYYY-MM-DD hh:mm:ss");
 
         ruleAction = "suspend";
-        connection.query(que, [exep[0].exception_id, req.body.accountID, req.session.accountID, req.body.ruleID, ruleAction, lastUpdate, exep[0].new_exception_value, exep[0].exception_value, exep[0].new_justification, req.body.justification, exep[0].new_review_date, lastUpdate], (err, row, fields) => {
+        connection.query(que, [exep[0].exception_id, req.body.accountID, req.session.accountID, req.body.ruleID, ruleAction, lastUpdate, exep[0].exception_value, exep[0].exception_value, exep[0].justification, req.body.justification, exep[0].review_date, lastUpdate], (err, row, fields) => {
             if (err) { //Query didn't run
                 reject(err);
             }
