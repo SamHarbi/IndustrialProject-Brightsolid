@@ -66,13 +66,15 @@
       ]);
 
       var options = {
+        
         chart: {
-          title: 'Total Compliance of Resources: Rule 8'
-
+          title: 'Total Compliance of Resources'
+            
         },
         bar: {
           groupWidth: '50%'
         }, // change width here
+        
       };
 
       var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
@@ -109,9 +111,9 @@
 
       <!--Font Resizing Buttons-->
       <span id="FontSizeTog">
-        <button id="a3" class="access btn btn-light" onclick="ExtraLarge()">A++</button>
-        <button id="a2" class="access btn btn-light" onclick="Large()">A+</button>
-        <button id="a1" class="access btn btn-light" onclick="Default()">A</button>
+        <button id="a3" class="access btn btn-light" onclick="ExtraLarge()">100%</button>
+        <button id="a2" class="access btn btn-light" onclick="Large()">150%</button>
+        <button id="a1" class="access btn btn-light" onclick="Default()">200%</button>
       </span>
 
       <br>
