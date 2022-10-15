@@ -24,6 +24,8 @@
     function createTable() {
 
       var pull = window.localStorage.getItem('id');
+      
+      document.getElementById("ruleTitle").innerHTML = "Compliance Rule " + pull + ": Detailed Report;"
 
         //Ajax post request, which will push ID to url provided
         $.ajax({
@@ -119,7 +121,7 @@
       <br>
     </div>
 
-    <h1 class="report-title">Compliance Rule X: Detailed Report</h1>
+    <h1 id="ruleTitle" class="report-title">Compliance Rule X: Detailed Report</h1>
 
     <div class="section" id="report-table">
       <table id="cells">
