@@ -32,6 +32,22 @@ function createUser(req, customer) {
     })
 }
 
+function createAccount(customer) {
+    return new Promise((resolve, reject) => {
+        //Uses code from https://odino.org/generating-the-md5-hash-of-a-string-in-nodejs/
+        let hash = crypto.createHash('md5').update(req.body.username).digest("hex"); //This information doesn't need to be secure, just unique
+
+        connection.query('INSERT INTO account (account_ref, platform_id, customer_id) VALUES (?, ?, ?);', [hash, 0, customer[0].customer_id], function (err, results) {
+            if (err) { //Query didn't run
+                reject(err);
+            }
+            else {
+                resolve(results);
+            }
+        });
+    })
+}
+
 function createCustomer(req, pass) {
     return new Promise((resolve, reject) => {
         connection.query('INSERT INTO customer (customer_name, password) VALUES (?, ?);', [req.body.username, pass.toString('hex')], function (err, results) {
@@ -65,6 +81,7 @@ async function processResults(req) {
     var customerCheck = [];
     var customerCreate;
     var customerGet;
+    var account;
     var user;
     var data;
 
@@ -98,6 +115,13 @@ async function processResults(req) {
     //Create User
     try {
         user = createUser(req, customerGet);
+    } catch (err) {
+        return err;
+    }
+
+    //Create Account
+    try {
+        user = createAccount(customerGet);
     } catch (err) {
         return err;
     }
