@@ -274,22 +274,6 @@ h4 {
     height: 102px;
 }
 
-#left, #right {
-    width: 925px;
-}
-
-#left {
-    float: left;
-    padding-top: 40px;
-    padding-left: 120px;
-}
-
-#right {
-    float: right;
-    padding-top: 76px;
-    padding-right: 120px;
-}
-
 #refresh {
     padding-top: 10px;
     text-align: center;
