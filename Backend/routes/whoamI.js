@@ -17,7 +17,7 @@ function isAuthenticated(req, res, next) {
 }
 
 /* GET users listing. */
-router.get('/', isAuthenticated, function (req, res) {
+router.get('/', function (req, res) {
     res.json({ user: req.session.user });
 })
 
