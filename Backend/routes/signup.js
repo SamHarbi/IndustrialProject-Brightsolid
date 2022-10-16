@@ -48,7 +48,7 @@ function createCustomer(req, pass) {
 function checkCustomer(req) {
     return new Promise((resolve, reject) => {
         //Check if Customer already exists
-        connection.query("SELECT * FROM customer WHERE customer_name = '?'", [req.body.username], function (err, results, fields) {
+        connection.query("SELECT * FROM customer WHERE customer_name = ?", [req.body.username], function (err, results, fields) {
             if (err) { //Query didn't run
                 reject(err)
             }
@@ -59,7 +59,7 @@ function checkCustomer(req) {
     });
 }
 
-async function processResults() {
+async function processResults(req) {
 
     var password;
     var customerCheck = [];
@@ -68,7 +68,15 @@ async function processResults() {
     var user;
     var data;
 
-
+    //Check if Customer already exists
+    try {
+        customerCheck = await checkCustomer(req)
+        if (customerCheck.length > 0) {
+            return "Customer already exists";
+        }
+    } catch (err) {
+        return err;
+    }
 
     //Hash password
     password = await HashPass(req.body.password);
