@@ -195,7 +195,7 @@
             <!-- Just display exception history for now -->
             <h2><b><u>Exception History</u></b></h2>
             <div id="exception-table">
-              <table id="cells">
+              <table id="exception-cells">
                 <thead>
                   <tr>
                     <th width="5%">User ID</th>
@@ -348,6 +348,9 @@
     reportButtons.classList.toggle("dark-modeButtons");
 
     var cell = document.getElementById('cells');
+    cell.classList.toggle("dark-modeCellReport");
+
+    var exceptionCell = document.getElementById('exception-cells');
     cell.classList.toggle("dark-modeCellReport");
 
     var exceptionHistory = document.getElementById('exception-history');
