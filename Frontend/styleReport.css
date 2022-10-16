@@ -307,6 +307,12 @@ h4 {
   overflow: auto;
 }
 
+#exception-table {
+  padding-left: 50px;
+  padding-right: 50px;
+  overflow: auto;
+}
+
 #return-btn {
   padding-left: 5px;
   padding-top: 5px;
