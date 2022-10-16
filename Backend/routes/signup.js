@@ -48,7 +48,7 @@ function createCustomer(req, pass) {
 function checkCustomer(req) {
     return new Promise((resolve, reject) => {
         //Check if Customer already exists
-        connection.query("SELECT * FROM customer WHERE customer_name = ?", [req.body.username], function (err, results, fields) {
+        connection.query("SELECT * FROM customer WHERE customer_name = '?'", [req.body.username], function (err, results, fields) {
             if (err) { //Query didn't run
                 reject("Something went wrong :(")
             }
