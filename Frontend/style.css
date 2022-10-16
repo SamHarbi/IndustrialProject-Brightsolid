@@ -42,6 +42,7 @@ th, td {
 
 /*Table Cells*/
 td{
+    text-overflow: ellipsis;
     word-wrap: break-word;
     border: 1px solid black;
 }
