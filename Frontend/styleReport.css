@@ -111,8 +111,8 @@ h4 {
 
 /*Dark mode styling for page body*/
 .dark-modeBody {
-    background-color: #1a1a1a;
-    color: white;
+  background-color: #383838;
+  color: white;
 }
 
 /*Dark mode styling for logo*/
@@ -136,14 +136,31 @@ h4 {
     background-color: #3f3f3f;
 }
 
-/*Dark mode styling for table cells*/
-.dark-modeCell tr{
-    background-color: #696969;
-}
-
 /* Dark mode styling for table cells in the detailed report */
 .dark-modeCellReport {
   background-color: #696969;
+}
+
+/*Dark mode styling for table head in the detailed report*/
+.dark-modeCellReport th{
+    background-color: #696969;
+    color: #ffffff;
+}
+
+/*Dark mode styling for even-numbered table cells in the detailed report*/
+.dark-modeCellReport tr:nth-child(even){
+    background-color: #696969;
+}
+
+/*Dark mode styling for odd-numbered table cells in the detailed report*/
+.dark-modeCellReport tr:nth-child(odd){
+    background-color: #4b4b4b;
+}
+
+/*Dark mode styling for hovering over cells in the detailed report*/
+.dark-modeCellReport tr:hover{
+    background-color: #c0c0c0;
+    color: #000000;
 }
 
 /*Dark mode styling for hovering over cells*/
