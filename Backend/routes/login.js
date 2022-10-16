@@ -72,7 +72,7 @@ function getUserData(customerID, accountID) {
     connection.query("SELECT * FROM user WHERE customer_id = ? AND user_id = ?;", [customerID, accountID], function (err, row, fields) {
       if (err) { reject(err); }
       if (row.length < 1) {
-        reject(err);
+        reject("Too long");
       } else {
         resolve(row[0]);
       }
