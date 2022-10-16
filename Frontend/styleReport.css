@@ -290,10 +290,6 @@ h4 {
     overflow: hidden;
 }
 
-#list {
-    overflow: auto;
-}
-
 #exception-history {
     padding-left: 5px;
     padding-top: 5px;
