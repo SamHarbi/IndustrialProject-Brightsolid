@@ -41,7 +41,7 @@ function getCustomerID(customerName) {
     connection.query("SELECT * FROM customer WHERE customer_name = ?;", [customerName], function (err, row, fields) {
       if (err) { reject(err); }
       if (row.length < 1) {
-        reject('An Error Occured 1');
+        reject(err);
       } else {
         resolve(row[0].customer_id);
       }
@@ -58,7 +58,7 @@ function getAccountData(customerID) {
     connection.query("SELECT * FROM account WHERE customer_id = ?;", [customerID], function (err, row, fields) {
       if (err) { reject(err); }
       if (row.length < 1) {
-        reject('An Error Occured 2');
+        reject(err);
       } else {
         resolve(row[0]);
       }
@@ -72,7 +72,7 @@ function getUserData(customerID, accountID) {
     connection.query("SELECT * FROM user WHERE customer_id = ? AND user_id = ?;", [customerID, accountID], function (err, row, fields) {
       if (err) { reject(err); }
       if (row.length < 1) {
-        reject('An Error Occured 3');
+        reject(err);
       } else {
         resolve(row[0]);
       }
