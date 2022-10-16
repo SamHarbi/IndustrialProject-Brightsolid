@@ -75,7 +75,7 @@ async function processResults() {
             return res.send("Customer already exists");
         }
     } catch (err) {
-        return res.send(err);
+        return err;
     }
 
     //Hash password
@@ -85,21 +85,21 @@ async function processResults() {
     try {
         customerCreate = createCustomer(req, password);
     } catch (err) {
-        return res.send(err);
+        return err;
     }
 
     //Get newly made customer record
     try {
         customerGet = await checkCustomer(req);
     } catch (err) {
-        return res.send(err);
+        return err;
     }
 
     //Create User
     try {
         user = createUser(req, customerGet);
     } catch (err) {
-        return res.send('Something went wrong :(');
+        return err;
     }
 
     data = "New Customer record and account made"
