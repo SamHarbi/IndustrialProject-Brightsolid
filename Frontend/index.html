@@ -121,6 +121,20 @@
 
                 })
         }
+        
+        function openDetail() {
+
+            //JQuery statement to pull ID thejn post
+            jQuery($ => {
+                $('table tr').on('click', function () { //When table cell is clicked
+                    var select = $(this); //Get cell clicked
+                    var push = select.find("td:eq(0)").text(); //Set push to first cell of row
+
+                    window.localStorage.setItem('id', push);
+                    document.location = 'detailed_report.html';
+                });
+            });
+        }
 
     </script>
 
@@ -317,21 +331,6 @@
             //Add Google Chart to page
             var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
             chart.draw(data, options);
-        }
-
-
-        function openDetail() {
-
-            //JQuery statement to pull ID thejn post
-            jQuery($ => {
-                $('table tr').on('click', function () { //When table cell is clicked
-                    var select = $(this); //Get cell clicked
-                    var push = select.find("td:eq(0)").text(); //Set push to first cell of row
-
-                    window.localStorage.setItem('id', push);
-                    document.location = 'detailed_report.html';
-                });
-            });
         }
 
         //Variable to target fonts for font size functions
