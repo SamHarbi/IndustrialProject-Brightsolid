@@ -187,11 +187,11 @@
         <div class="container">
 
             <div class="row">
-                <div class="col-lg" id="exception-history">
-                    <h2 id="historyTitle"><b><u>Exception History</u></b></h2>
-                    <div class="section">
+                <div class="col-lg">
+                    <div id="exception-history" class="section">
 
                         <!-- Just display exception history for now -->
+                        <h2><b><u>Exception History</u></b></h2>
                         <div id="exception-table">
                             <table id="exception-cells">
                                 <thead>
@@ -356,6 +356,9 @@
 
         var exceptionManagement = document.getElementById('exception-management');
         exceptionManagement.classList.toggle("dark-modeExceptionManagement");
+
+        var modal = document.getElementById('modalDark');
+        modal.classList.toggle("dark-modeModal");
 
     }
 
