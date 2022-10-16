@@ -37,7 +37,7 @@ function createAccount(req, customer) {
 
         let hash = 1 //Add an actual hash here if account ref is ever needed
 
-        connection.query('INSERT INTO account (account_ref, platform_id, customer_id) VALUES (?, ?, ?);', [hash, 0, customer[0].customer_id], function (err, results) {
+        connection.query('INSERT INTO account (account_ref, platform_id, customer_id) VALUES (?, ?, ?);', [hash, 2, customer[0].customer_id], function (err, results) {
             if (err) { //Query didn't run
                 reject(err);
             }
