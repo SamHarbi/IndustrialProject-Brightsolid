@@ -105,10 +105,10 @@
 
                     //For loop to go through all resources read in and add them to table
                     for (i = 0; i < array.length; i++) {
-                        if (!isNaN(array[i].id)) {
+                        //if (!isNaN(array[i].id)) {
                             var cleanup = array[i]; //Cuts down on code in the line below
                             txt += "<tr><td>" + cleanup.user_id + "</td><td>" + cleanup.action + "</td><td>" + cleanup.action_dt + "</td><td>" + cleanup.new_exception_value + "</td><td>" + cleanup.new_justification + "</td><td>" + cleanup.new_review_date + "</td></tr>"
-                        }
+                        //}
                     }
 
                     //Once finished adding cells to 'txt', innerHTML is used to add to the table's body
