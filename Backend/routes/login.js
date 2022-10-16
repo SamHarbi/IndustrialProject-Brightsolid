@@ -98,8 +98,11 @@ router.post('/', express.urlencoded({ extended: false }), function (req, res, ne
 
       //Get customer ID then use it to get account data 
       getCustomerID(req.body.username).then((result) => {
+        console.log("1");
         getAccountData(result).then((result2) => {
+          console.log("2");
           getUserData(req.body.username, req.body.account).then((result3) => {
+            console.log("3");
 
             //Save data into session
             accountData = result2;
