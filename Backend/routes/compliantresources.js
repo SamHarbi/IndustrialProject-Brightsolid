@@ -15,6 +15,17 @@ function isAuthenticated(req, res, next) {
     else next('/')
 }
 
+function createErrorData(data) {
+    data.push({
+        resource_id: "No Resources Found",
+        resource_ref: "NA",
+        account_id: "NA",
+        resource_type_id: "NA",
+        resource_name: "NA",
+        last_updated: "NA"
+    })
+}
+
 /* GET listing. */
 router.get('/', isAuthenticated, function (req, res) {
 
@@ -22,10 +33,12 @@ router.get('/', isAuthenticated, function (req, res) {
 
     connection.query('SELECT * FROM `resource` WHERE resource_id NOT IN (SELECT resource_id FROM non_compliance) AND account_id = ?; ', [req.session.accountID], (err, row, fields) => {
         if (err) { //Query didn't run
-            res.send('Something went wrong :(');
+            createErrorData(returnData);
+            res.json(returnData);
         }
         if (row.length < 1) {//No result from query
-            res.send('No Resource Found');
+            createErrorData(returnData);
+            res.json(returnData);
         } else {
             res.json(row);//Return result
         }
