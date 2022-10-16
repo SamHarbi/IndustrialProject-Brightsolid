@@ -19,54 +19,99 @@ function HashPass(password) {
     })
 }
 
-function createUser(res) {
-    connection.query('INSERT INTO user (user_name, role_id, customer_id) VALUES (?, ?, ?);', [req.body.username, 0, res.body.customer_id], function (err, results) {
-        if (err) { //Query didn't run
-            console.log(err);
-            return res.send('Something went wrong :(');
-            connection.end();
-        }
-        else {
-            return res.send('User Created');
-            connection.end();
-        }
+function createUser(req, customer) {
+    return new Promise((resolve, reject) => {
+        connection.query('INSERT INTO user (user_name, role_id, customer_id) VALUES (?, ?, ?);', [req.body.username, 0, customer[0].customer_id], function (err, results) {
+            if (err) { //Query didn't run
+                reject(err);
+            }
+            else {
+                resolve(results);
+            }
+        });
+    })
+}
+
+function createCustomer(req, pass) {
+    return new Promise((resolve, reject) => {
+        connection.query('INSERT INTO customer (customer_name, password) VALUES (?, ?);', [req.body.username, pass.toString('hex')], function (err, results) {
+            if (err) { //Query didn't run
+                reject(err);
+            }
+            else {
+                resolve(results);
+            }
+        });
+    })
+}
+
+function checkCustomer(req) {
+    return new Promise((resolve, reject) => {
+        //Check if Customer already exists
+        connection.query("SELECT * FROM customer WHERE customer_name = ?", [req.body.username], function (err, results, fields) {
+            if (err) { //Query didn't run
+                reject("Something went wrong :(")
+            }
+            else {
+                resolve(results);
+            }
+        });
     });
+}
+
+async function processResults() {
+
+    var password;
+    var customerCheck = [];
+    var customerCreate;
+    var customerGet;
+    var user;
+    var data;
+
+    //Check if Customer already exists
+    try {
+        customerCheck = await checkCustomer(req)
+        if (customerCheck.length > 0) {
+            return res.send("Customer already exists");
+        }
+    } catch (err) {
+        return res.send(err);
+    }
+
+    //Hash password
+    password = await HashPass(req.body.password);
+
+    //Create Customer
+    try {
+        customerCreate = createCustomer(req, password);
+    } catch (err) {
+        return res.send(err);
+    }
+
+    //Get newly made customer record
+    try {
+        customerGet = await checkCustomer(req);
+    } catch (err) {
+        return res.send(err);
+    }
+
+    //Create User
+    try {
+        user = createUser(req, customerGet);
+    } catch (err) {
+        return res.send('Something went wrong :(');
+    }
+
+    data = "New Customer record and account made"
+    return data;
 }
 
 /* POST listing. */
 router.post('/', function (req, res, next) {
-
-    HashPass(req.body.password)
-        .then((hashedPassword) => {
-            //Setup DB Connection and Connect
-            connection = connectionSetup.databaseSetup();
-            connection.connect();
-
-            //Check if Customer already exists
-            connection.query('SELECT * FROM customer WHERE customer_name = ?', [req.body.username], function (err, results, fields) {
-                if (err) { //Query didn't run
-                    return res.send('Something went wrong :(');
-                    connection.end();
-                }
-
-                if (results.length > 0) {//Customer name taken
-                    return res.send('User Already Exists');
-                    connection.end();
-                }
-
-                //Insert customer into customer table
-                connection.query('INSERT INTO customer (customer_name, password) VALUES (?, ?);', [req.body.username, hashedPassword.toString('hex')], function (err, results) {
-                    if (err) { //Query didn't run
-                        console.log(err);
-                        return res.send('Something went wrong :(');
-                        connection.end();
-                    }
-                    else {
-
-                    }
-                });
-            });
-        });
+    processResults(req).then((data) => {
+        res.json(data);
+    })
 });
+
 
 module.exports = router;
