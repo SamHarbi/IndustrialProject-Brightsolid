@@ -85,21 +85,21 @@ async function processResults(req) {
     try {
         customerCreate = createCustomer(req, password);
     } catch (err) {
-        return "2";
+        return err;
     }
 
     //Get newly made customer record
     try {
         customerGet = await checkCustomer(req);
     } catch (err) {
-        return "3";
+        return err;
     }
 
     //Create User
     try {
         user = createUser(req, customerGet);
     } catch (err) {
-        return "4";
+        return err;
     }
 
     data = "New Customer record and account made"
