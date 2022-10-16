@@ -134,12 +134,12 @@ h4 {
 
 /*Dark mode styling for table*/
 .dark-modeTable {
-    background-color: #3f3f3f !important;
+    background-color: #3f3f3f;
 }
 
 /* Dark mode styling for table cells in the detailed report */
 .dark-modeCellReport {
-  background-color: #696969 !important;
+  background-color: #696969;
 }
 
 /*Dark mode styling for table head in the detailed report*/
@@ -200,7 +200,7 @@ h4 {
     padding-bottom: 5px;
     width: 400px;
     height: 400px;
-    background-color: #696969!important;
+    background-color: #696969;
 }
 
 .dark-modeExceptionHistory {
@@ -210,7 +210,7 @@ h4 {
   padding-bottom: 5px;
   width: 800px;
   height: 400px;
-  background-color: #696969 !important;
+  background-color: #696969;
 }
 
 .dark-modeExceptionManagement p{
