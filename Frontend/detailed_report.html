@@ -63,7 +63,7 @@
             jQuery($ => {
                 $('table tr').on('click', function () { //When table cell is clicked
                     var select = $(this); //Get cell clicked
-                    var resourceID = select.find("td:eq(0)").text(); //Set resourceID to first cell of row
+                    var resourceID = select.find("tr td:first-child").text(); //Set resourceID to first cell of row
                 });
             });
 
