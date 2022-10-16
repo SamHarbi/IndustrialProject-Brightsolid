@@ -84,8 +84,7 @@
                     for (i = 0; i < array.length; i++) {
                         if (!isNaN(array[i].id)) {
                             var cleanup = array[i]; //Cuts down on code in the line below
-                            txt += "<tr><td>" + cleanup.id + "</td><td>" + cleanup.resource + "</td><td>" + cleanup.complianceState + "</td><td>" + cleanup.exception + "</td><td>" + cleanup.justification + "</td><td>" + cleanup.reviewdate + "</td><td>" +
-                                cleanup.lastupdated + "</td><td>" + cleanup.updatedby + "</td></tr>"
+                            txt += "<tr><td>" + cleanup.user_id + "</td><td>" + cleanup.action + "</td><td>" + cleanup.action_dt + "</td><td>" + cleanup.new_exception_value + "</td><td>" + cleanup.new_justification + "</td><td>" + cleanup.new_review_date + "</td></tr>";
                         }
                     }
 
@@ -173,14 +172,12 @@
             <table id="cells">
               <thead>
                 <tr>
-                  <th width="5%">ID</th>
-                  <th width="15%">Resource</th>
-                  <th width="15%">Compliance</th>
-                  <th width="15%">Exception</th>
-                  <th width="20%">Justification</th>
+                  <th width="5%">User ID</th>
+                  <th width="10%">Action</th>
+                  <th width="10%">Date of Action</th>
+                  <th width="30%">Exception</th>
+                  <th width="35%">Justification</th>
                   <th width="10%">Review Date</th>
-                  <th width="10%">Last Updated</th>
-                  <th width="10%">Updated By</th>
                 </tr>
               </thead>
 
