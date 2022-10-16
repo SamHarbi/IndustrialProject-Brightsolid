@@ -86,6 +86,44 @@ function isAuthenticated(req, res, next) {
   else next('route')
 }
 
+async function processResults(req) {
+
+  customerID = 0;
+  accountData = [];
+  userData = [];
+  data = "https://brightsolid-monoserver-7q9js.ondigitalocean.app/login.html";
+
+  try {
+    customerID = await getCustomerID(req.body.username);
+  } catch (err) {
+    return data;
+  }
+
+  try {
+    accountData = await getAccountData(customerID);
+  } catch (err) {
+    return data;
+  }
+
+  try {
+    userData = await getUserData(accountData.customer_id, req.body.account);
+  } catch (err) {
+    return data;
+  }
+
+  //Save data into session
+  req.session.accountID = accountData.account_id;
+  req.session.roleID = userData.role_id;
+  req.session.user = req.body.username;
+  req.session.save(function (err) {
+    if (err) { return next(err) }
+    data = "https://brightsolid-monoserver-7q9js.ondigitalocean.app/"; //User has been logged in successfully
+
+  })
+
+  return data;
+}
+
 /* POST listing. */
 router.post('/', express.urlencoded({ extended: false }), function (req, res, next) {
 
@@ -96,40 +134,9 @@ router.post('/', express.urlencoded({ extended: false }), function (req, res, ne
     req.session.regenerate(function (err) {
       if (err) { next(err); }
 
-      //Get customer ID then use it to get account data 
-      getCustomerID(req.body.username).then((result) => {
-        console.log("1");
-        getAccountData(result).then((result2) => {
-
-          console.log("2");
-          //Save data into session
-          accountData = result2;
-          req.session.accountID = result2.account_id;
-
-          getUserData(result2.customer_id, req.body.account).then((result3) => {
-            console.log("3");
-
-            //Save data into session
-
-            req.session.roleID = result3.role_id;
-            req.session.user = req.body.username;
-            req.session.save(function (err) {
-              if (err) { return next(err) }
-              res.redirect("https://brightsolid-monoserver-7q9js.ondigitalocean.app/"); //User has been logged in successfully
-
-            })
-          }).catch(function (err) {
-            console.log(err);
-
-          });
-        }).catch(function (err) {
-          console.log(err);
-
-        });
-      }).catch(function (err) {
-        console.log(err);
-
-      });
+      processResults(req).then((data) => {
+        res.redirect(data);
+      })
 
     }).catch((err) => { console.log(err); });
   }).catch((err) => { console.log(err); });
