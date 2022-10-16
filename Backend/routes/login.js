@@ -114,7 +114,9 @@ router.post('/', express.urlencoded({ extended: false }), function (req, res, ne
           }).catch(function (err) {
             console.log(err);
           });
-        })
+        }).catch(function (err) {
+          console.log(err);
+        });
       }).catch(function (err) {
         console.log(err);
         res.send("Error") //Something went wrong with login
