@@ -116,11 +116,11 @@ async function processResults(req) {
   req.session.roleID = userData.role_id;
   req.session.user = req.body.username;
   req.session.save(function (err) {
-    if (err) { return next(err) }
-    data = "https://brightsolid-monoserver-7q9js.ondigitalocean.app/"; //User has been logged in successfully
-  }).then(() => { return data; })
+    if (err) { return data; }
+  })
 
-  //return data;
+  data = "https://brightsolid-monoserver-7q9js.ondigitalocean.app/"; //User has been logged in successfully
+  return data;
 }
 
 /* POST listing. */
