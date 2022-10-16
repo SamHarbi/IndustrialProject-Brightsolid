@@ -40,9 +40,9 @@
                     var array = JSON.parse(readin);
 
                     console.log(array[0]);
-                    console.log(array[0].user);
+                    console.log(array.user);
 
-                    if(array.length < 1)
+                    if(array.user == null)
                     {
                         console.log("NOT LOGGED IN");
                         window.location.replace("https://brightsolid-monoserver-7q9js.ondigitalocean.app/login.html");
