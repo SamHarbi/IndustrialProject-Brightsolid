@@ -28,10 +28,6 @@
         let noncompliant = 0;
         let comPercent = 0;
 
-        //Chart creation
-        google.charts.load("current", { packages: ["corechart"] });
-        google.charts.setOnLoadCallback(createTable);
-
         //Call for createTable function
 
         //Function to fill the table with rules
@@ -60,7 +56,6 @@
                 })
                 .then(getNoncompliant())
                 .then(getCompliant())
-                .then(graphCreation())
         }
 
         async function getNoncompliant() {
@@ -95,40 +90,6 @@
                     }
 
                 })
-        }
-
-        async function graphCreation() {
-            comPercent = parseFloat(((compliant / (compliant + noncompliant)) * 100).toFixed(1)); //Percentage calculation    
-            drawChart();
-
-        }
-
-        async function drawChart() {
-            console.log(noncompliant);
-            console.log(compliant);
-
-            var data = google.visualization.arrayToDataTable([
-                ['Compliance Status', 'Number of Compliant Resources'],
-                ['Compliant', compliant],
-                ['Non-Compliant', noncompliant],
-
-            ]);
-
-            //Chart options
-            var options = {
-                backgroundColor: 'transparent',
-                pieHole: 0.7,
-                colors: ['#3ace50', '#ff0000'],
-                legend: { position: "bottom", textStyle: { color: "#F1BA56", fontSize: 20 } },
-                pieSliceText: "none",
-            };
-
-            //Insert percentage into percent p element
-            document.getElementById("percent").innerHTML = comPercent + "%";
-
-            //Add Google Chart to page
-            var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
-            chart.draw(data, options);
         }
 
     </script>
@@ -299,6 +260,41 @@
 
     <!--Scripts for functions-->
     <script>
+        
+        comPercent = parseFloat(((compliant / (compliant + noncompliant)) * 100).toFixed(1)); //Percentage calculation
+        
+        //Chart creation
+        google.charts.load("current", { packages: ["corechart"] });
+        google.charts.setOnLoadCallback(drawChart);
+        
+        function drawChart() {
+            console.log(noncompliant);
+            console.log(compliant);
+
+            var data = google.visualization.arrayToDataTable([
+                ['Compliance Status', 'Number of Compliant Resources'],
+                ['Compliant', compliant],
+                ['Non-Compliant', noncompliant],
+
+            ]);
+
+            //Chart options
+            var options = {
+                backgroundColor: 'transparent',
+                pieHole: 0.7,
+                colors: ['#3ace50', '#ff0000'],
+                legend: { position: "bottom", textStyle: { color: "#F1BA56", fontSize: 20 } },
+                pieSliceText: "none",
+            };
+
+            //Insert percentage into percent p element
+            document.getElementById("percent").innerHTML = comPercent + "%";
+
+            //Add Google Chart to page
+            var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
+            chart.draw(data, options);
+        }
+
 
         function openDetail() {
 
