@@ -25,7 +25,7 @@ router.get('/', isAuthenticated, function (req, res) {
             res.send('Something went wrong :(');
         }
         if (row.length < 1) {//No result from query
-            reject('No Resource Found');
+            res.send('No Resource Found');
         } else {
             res.json(row);//Return result
         }
