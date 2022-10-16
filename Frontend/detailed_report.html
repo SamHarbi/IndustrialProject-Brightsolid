@@ -65,13 +65,21 @@
     }
 
     function createHistoryTable() {
+      //JQuery statement to pull ID thejn post
+            jQuery($ => {
+                $('table tr').on('click', function () { //When table cell is clicked
+                    var select = $(this); //Get cell clicked
+                    var resourceID = select.find("td:eq(0)").text(); //Set push to first cell of row
+                });
+            });
+
       //Ajax post request, which will push ID to url provided
       $.ajax({
         url: 'https://brightsolid-monoserver-7q9js.ondigitalocean.app/Backend/exceptionhistory',
         type: "POST",
         dataType: "json",
         data: {
-          id: pull
+          id: resourceID
         },
         success: function(data) {
           console.log(data);
