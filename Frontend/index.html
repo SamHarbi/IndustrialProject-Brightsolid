@@ -39,7 +39,8 @@
                     var readin = JSON.stringify(data);
                     var array = JSON.parse(readin);
 
-                    console.log("NOT LOGGED IN");
+                    console.log(array[0]);
+                    console.log(array[0].user);
 
                     if(array.length < 1)
                     {
