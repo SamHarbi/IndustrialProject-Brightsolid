@@ -184,8 +184,10 @@
         </div>
 
         <br>
+        <div class="container">
 
-
+            <div class="row">
+                <div class="col-lg">
                     <div id="exception-history" class="section">
 
                         <!-- Just display exception history for now -->
@@ -210,60 +212,66 @@
                         </div>
 
                     </div>
+                </div>
 
-                <div id="exception-management" class="section">
-                    <form action="" method="post" id="manageException">
-                        <b>
-                            <p align="right" id="formRule">Rule ID</p>
-                        </b>
-
-                        <div class="form-group">
-                            <label for="action">Action</label>
-                            <br>
-                            <select class="custom-select">
-                                <option selected>Choose Action</option>
-                                <option value="1" onclick="createException()">Create/Update Exception</option>
-                                <option value="2" onclick="suspendException()">Suspend Exception</option>
-                            </select>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="account-id">
-                                <label for="accountID">Account ID</label><br>
-                                <input type="text" id="accountID" name="accountID" />
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="resource-id">
-                                <label for="resourceID">Resource ID</label><br>
-                                <input type="text" id="resourceID" name="resourceID" />
-                            </div>
-                        </div>
+                <div class="col-sm">
+                    <div id="exception-management" class="section">
+                        <form action="" method="post" id="manageException">
+                            <b>
+                                <p align="right" id="formRule">Rule ID</p>
+                            </b>
 
                             <div class="form-group">
-                            <div class="addedTime">
-                                <label for="addedTime">For How Long (Months)?</label><br>
-                                <input type="text" id="addedTime" name="addedTime" />
+                                <label for="action">Action</label>
+                                <br>
+                                <select class="custom-select">
+                                    <option selected>Choose Action</option>
+                                    <option value="1" onclick="createException()">Create/Update Exception</option>
+                                    <option value="2" onclick="suspendException()">Suspend Exception</option>
+                                </select>
                             </div>
 
                             <div class="form-group">
-                                <div class="justification">
-                                    <label for="justification">Justification</label><br>
-                                    <textarea id="justification" name="justification"></textarea>
+                                <div class="account-id">
+                                    <label for="accountID">Account ID</label><br>
+                                    <input type="text" id="accountID" name="accountID" />
                                 </div>
                             </div>
-                        </div>
 
-                        <input type="text" type="hidden" style="display: none;" value="" id="hiddenRule" name="ruleID">
-                        <script>
-                            document.getElementById("hiddenRule").value = window.localStorage.getItem('id');
-                        </script>
-                        <button type="submit">Submit</button>
+                            <div class="form-group">
+                                <div class="resource-id">
+                                    <label for="resourceID">Resource ID</label><br>
+                                    <input type="text" id="resourceID" name="resourceID" />
+                                </div>
+                            </div>
 
-                    </form>
+                            <div class="form-group">
+                                <div class="addedTime">
+                                    <label for="addedTime">For How Long (Months)?</label><br>
+                                    <input type="text" id="addedTime" name="addedTime" />
+                                </div>
 
+                                <div class="form-group">
+                                    <div class="justification">
+                                        <label for="justification">Justification</label><br>
+                                        <textarea id="justification" name="justification"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <input type="text" type="hidden" style="display: none;" value="" id="hiddenRule" name="ruleID">
+                            <script>
+                                document.getElementById("hiddenRule").value = window.localStorage.getItem('id');
+                            </script>
+                            <button type="submit">Submit</button>
+
+                        </form>
+
+                    </div>
                 </div>
+            </div>
+
+        </div>
         <br>
 
     </main>
