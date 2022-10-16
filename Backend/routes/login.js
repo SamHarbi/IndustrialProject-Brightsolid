@@ -100,13 +100,17 @@ router.post('/', express.urlencoded({ extended: false }), function (req, res, ne
       getCustomerID(req.body.username).then((result) => {
         console.log("1");
         getAccountData(result).then((result2) => {
+
           console.log("2");
+          //Save data into session
+          accountData = result2;
+          req.session.accountID = result2.account_id;
+
           getUserData(result2.customer_id, req.body.account).then((result3) => {
             console.log("3");
 
             //Save data into session
-            accountData = result2;
-            req.session.accountID = result2.account_id;
+
             req.session.roleID = result3.role_id;
             req.session.user = req.body.username;
             req.session.save(function (err) {
