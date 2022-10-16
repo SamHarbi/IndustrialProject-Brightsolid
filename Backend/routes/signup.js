@@ -34,8 +34,8 @@ function createUser(req, customer) {
 
 function createAccount(req, customer) {
     return new Promise((resolve, reject) => {
-        //Uses code from https://odino.org/generating-the-md5-hash-of-a-string-in-nodejs/
-        let hash = crypto.createHash('md5').update(req.body.username).digest("hex"); //This information doesn't need to be secure, just unique
+
+        let hash = 1 //Add an actual hash here if account ref is ever needed
 
         connection.query('INSERT INTO account (account_ref, platform_id, customer_id) VALUES (?, ?, ?);', [hash, 0, customer[0].customer_id], function (err, results) {
             if (err) { //Query didn't run
