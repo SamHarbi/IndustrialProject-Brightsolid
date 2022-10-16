@@ -164,8 +164,31 @@ h4 {
     color: #000000;
 }
 
+/* Dark mode styling for table cells in the exception history table */
 .dark-modeCellException {
   background-color: #696969 !important;
+}
+
+/*Dark mode styling for table head in the exception history table*/
+.dark-modeCellException th{
+    background-color: #696969;
+    color: #ffffff;
+}
+
+/*Dark mode styling for even-numbered table cells in the exception history table*/
+.dark-modeCellException tr:nth-child(even){
+    background-color: #696969;
+}
+
+/*Dark mode styling for odd-numbered table cells in the exception history table*/
+.dark-modeCellException tr:nth-child(odd){
+    background-color: #4b4b4b;
+}
+
+/*Dark mode styling for hovering over cells in the exception history table*/
+.dark-modeCellException tr:hover{
+    background-color: #c0c0c0;
+    color: #000000;
 }
 
 /*Dark mode styling for hovering over cells*/
