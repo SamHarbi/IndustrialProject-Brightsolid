@@ -15,6 +15,7 @@ p, a, th, label {
 table {
     table-layout:fixed;
     width: 100%;
+    overflow: auto;
 }
 
 th, td {
