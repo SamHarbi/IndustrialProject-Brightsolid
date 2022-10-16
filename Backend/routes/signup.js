@@ -50,7 +50,7 @@ function checkCustomer(req) {
         //Check if Customer already exists
         connection.query("SELECT * FROM customer WHERE customer_name = '?'", [req.body.username], function (err, results, fields) {
             if (err) { //Query didn't run
-                reject("Something went wrong :(")
+                reject(err)
             }
             else {
                 resolve(results);
@@ -75,7 +75,7 @@ async function processResults() {
             return "Customer already exists";
         }
     } catch (err) {
-        return "1";
+        return err;
     }
 
     //Hash password
