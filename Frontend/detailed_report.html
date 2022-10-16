@@ -21,7 +21,8 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script type="text/javascript">
         var pull = window.localStorage.getItem('id');
-        var role =
+        var resourceID;
+        //var role =
 
         createTable();
 
@@ -59,8 +60,6 @@
         }
 
         function createHistoryTable() {
-          var resourceID;
-
             //JQuery statement to pull ID from table row
             jQuery($ => {
                 $('table tr').on('click', function () { //When table cell is clicked
