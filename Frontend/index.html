@@ -23,8 +23,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript">
 
-        getCheckLogin(); //Make sure visitor is logged in
-
         //Variables to insert into graph
         let compliant = 0;
         let noncompliant = 0;
@@ -54,6 +52,7 @@
 
             //Fetch command to take in rules 
             fetch("https://brightsolid-monoserver-7q9js.ondigitalocean.app/Backend/summary")
+                .then(getCheckLogin())
                 .then(res => res.json())
                 .then(data => {
 
