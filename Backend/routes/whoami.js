@@ -10,15 +10,9 @@ var escapeHtml = require('escape-html')
 const mysql = require('mysql2');
 var router = express.Router();
 
-// middleware to test if authenticated - copied from https://www.npmjs.com/package/express-session user login example
-function isAuthenticated(req, res, next) {
-    if (req.session.user) next()
-    else next('/')
-}
-
 /* GET users listing. */
 router.get('/', function (req, res) {
-    res.json({ user: req.session.user });
+    res.json({ user: req.session.user + "ID: " + req.session.accountID });
 })
 
 module.exports = router;
