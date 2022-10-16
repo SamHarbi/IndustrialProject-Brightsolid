@@ -13,11 +13,11 @@ var router = express.Router();
 // middleware to test if authenticated - copied from https://www.npmjs.com/package/express-session user login example
 function isAuthenticated(req, res, next) {
     if (req.session.user) next()
-    else next('/login.html')
+    else next('/')
 }
 
 /* GET users listing. */
-router.get('/', function (req, res) {
+router.get('/', isAuthenticated, function (req, res) {
     res.json({ user: req.session.user });
 })
 
