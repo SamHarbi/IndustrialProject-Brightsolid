@@ -134,12 +134,12 @@ h4 {
 
 /*Dark mode styling for table*/
 .dark-modeTable {
-    background-color: #3f3f3f;
+    background-color: #3f3f3f !important;
 }
 
 /* Dark mode styling for table cells in the detailed report */
 .dark-modeCellReport {
-  background-color: #696969;
+  background-color: #696969 !important;
 }
 
 /*Dark mode styling for table head in the detailed report*/
