@@ -118,10 +118,9 @@ async function processResults(req) {
   req.session.save(function (err) {
     if (err) { return next(err) }
     data = "https://brightsolid-monoserver-7q9js.ondigitalocean.app/"; //User has been logged in successfully
+  }).then(() => { return data; })
 
-  })
-
-  return data;
+  //return data;
 }
 
 /* POST listing. */
