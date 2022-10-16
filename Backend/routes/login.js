@@ -69,7 +69,7 @@ function getAccountData(customerID) {
 //Get User data
 function getUserData(customerID, accountID) {
   return new Promise((resolve, reject) => {
-    connection.query("SELECT * FROM user WHERE customer_name = ? AND user_id = ?;", [customerID, accountID], function (err, row, fields) {
+    connection.query("SELECT * FROM user WHERE customer_id = ? AND user_id = ?;", [customerID, accountID], function (err, row, fields) {
       if (err) { reject(err); }
       if (row.length < 1) {
         reject("Too long");
@@ -101,7 +101,7 @@ router.post('/', express.urlencoded({ extended: false }), function (req, res, ne
         console.log("1");
         getAccountData(result).then((result2) => {
           console.log("2");
-          getUserData(req.body.username, req.body.account).then((result3) => {
+          getUserData(result2.customer_id, req.body.account).then((result3) => {
             console.log("3");
 
             //Save data into session
