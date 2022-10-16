@@ -31,6 +31,22 @@
         //Call for createTable function
         createTable();
 
+        async function getCheckLogin() {
+            fetch("https://brightsolid-monoserver-7q9js.ondigitalocean.app/Backend/whoami")
+                .then(res => res.json())
+                .then(data => {
+
+                    var readin = JSON.stringify(data);
+                    var array = JSON.parse(readin);
+
+                    if(array[0].user == null)
+                    {
+                        window.location.replace("https://brightsolid-monoserver-7q9js.ondigitalocean.app/login.html");
+                    }
+
+                })
+        }
+
         //Function to fill the table with rules
         async function createTable() {
 
