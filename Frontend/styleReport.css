@@ -91,6 +91,7 @@ h4 {
 
 .btn {
     color: #195A5F;
+    transition: none;
 }
 
 .w3-modal-content {
