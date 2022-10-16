@@ -148,9 +148,9 @@
 
       <!--Font Resizing Buttons-->
       <span id="FontSizeTog">
-        <button id="a3" class="access btn btn-light" onclick="ExtraLarge()">A++</button>
-        <button id="a2" class="access btn btn-light" onclick="Large()">A+</button>
-        <button id="a1" class="access btn btn-light" onclick="Default()">A</button>
+        <button id="a3" class="access btn btn-light" onclick="ExtraLarge()">200%</button>
+        <button id="a2" class="access btn btn-light" onclick="Large()">150%</button>
+        <button id="a1" class="access btn btn-light" onclick="Default()">100%</button>
       </span>
 
       <br>
@@ -195,7 +195,7 @@
             <!-- Just display exception history for now -->
             <h2><b><u>Exception History</u></b></h2>
             <div id="exception-table">
-              <table id="cells">
+              <table id="exception-cells">
                 <thead>
                   <tr>
                     <th width="5%">User ID</th>
@@ -317,6 +317,9 @@
     var reportTable = document.getElementById("report-table");
     reportTable.classList.toggle("dark-modeTable");
 
+    var exceptionTable = document.getElementById("exception-table");
+    exceptionTable.classList.toggle("dark-modeTable");
+
     var toggle = document.getElementById("tog");
     toggle.classList.toggle("dark-modeButtons");
 
@@ -346,6 +349,9 @@
 
     var cell = document.getElementById('cells');
     cell.classList.toggle("dark-modeCellReport");
+
+    var exceptionCell = document.getElementById('exception-cells');
+    cell.classList.toggle("dark-modeCellException");
 
     var exceptionHistory = document.getElementById('exception-history');
     exceptionHistory.classList.toggle("dark-modeExceptionHistory");

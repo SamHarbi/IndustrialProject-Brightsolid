@@ -134,12 +134,12 @@ h4 {
 
 /*Dark mode styling for table*/
 .dark-modeTable {
-    background-color: #3f3f3f;
+    background-color: #3f3f3f !important;
 }
 
 /* Dark mode styling for table cells in the detailed report */
 .dark-modeCellReport {
-  background-color: #696969;
+  background-color: #696969 !important;
 }
 
 /*Dark mode styling for table head in the detailed report*/
@@ -160,6 +160,33 @@ h4 {
 
 /*Dark mode styling for hovering over cells in the detailed report*/
 .dark-modeCellReport tr:hover{
+    background-color: #c0c0c0;
+    color: #000000;
+}
+
+/* Dark mode styling for table cells in the exception history table */
+.dark-modeCellException {
+  background-color: #696969 !important;
+}
+
+/*Dark mode styling for table head in the exception history table*/
+.dark-modeCellException th{
+    background-color: #696969;
+    color: #ffffff;
+}
+
+/*Dark mode styling for even-numbered table cells in the exception history table*/
+.dark-modeCellException tr:nth-child(even){
+    background-color: #696969;
+}
+
+/*Dark mode styling for odd-numbered table cells in the exception history table*/
+.dark-modeCellException tr:nth-child(odd){
+    background-color: #4b4b4b;
+}
+
+/*Dark mode styling for hovering over cells in the exception history table*/
+.dark-modeCellException tr:hover{
     background-color: #c0c0c0;
     color: #000000;
 }
@@ -200,7 +227,7 @@ h4 {
     padding-bottom: 5px;
     width: 400px;
     height: 400px;
-    background-color: #3f3f3f !important;
+    background-color: #696969!important;
 }
 
 .dark-modeExceptionHistory {
@@ -210,7 +237,7 @@ h4 {
   padding-bottom: 5px;
   width: 800px;
   height: 400px;
-  background-color: #3f3f3f !important;
+  background-color: #696969 !important;
 }
 
 .dark-modeExceptionManagement p{
