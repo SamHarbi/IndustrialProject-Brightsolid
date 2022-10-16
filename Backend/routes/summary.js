@@ -51,8 +51,13 @@ function getCompliantRules(req) {
 //Create the final JSON return from multiple query data
 async function processResults(req) {
     //Get Data from DB
-    var nonCompliant = await getNonCompliantRules(req);
-    var compliant = await getCompliantRules(req);
+    try {
+        var nonCompliant = await getNonCompliantRules(req);
+        var compliant = await getCompliantRules(req);
+    } catch (err) {
+        return "";
+    }
+
 
     //Define a new json response array
     var data = [];

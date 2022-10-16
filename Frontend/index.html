@@ -56,6 +56,12 @@
                 })
                 .then(getNoncompliant())
                 .then(getCompliant())
+                .then(
+                    //Chart creation
+                    google.charts.load("current", { packages: ["corechart"] });
+                    google.charts.setOnLoadCallback(drawChart);
+                )
+                .then(drawChart())
         }
 
         async function getNoncompliant() {
@@ -262,10 +268,6 @@
     <script>
         
         comPercent = parseFloat(((compliant / (compliant + noncompliant)) * 100).toFixed(1)); //Percentage calculation
-        
-        //Chart creation
-        google.charts.load("current", { packages: ["corechart"] });
-        google.charts.setOnLoadCallback(drawChart);
         
         function drawChart() {
             console.log(noncompliant);
