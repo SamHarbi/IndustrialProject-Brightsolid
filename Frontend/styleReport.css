@@ -182,7 +182,7 @@ h4 {
     padding-bottom: 5px;
     width: 400px;
     height: 400px;
-    background-color: #3f3f3f;
+    background-color: #3f3f3f !important;
 }
 
 .dark-modeExceptionHistory {
@@ -192,7 +192,7 @@ h4 {
   padding-bottom: 5px;
   width: 800px;
   height: 400px;
-  background-color: #3f3f3f;
+  background-color: #3f3f3f !important;
 }
 
 .dark-modeExceptionManagement p{
