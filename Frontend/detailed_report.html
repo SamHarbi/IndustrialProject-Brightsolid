@@ -22,90 +22,84 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
   <script type="text/javascript">
-    var pull;
+        var pull;
 
-    createTable();
+        createTable();
 
-    function createTable() {
+        function createTable() {
 
-      pull = window.localStorage.getItem('id');
+            pull = window.localStorage.getItem('id');
 
-      //Ajax post request, which will push ID to url provided
-      $.ajax({
-        url: 'https://brightsolid-monoserver-7q9js.ondigitalocean.app/Backend/detailreport',
-        type: "POST",
-        dataType: "json",
-        data: {
-          id: pull
-        },
-        success: function(data) {
-          console.log(data);
-          var readin = JSON.stringify(data);
-          var array = JSON.parse(readin);
-          var txt = "";
-          var i;
-          var history = '"createHistoryTable()"';
+            //Ajax post request, which will push ID to url provided
+            $.ajax({
+                url: 'https://brightsolid-monoserver-7q9js.ondigitalocean.app/Backend/detailreport',
+                type: "POST",
+                dataType: "json",
+                data: {
+                    id: pull
+                },
+                success: function (data) {
+                    var readin = JSON.stringify(data);
+                    var array = JSON.parse(readin);
+                    var txt = "";
+                    var i;
+                    var history = '"createHistoryTable()"';
 
-          console.log(isNaN(array[0].id));
+                    //For loop to go through all resources read in and add them to table
+                    for (i = 0; i < array.length; i++) {
+                        if (!isNaN(array[i].id)) {
+                            var cleanup = array[i]; //Cuts down on code in the line below
+                            txt += "<tr onclick=" + history + "><td>" + cleanup.id + "</td><td>" + cleanup.resource + "</td><td>" + cleanup.complianceState + "</td><td>" + cleanup.exception + "</td><td>" + cleanup.justification + "</td><td>" + cleanup.reviewdate + "</td><td>" +
+                                cleanup.lastupdated + "</td><td>" + cleanup.updatedby + "</td></tr>"
+                        }
+                    }
 
-          //For loop to go through all resources read in and add them to table
-          for (i = 0; i < array.length; i++) {
-            if (!isNaN(array[i].id)) {
-              var cleanup = array[i]; //Cuts down on code in the line below
-              txt += "<tr onclick=" + history + "><td>" + cleanup.id + "</td><td>" + cleanup.resource + "</td><td>" + cleanup.complianceState + "</td><td>" + cleanup.exception + "</td><td>" + cleanup.justification + "</td><td>" + cleanup
-                .reviewdate + "</td><td>" +
-                cleanup.lastupdated + "</td><td>" + cleanup.updatedby + "</td></tr>"
-            }
-          }
+                    //Once finished adding cells to 'txt', innerHTML is used to add to the table's body
+                    document.getElementById("insert").innerHTML = txt;
+                }
+            });
 
-          //Once finished adding cells to 'txt', innerHTML is used to add to the table's body
-          document.getElementById("insert").innerHTML = txt;
         }
-      });
 
-    }
+        function createHistoryTable() {
+            //JQuery statement to pull ID from table row
+            jQuery($ => {
+                $('table tr').on('click', function () { //When table cell is clicked
+                    var select = $(this); //Get cell clicked
+                    var resourceID = select.find("td:eq(0)").text(); //Set resourceID to first cell of row
+                });
+            });
 
-    function createHistoryTable() {
-      //JQuery statement to pull ID thejn post
-      jQuery($ => {
-        $('table tr').on('click', function() { //When table cell is clicked
-          var select = $(this); //Get cell clicked
-          var resourceID = select.find("td:eq(0)").text(); //Set push to first cell of row
-        });
-      });
+            //Ajax post request, which will push ID to url provided
+            $.ajax({
+                url: 'https://brightsolid-monoserver-7q9js.ondigitalocean.app/Backend/exceptionhistory',
+                type: "POST",
+                dataType: "json",
+                data: {
+                    id: resourceID
+                },
+                success: function (data) {
+                    var readin = JSON.stringify(data);
+                    var array = JSON.parse(readin);
+                    var txt = "";
+                    var i;
 
-      //Ajax post request, which will push ID to url provided
-      $.ajax({
-        url: 'https://brightsolid-monoserver-7q9js.ondigitalocean.app/Backend/exceptionhistory',
-        type: "POST",
-        dataType: "json",
-        data: {
-          id: resourceID
-        },
-        success: function(data) {
-          console.log(data);
-          var readin = JSON.stringify(data);
-          var array = JSON.parse(readin);
-          var txt = "";
-          var i;
+                    //For loop to go through all resources read in and add them to table
+                    for (i = 0; i < array.length; i++) {
+                        if (!isNaN(array[i].id)) {
+                            var cleanup = array[i]; //Cuts down on code in the line below
+                            txt += "<tr><td>" + cleanup.id + "</td><td>" + cleanup.resource + "</td><td>" + cleanup.complianceState + "</td><td>" + cleanup.exception + "</td><td>" + cleanup.justification + "</td><td>" + cleanup.reviewdate + "</td><td>" +
+                                cleanup.lastupdated + "</td><td>" + cleanup.updatedby + "</td></tr>"
+                        }
+                    }
 
-          console.log(isNaN(array[0].id));
-
-          //For loop to go through all resources read in and add them to table
-          for (i = 0; i < array.length; i++) {
-            if (!isNaN(array[i].id)) {
-              var cleanup = array[i]; //Cuts down on code in the line below
-              txt += "<tr><td>" + cleanup.id + "</td><td>" + cleanup.resource + "</td><td>" + cleanup.complianceState + "</td><td>" + cleanup.exception + "</td><td>" + cleanup.justification + "</td><td>" + cleanup.reviewdate + "</td><td>" +
-                cleanup.lastupdated + "</td><td>" + cleanup.updatedby + "</td></tr>"
-            }
-          }
-
-          //Once finished adding cells to 'txt', innerHTML is used to add to the table's body
-          document.getElementById("insertHistory").innerHTML = txt;
+                    //Once finished adding cells to 'txt', innerHTML is used to add to the table's body
+                    document.getElementById("insertHistory").innerHTML = txt;
+                }
+            });
         }
-      });
-    }
-  </script>
+
+    </script>
 
 </head>
 
