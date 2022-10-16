@@ -42,6 +42,8 @@
                     {
                         console.log("NOT LOGGED IN");
                         window.location.replace("https://brightsolid-monoserver-7q9js.ondigitalocean.app/login.html");
+                    } else{
+                        document.getElementById("username-tag").innerHTML = array.user;
                     }
 
                 })
@@ -128,7 +130,7 @@
     <img id="logo" src="BrightSolid.png" />
 
     <div class="logout">
-      <p class="user">Hello *USER*</p>
+      <p class="user" id="username-tag">Hello *USER*</p>
 
       <!--Log out button for a logged in user-->
       <button id="logout" class="btn" onclick="window.location='https://brightsolid-monoserver-7q9js.ondigitalocean.app/Backend/logout'">Log Out</button>
