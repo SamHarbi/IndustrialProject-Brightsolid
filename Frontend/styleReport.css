@@ -216,11 +216,6 @@ h4 {
     background-color: #424242;
 }
 
-/*Dark mode styling for modal div*/
-.dark-modeModal div {
-    background-color: #6e6e6e;
-}
-
 /* Dark mode styling for the details section of the detailed report */
 .dark-modeExceptionManagement {
     padding-left: 5px;
@@ -277,17 +272,6 @@ h4 {
 #refresh {
     padding-top: 10px;
     text-align: center;
-}
-
-#righttitle {
-    background-color: #e8e8e8;
-    color: #195A5F;
-}
-
-#donutchart {
-    width: auto;
-    height: 500px;
-    overflow: hidden;
 }
 
 #exception-history {
