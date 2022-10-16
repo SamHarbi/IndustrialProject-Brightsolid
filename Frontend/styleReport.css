@@ -15,7 +15,6 @@ p, a, th, label {
 table {
     table-layout: fixed;
     width: 100%;
-    overflow: auto;
 }
 
 th, td {
@@ -105,6 +104,11 @@ h4 {
     text-align: center;
     color: #F1BA56;
     top: 0;
+}
+
+.tableContainer{
+    padding-left:50px;
+    padding-right:50px;
 }
 
 /*Styling for accessibility buttons (Font Resizer and Dark Mode Toggle)*/
@@ -295,8 +299,6 @@ h4 {
 }
 
 #report-table {
-    padding-left: 50px;
-    padding-right: 50px;
     overflow: auto;
 }
 
