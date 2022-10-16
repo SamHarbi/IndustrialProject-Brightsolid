@@ -60,7 +60,21 @@ function getAccountData(customerID) {
       if (row.length < 1) {
         reject('An Error Occured 2');
       } else {
-        resolve(row[0]); //Add multi account support 
+        resolve(row[0]);
+      }
+    });
+  });
+}
+
+//Get User data
+function getUserData(customerID, accountID) {
+  return new Promise((resolve, reject) => {
+    connection.query("SELECT * FROM user WHERE customer_id = ? AND user_id = ?;", [customerID, accountID], function (err, row, fields) {
+      if (err) { reject(err); }
+      if (row.length < 1) {
+        reject('An Error Occured 3');
+      } else {
+        resolve(row[0]);
       }
     });
   });
@@ -85,15 +99,21 @@ router.post('/', express.urlencoded({ extended: false }), function (req, res, ne
       //Get customer ID then use it to get account data 
       getCustomerID(req.body.username).then((result) => {
         getAccountData(result).then((result2) => {
+          getUserData(req.body.username, req.body.account).then((result3) => {
 
-          //Save data into session
-          accountData = result2;
-          req.session.accountID = result2.account_id;
-          req.session.user = req.body.username;
-          req.session.save(function (err) {
-            if (err) { return next(err) }
-            res.redirect("https://brightsolid-monoserver-7q9js.ondigitalocean.app/"); //User has been logged in successfully
-          })
+            //Save data into session
+            accountData = result2;
+            req.session.accountID = result2.account_id;
+            req.session.roleID = result3.role_id;
+            req.session.user = req.body.username;
+            req.session.save(function (err) {
+              if (err) { return next(err) }
+              res.redirect("https://brightsolid-monoserver-7q9js.ondigitalocean.app/"); //User has been logged in successfully
+
+            })
+          }).catch(function (err) {
+            console.log(err);
+          });
         })
       }).catch(function (err) {
         console.log(err);
