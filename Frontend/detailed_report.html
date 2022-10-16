@@ -44,6 +44,42 @@
           var array = JSON.parse(readin);
           var txt = "";
           var i;
+          var history = '"createHistoryTable()"';
+
+          console.log(isNaN(array[0].id));
+
+          //For loop to go through all resources read in and add them to table
+          for (i = 0; i < array.length; i++) {
+            if (!isNaN(array[i].id)) {
+              var cleanup = array[i]; //Cuts down on code in the line below
+              txt += "<tr onclick=" + history + "><td>" + cleanup.id + "</td><td>" + cleanup.resource + "</td><td>" + cleanup.complianceState + "</td><td>" + cleanup.exception + "</td><td>" + cleanup.justification + "</td><td>" + cleanup.reviewdate + "</td><td>" +
+                cleanup.lastupdated + "</td><td>" + cleanup.updatedby + "</td></tr>"
+            }
+          }
+
+          //Once finished adding cells to 'txt', innerHTML is used to add to the table's body
+          document.getElementById("insert").innerHTML = txt;
+        }
+      });
+
+    }
+
+    // Creates the Exception History Table
+    function createHistoryTable(){
+      //Ajax post request, which will push ID to url provided
+      $.ajax({
+        url: 'https://brightsolid-monoserver-7q9js.ondigitalocean.app/Backend/exceptionhistory',
+        type: "POST",
+        dataType: "json",
+        data: {
+          id: pull
+        },
+        success: function(data) {
+          console.log(data);
+          var readin = JSON.stringify(data);
+          var array = JSON.parse(readin);
+          var txt = "";
+          var i;
 
           console.log(isNaN(array[0].id));
 
@@ -57,10 +93,9 @@
           }
 
           //Once finished adding cells to 'txt', innerHTML is used to add to the table's body
-          document.getElementById("insert").innerHTML = txt;
+          document.getElementById("insertHistory").innerHTML = txt;
         }
       });
-
     }
 
     // This code was taken and adapted for our project from the google charts API
@@ -179,8 +214,8 @@
               </thead>
 
               <tbody id="insertHistory">
-              </tbody>
 
+              </tbody>
             </table>
 
           </div>
