@@ -52,7 +52,8 @@
           for (i = 0; i < array.length; i++) {
             if (!isNaN(array[i].id)) {
               var cleanup = array[i]; //Cuts down on code in the line below
-              txt += "<tr onclick=" + history + "><td>" + cleanup.id + "</td><td>" + cleanup.resource + "</td><td>" + cleanup.complianceState + "</td><td>" + cleanup.exception + "</td><td>" + cleanup.justification + "</td><td>" + cleanup.reviewdate + "</td><td>" +
+              txt += "<tr onclick=" + history + "><td>" + cleanup.id + "</td><td>" + cleanup.resource + "</td><td>" + cleanup.complianceState + "</td><td>" + cleanup.exception + "</td><td>" + cleanup.justification + "</td><td>" + cleanup
+                .reviewdate + "</td><td>" +
                 cleanup.lastupdated + "</td><td>" + cleanup.updatedby + "</td></tr>"
             }
           }
@@ -66,12 +67,12 @@
 
     function createHistoryTable() {
       //JQuery statement to pull ID thejn post
-            jQuery($ => {
-                $('table tr').on('click', function () { //When table cell is clicked
-                    var select = $(this); //Get cell clicked
-                    var resourceID = select.find("td:eq(0)").text(); //Set push to first cell of row
-                });
-            });
+      jQuery($ => {
+        $('table tr').on('click', function() { //When table cell is clicked
+          var select = $(this); //Get cell clicked
+          var resourceID = select.find("td:eq(0)").text(); //Set push to first cell of row
+        });
+      });
 
       //Ajax post request, which will push ID to url provided
       $.ajax({
@@ -231,7 +232,9 @@
         <div class="col-sm">
           <div id="exception-management" class="section">
             <form action="" method="post" id="manageException">
-              <b><p align="right" id="formRule">Rule ID</p></b>
+              <b>
+                <p align="right" id="formRule">Rule ID</p>
+              </b>
 
               <div class="form-group">
                 <label for="action">Action</label>
