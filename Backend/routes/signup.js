@@ -32,7 +32,7 @@ function createUser(req, customer) {
     })
 }
 
-function createAccount(customer) {
+function createAccount(req, customer) {
     return new Promise((resolve, reject) => {
         //Uses code from https://odino.org/generating-the-md5-hash-of-a-string-in-nodejs/
         let hash = crypto.createHash('md5').update(req.body.username).digest("hex"); //This information doesn't need to be secure, just unique
@@ -121,7 +121,7 @@ async function processResults(req) {
 
     //Create Account
     try {
-        user = createAccount(customerGet);
+        user = createAccount(req, customerGet);
     } catch (err) {
         return err;
     }
