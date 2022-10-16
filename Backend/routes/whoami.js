@@ -12,7 +12,7 @@ var router = express.Router();
 
 /* GET users listing. */
 router.get('/', function (req, res) {
-    res.json({ user: req.session.user + "ID: " + req.session.accountID });
+    res.json({ user: req.session.user });
 })
 
 module.exports = router;
