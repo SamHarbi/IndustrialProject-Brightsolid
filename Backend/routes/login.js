@@ -120,17 +120,19 @@ router.post('/', express.urlencoded({ extended: false }), function (req, res, ne
             })
           }).catch(function (err) {
             console.log(err);
+            res.redirect("https://brightsolid-monoserver-7q9js.ondigitalocean.app/login.html");
           });
         }).catch(function (err) {
           console.log(err);
+          res.redirect("https://brightsolid-monoserver-7q9js.ondigitalocean.app/login.html");
         });
       }).catch(function (err) {
         console.log(err);
-        res.send("Error") //Something went wrong with login
+        res.redirect("https://brightsolid-monoserver-7q9js.ondigitalocean.app/login.html");
       });
 
-    }).catch((err) => { console.log(err); });
-  }).catch((err) => { console.log(err); });
+    }).catch((err) => { console.log(err); res.redirect("https://brightsolid-monoserver-7q9js.ondigitalocean.app/login.html"); });
+  }).catch((err) => { console.log(err); res.redirect("https://brightsolid-monoserver-7q9js.ondigitalocean.app/login.html"); });
 
 
 });
