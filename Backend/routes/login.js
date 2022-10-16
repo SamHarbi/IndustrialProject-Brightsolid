@@ -120,17 +120,19 @@ router.post('/', express.urlencoded({ extended: false }), function (req, res, ne
             })
           }).catch(function (err) {
             console.log(err);
+            res.send("Error");
           });
         }).catch(function (err) {
           console.log(err);
+          res.send("Error");
         });
       }).catch(function (err) {
         console.log(err);
-        res.send("Error") //Something went wrong with login
+        res.send("Error");
       });
 
-    }).catch((err) => { console.log(err); });
-  }).catch((err) => { console.log(err); });
+    }).catch((err) => { console.log(err); res.send("Error"); });
+  }).catch((err) => { console.log(err); res.send("Error"); });
 
 
 });
