@@ -59,11 +59,13 @@
         }
 
         function createHistoryTable() {
+          var resourceID
+
             //JQuery statement to pull ID from table row
             jQuery($ => {
                 $('table tr').on('click', function () { //When table cell is clicked
                     var select = $(this); //Get cell clicked
-                    var resourceID = select.find("td:eq(0)").text(); //Set resourceID to first cell of row
+                    resourceID = select.find("td:eq(0)").text(); //Set resourceID to first cell of row
                 });
             });
 
