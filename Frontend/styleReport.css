@@ -274,6 +274,7 @@ h4 {
     width: 800px;
     height: 400px;
     background-color: #ffffff;
+    overflow: auto;
 }
 
 #exception-management {
