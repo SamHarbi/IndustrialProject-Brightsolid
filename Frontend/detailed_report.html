@@ -44,6 +44,7 @@
           var array = JSON.parse(readin);
           var txt = "";
           var i;
+          var history = '"createHistoryTable()"';
 
           console.log(isNaN(array[0].id));
 
@@ -51,7 +52,7 @@
           for (i = 0; i < array.length; i++) {
             if (!isNaN(array[i].id)) {
               var cleanup = array[i]; //Cuts down on code in the line below
-              txt += "<tr><td>" + cleanup.id + "</td><td>" + cleanup.resource + "</td><td>" + cleanup.complianceState + "</td><td>" + cleanup.exception + "</td><td>" + cleanup.justification + "</td><td>" + cleanup.reviewdate + "</td><td>" +
+              txt += "<tr onclick=" + history + "><td>" + cleanup.id + "</td><td>" + cleanup.resource + "</td><td>" + cleanup.complianceState + "</td><td>" + cleanup.exception + "</td><td>" + cleanup.justification + "</td><td>" + cleanup.reviewdate + "</td><td>" +
                 cleanup.lastupdated + "</td><td>" + cleanup.updatedby + "</td></tr>"
             }
           }
@@ -61,6 +62,10 @@
         }
       });
 
+    }
+
+    function createHistoryTable() {
+      alert("It worked");
     }
 
     // This code was taken and adapted for our project from the google charts API
