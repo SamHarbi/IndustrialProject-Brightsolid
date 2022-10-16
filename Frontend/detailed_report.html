@@ -24,6 +24,27 @@
         var role =
 
         createTable();
+        getCheckLogin();
+
+        async function getCheckLogin() {
+            fetch("https://brightsolid-monoserver-7q9js.ondigitalocean.app/Backend/whoami")
+                .then(res => res.json())
+                .then(data => {
+
+                    var readin = JSON.stringify(data);
+                    var array = JSON.parse(readin);
+
+                    console.log(array[0]);
+                    console.log(array.user);
+
+                    if(array.user == null)
+                    {
+                        console.log("NOT LOGGED IN");
+                        window.location.replace("https://brightsolid-monoserver-7q9js.ondigitalocean.app/login.html");
+                    }
+
+                })
+        }
 
         function createTable() {
 
