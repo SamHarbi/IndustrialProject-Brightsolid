@@ -44,7 +44,7 @@
           var array = JSON.parse(readin);
           var txt = "";
           var i;
-          var history = '"createHistoryTable(cleanup.id)"';
+          var history = '"createHistoryTable()"';
 
           console.log(isNaN(array[0].id));
 
@@ -64,8 +64,8 @@
 
     }
 
-    function createHistoryTable(exceptionID) {
-      alert("Exception ID: " + exceptionID);
+    function createHistoryTable() {
+      alert("It worked");
     }
 
     // This code was taken and adapted for our project from the google charts API
@@ -148,6 +148,7 @@
         </thead>
 
         <tbody id="insert">
+
 
         </tbody>
       </table>
