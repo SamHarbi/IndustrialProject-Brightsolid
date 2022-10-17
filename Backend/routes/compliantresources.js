@@ -50,6 +50,9 @@ router.get('/', isAuthenticated, function (req, res) {
         } else {
             res.json(row);//Return result
         }
+
+        //End DB Connection
+        connection.end();
     });
 
 })

@@ -3,6 +3,7 @@ A Secured Route that takes a POST request and creates a new exception for a non 
 */
 require('dotenv').config() //.env files for local testing
 
+//Imports
 var express = require('express');
 var session = require('express-session');
 var escapeHtml = require('escape-html');
@@ -10,11 +11,17 @@ const dayjs = require('dayjs');
 const mysql = require('mysql2');
 var router = express.Router();
 
+//Setup Databse Connection
+connectionSetup = require('../database.js');
+connection = connectionSetup.databaseSetup();
+connection.connect();
+
+//Setup day.js 
 var customParseFormat = require('dayjs/plugin/customParseFormat');
 dayjs.extend(customParseFormat);
 
+//Global Variables to decide on an update vs create
 let oldExceptionsPresent = false;
-
 let exceptionAction = 0;
 
 // middleware to test if authenticated - copied from https://www.npmjs.com/package/express-session user login example
@@ -24,10 +31,10 @@ function isAuthenticated(req, res, next) {
 }
 
 /*
-    It is pretty clear that a non atomic commit kind of event can occur here that is why the frontend autofills all information on the 
-    users behalf (gotten from the server beforehand through other routes) to ensure it is correct, the only item dependant on the user, 
-    resource_ID is checked by trying to delete it. Information is not autofilled in the testexceptioncreate page
+    It is pretty clear that a non atomic commit kind of event can occur here if one piece of info is wrong. That is why this route does some queries in a roundabout way
+    to ensure that all information is consistant and thus correct. Some critical info like the ruleID is autofilled on the frontend based on previous backend checks
 */
+
 // This function removes the resource from non compliance and gets if any exception record
 function stageException(req) {
     return new Promise((resolve, reject) => { //First check that exception is not compliant and then delete it
@@ -66,14 +73,14 @@ function createException(req, exep) {
                     reject(err);
                 }
                 else {
-                    exceptionAction = -1;
+                    exceptionAction = -1; //The Action was an update
                     resolve(exep);
                 }
             });
 
         } else { //No current exception - Create it
 
-            //Then add an exception
+            //add an exception
             connection.query('INSERT INTO exception (customer_id, rule_id, last_updated_by, exception_value, justification, resource_id, review_date, last_updated, active) VALUES ((SELECT customer_id FROM account WHERE account_id = ? ), ?, ?, (SELECT resource_name FROM resource WHERE resource_id = ?), ?, ?, ?, ?, 1);', [req.body.accountID, req.body.ruleID, req.session.accountID, req.body.resourceID, req.body.justification, req.body.resourceID, reviewDate, lastUpdate], (err, row, fields) => {
                 if (err) { //Query didn't run
                     reject(err);
@@ -84,7 +91,7 @@ function createException(req, exep) {
                             reject(err);
                         }
                         else {
-                            exceptionAction = 1;
+                            exceptionAction = 1; //The Action was a Create
                             resolve(row);
                         }
                     });
@@ -123,7 +130,7 @@ function createAudit(req, exep, oldexep) {
         reviewDate = dayjs().add(req.body.addedTime, 'month');
         reviewDate = reviewDate.format("YYYY-MM-DD hh:mm:ss");
 
-
+        //Check which action was perfromed and edit inputs to query accordingly
         if (exceptionAction == -1) {
             exceptionAction = 0;
             ruleAction = "update";
@@ -152,6 +159,7 @@ function createAudit(req, exep, oldexep) {
     });
 }
 
+//Run queries and create final response
 async function processResults(req) {
 
     //Setup initial data
@@ -194,7 +202,10 @@ async function processResults(req) {
 /* POST listing. */
 router.post('/', isAuthenticated, function (req, res) {
     processResults(req).then((data) => {
-        res.redirect("https://brightsolid-monoserver-7q9js.ondigitalocean.app/detailed_report.html");
+        res.send("Okay");
+
+        //End DB Connection
+        connection.end();
     })
 })
 
