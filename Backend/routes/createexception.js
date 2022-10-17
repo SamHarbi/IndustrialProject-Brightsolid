@@ -202,10 +202,7 @@ async function processResults(req) {
 /* POST listing. */
 router.post('/', isAuthenticated, function (req, res) {
     processResults(req).then((data) => {
-        res.send("Okay");
-
-        //End DB Connection
-        connection.end();
+        res.redirect("https://brightsolid-monoserver-7q9js.ondigitalocean.app/detailed_report.html");
     })
 })
 
