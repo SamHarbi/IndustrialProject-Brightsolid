@@ -1,301 +1,318 @@
-﻿body {
-    background-color: #195A5F;
+/* Page Body */
+body {
+  background-color: #195A5F;
 }
 
+/* Page Header */
 header {
-    background-color: #F1BA56;
-    height: 130px;
+  background-color: #F1BA56;
+  height: 130px;
 }
 
+/* Page Text */
 p, a, th, label {
-    font-family: 'Roboto', sans-serif;
-    color: #195A5F;
+  font-family: 'Roboto', sans-serif;
+  color: #195A5F;
 }
 
+/* Table */
 table {
-    table-layout: fixed;
-    width: 100%;
+  table-layout: fixed;
+  width: 100%;
 }
 
+/* Padding for table headers and cells*/
 th, td {
-    padding: 8px;
+  padding: 8px;
 }
 
+/* Table Cell */
 td {
-    text-overflow: ellipsis;
-    word-wrap: break-word;
-    border: 1px solid black;
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+  border: 1px solid black;
 }
 
+/* Table Heads */
 thead, th {
-    background-color: #e8e8e8;
-    text-align: center;
-    position: sticky;
-    top: 0;
+  background-color: #e8e8e8;
+  text-align: center;
+  position: sticky;
+  top: 0;
 }
 
 /*Even numbered data cells*/
 tr:nth-child(even) {
-    background-color: #e8e8e8;
+  background-color: #e8e8e8;
 }
 
 /*Odd numbered data cells*/
 tr:nth-child(odd) {
-    background-color: #ffffff;
+  background-color: #ffffff;
 }
 
 /*Styling for mouse hover event*/
 tbody tr:hover {
-    cursor: pointer;
-    background-color: #616161;
-    color: #ffffff;
+  cursor: pointer;
+  background-color: #616161;
+  color: #ffffff;
 }
 
+/* Further Text Styling */
 h2 {
-    font-size: 20px;
-    font-family: 'Roboto', sans-serif;
-    color: #195A5F;
-    text-align: center;
+  font-size: 20px;
+  font-family: 'Roboto', sans-serif;
+  color: #195A5F;
+  text-align: center;
 }
 
 h4 {
-    text-align: center;
+  text-align: center;
 }
 
+/* Logout Button */
 .logout {
-    text-align: center;
-    line-height: 0;
-    float: right;
-    padding-top: 45px;
-    padding-right: 345px;
-    padding-bottom: 5px;
+  text-align: center;
+  line-height: 0;
+  float: right;
+  padding-top: 45px;
+  padding-right: 345px;
+  padding-bottom: 5px;
 }
 
+/* Username */
 .user {
-    color: #195A5F;
+  color: #195A5F;
 }
 
+/* Page Title */
 .title {
-    font-family: 'Montserrat', sans-serif;
-    padding-top: 10px;
-    text-align: center;
-    color: #F1BA56;
+  font-family: 'Montserrat', sans-serif;
+  padding-top: 10px;
+  text-align: center;
+  color: #F1BA56;
 }
 
+/* Background of certain page elements*/
 .section {
-    background-color: #e8e8e8;
-    height: 500px;
-    overflow: hidden;
+  background-color: #e8e8e8;
+  height: 500px;
+  overflow: hidden;
 }
 
+/* Buttons */
 .btn {
-    color: #195A5F;
-    transition: none;
-}
-
-.w3-modal-content {
-    width: 500px;
+  color: #195A5F;
+  transition: none;
 }
 
 /* Styling for the title of the report page */
 .report-title {
-    font-family: 'Montserrat', sans-serif;
-    padding-top: 10px;
-    text-align: center;
-    color: #F1BA56;
-    top: 0;
+  font-family: 'Montserrat', sans-serif;
+  padding-top: 10px;
+  text-align: center;
+  color: #F1BA56;
+  top: 0;
 }
 
-.tableContainer{
-    padding-left:50px;
-    padding-right:50px;
+/* Table Container */
+.tableContainer {
+  padding-left: 50px;
+  padding-right: 50px;
 }
 
 /*Styling for accessibility buttons (Font Resizer and Dark Mode Toggle)*/
 .access {
-    float: right;
+  float: right;
 }
 
 /*Dark mode styling for page body*/
 .dark-modeBody {
-    background-color: #383838;
-    color: white;
+  background-color: #383838;
+  color: white;
 }
 
 /*Dark mode styling for logo*/
 .dark-modeLogo {
-    content: url(BrightSolidDark.png);
+  content: url(BrightSolidDark.png);
 }
 
 /*Dark mode styling for header*/
 .dark-modeHeader {
-    background-color: #181818;
-    color: #F1BA56;
+  background-color: #181818;
+  color: #F1BA56;
 }
 
-    /*Dark mode styling for paragraphs*/
-    .dark-modeHeader p {
-        color: #F1BA56;
-    }
+/*Dark mode styling for paragraphs*/
+.dark-modeHeader p {
+  color: #F1BA56;
+}
 
 /*Dark mode styling for table*/
 .dark-modeTable {
-    background-color: #3f3f3f !important;
+  background-color: #3f3f3f !important;
 }
 
 /* Dark mode styling for table cells in the detailed report */
 .dark-modeCellReport {
-    background-color: #696969 !important;
+  background-color: #696969 !important;
 }
 
-    /*Dark mode styling for table head in the detailed report*/
-    .dark-modeCellReport th {
-        background-color: #696969;
-        color: #ffffff;
-    }
+/*Dark mode styling for table head in the detailed report*/
+.dark-modeCellReport th {
+  background-color: #696969;
+  color: #ffffff;
+}
 
-    /*Dark mode styling for even-numbered table cells in the detailed report*/
-    .dark-modeCellReport tr:nth-child(even) {
-        background-color: #696969;
-    }
+/*Dark mode styling for even-numbered table cells in the detailed report*/
+.dark-modeCellReport tr:nth-child(even) {
+  background-color: #696969;
+}
 
-    /*Dark mode styling for odd-numbered table cells in the detailed report*/
-    .dark-modeCellReport tr:nth-child(odd) {
-        background-color: #4b4b4b;
-    }
+/*Dark mode styling for odd-numbered table cells in the detailed report*/
+.dark-modeCellReport tr:nth-child(odd) {
+  background-color: #4b4b4b;
+}
 
-    /*Dark mode styling for hovering over cells in the detailed report*/
-    .dark-modeCellReport tr:hover {
-        background-color: #c0c0c0;
-        color: #000000;
-    }
+/*Dark mode styling for hovering over cells in the detailed report*/
+.dark-modeCellReport tr:hover {
+  background-color: #c0c0c0;
+  color: #000000;
+}
 
 /* Dark mode styling for table cells in the exception history table */
 .dark-modeCellException {
-    background-color: #696969 !important;
+  background-color: #696969 !important;
 }
 
-    /*Dark mode styling for table head in the exception history table*/
-    .dark-modeCellException th {
-        background-color: #696969;
-        color: #ffffff;
-    }
+/*Dark mode styling for table head in the exception history table*/
+.dark-modeCellException th {
+  background-color: #696969;
+  color: #ffffff;
+}
 
-    /*Dark mode styling for even-numbered table cells in the exception history table*/
-    .dark-modeCellException tr:nth-child(even) {
-        background-color: #696969;
-    }
+/*Dark mode styling for even-numbered table cells in the exception history table*/
+.dark-modeCellException tr:nth-child(even) {
+  background-color: #696969;
+}
 
-    /*Dark mode styling for odd-numbered table cells in the exception history table*/
-    .dark-modeCellException tr:nth-child(odd) {
-        background-color: #4b4b4b;
-    }
+/*Dark mode styling for odd-numbered table cells in the exception history table*/
+.dark-modeCellException tr:nth-child(odd) {
+  background-color: #4b4b4b;
+}
 
-    /*Dark mode styling for hovering over cells in the exception history table*/
-    .dark-modeCellException tr:hover {
-        background-color: #c0c0c0;
-        color: #000000;
-    }
+/*Dark mode styling for hovering over cells in the exception history table*/
+.dark-modeCellException tr:hover {
+  background-color: #c0c0c0;
+  color: #000000;
+}
 
 /*Dark mode styling for hovering over cells*/
 .dark-modeCell tr:hover {
-    background-color: #adadad;
-    color: #000000;
+  background-color: #adadad;
+  color: #000000;
 }
 
 /*Dark mode styling for buttons*/
 .dark-modeButtons {
-    background-color: #3f3f3f !important;
-    color: #ffffff !important;
+  background-color: #3f3f3f !important;
+  color: #ffffff !important;
 }
 
 /*Dark mode styling for logout button*/
 .dark-modeLogOut {
-    background-color: none;
-    color: #F1BA56;
+  background-color: none;
+  color: #F1BA56;
 }
 
 /*Dark mode styling for modal header*/
 .dark-modeModal header {
-    background-color: #424242;
+  background-color: #424242;
 }
 
-/* Dark mode styling for the details section of the detailed report */
+/* Dark mode styling for the details section of the detailed report (exceptionManagement and ExceptionHistory) */
 .dark-modeExceptionManagement {
-    background-color: #696969 !important;
+  background-color: #696969 !important;
 }
 
 .dark-modeExceptionHistory {
-    background-color: #696969 !important;
+  background-color: #696969 !important;
 }
 
 .dark-modeExceptionManagement p {
-    color: #F1BA56
+  color: #F1BA56
 }
 
 .dark-modeExceptionManagement h2 {
-    color: #F1BA56
+  color: #F1BA56
 }
 
 .dark-modeExceptionManagement label {
-    color: #F1BA56
+  color: #F1BA56
 }
 
 .dark-modeExceptionHistory p {
-    color: #F1BA56
+  color: #F1BA56
 }
 
 .dark-modeExceptionHistory h2 {
-    color: #F1BA56
+  color: #F1BA56
 }
 
 .dark-modeExceptionHistory label {
-    color: #F1BA56
+  color: #F1BA56
 }
 
+/* Brightsolid Logo*/
 #logo {
-    float: left;
-    padding-left: 345px;
-    padding-top: 45px;
-    padding-bottom: 5px;
-    height: 102px;
+  float: left;
+  padding-left: 345px;
+  padding-top: 45px;
+  padding-bottom: 5px;
+  height: 102px;
 }
 
+/* Refresh Button*/
 #refresh {
-    padding-top: 10px;
-    text-align: center;
+  padding-top: 10px;
+  text-align: center;
 }
 
+/* Exception History Section*/
 #exception-history {
-    padding-left: 5px;
-    padding-top: 5px;
-    padding-right: 5px;
-    padding-bottom: 5px;
-    width: 800px;
-    height: 400px;
-    background-color: #ffffff;
-    overflow: auto;
+  padding-left: 5px;
+  padding-top: 5px;
+  padding-right: 5px;
+  padding-bottom: 5px;
+  width: 800px;
+  height: 400px;
+  background-color: #ffffff;
+  overflow: auto;
 }
 
+/* Exception Management Section */
 #exception-management {
-    padding-left: 5px;
-    padding-top: 5px;
-    padding-right: 5px;
-    padding-bottom: 5px;
-    width: 400px;
-    height: 400px;
-    background-color: #ffffff;
+  padding-left: 5px;
+  padding-top: 5px;
+  padding-right: 5px;
+  padding-bottom: 5px;
+  width: 400px;
+  height: 400px;
+  background-color: #ffffff;
 }
 
+/* Detailed Report Table*/
 #report-table {
-    overflow: auto;
+  overflow: auto;
 }
 
+/* Exception History Table*/
 #exception-table {
-    overflow: auto;
+  overflow: auto;
 }
 
+/* Return Button */
 #return-btn {
-    padding-left: 5px;
-    padding-top: 5px;
+  padding-left: 5px;
+  padding-top: 5px;
 }
