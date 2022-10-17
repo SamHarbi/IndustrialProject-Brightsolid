@@ -10,6 +10,11 @@ const mysql = require('mysql2');
 const { json } = require('body-parser');
 var router = express.Router();
 
+//Setup Databse Connection
+connectionSetup = require('../database.js');
+connection = connectionSetup.databaseSetup();
+connection.connect();
+
 // middleware to test if authenticated - copied from https://www.npmjs.com/package/express-session user login example
 function isAuthenticated(req, res, next) {
     if (req.session.user) next()

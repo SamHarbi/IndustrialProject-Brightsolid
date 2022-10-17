@@ -10,7 +10,10 @@ var crypto = require('crypto');
 const bcrypt = require('bcrypt');
 var router = express.Router();
 
+//Setup Databse Connection
 connectionSetup = require('../database.js');
+connection = connectionSetup.databaseSetup();
+connection.connect();
 
 //Get hashed user password from db and compare to hashed input password
 function login(username, password) {
@@ -86,13 +89,16 @@ function isAuthenticated(req, res, next) {
   else next('route')
 }
 
+//Run queries and create final response
 async function processResults(req) {
 
+  //Create arrays / vars to be populated
   customerID = 0;
   accountData = [];
   userData = [];
-  data = "https://brightsolid-monoserver-7q9js.ondigitalocean.app/login.html";
+  data = "https://brightsolid-monoserver-7q9js.ondigitalocean.app/login.html"; //On fail
 
+  //Get Data from DB and upon an error add error data
   try {
     customerID = await getCustomerID(req.body.username);
   } catch (err) {

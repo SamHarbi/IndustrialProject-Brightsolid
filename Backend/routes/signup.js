@@ -3,22 +3,35 @@ A Secured Route that takes a POST request to create a new customer record
 */
 require('dotenv').config() //.env files for local testing
 
+//Imports
 var express = require('express');
 const mysql = require('mysql2/promise');
 var crypto = require('crypto');
 const bcrypt = require('bcrypt');
 var router = express.Router();
 
+//Setup Databse Connection
 connectionSetup = require('../database.js');
+connection = connectionSetup.databaseSetup();
+connection.connect();
 
+// middleware to test if authenticated - copied from https://www.npmjs.com/package/express-session user login example
+function isAuthenticated(req, res, next) {
+    if (req.session.user && req.session.roleID == 1) next()
+    else res.redirect("https://brightsolid-monoserver-7q9js.ondigitalocean.app/login.html");
+}
+
+//Hash the input password
 function HashPass(password) {
     return new Promise((resolve, reject) => {
+        //number of salt rounds is 10
         bcrypt.hash(password, 10).then(function (hash) {
             resolve(hash);
         });
     })
 }
 
+//Create record in user of type auditor
 function createUser(req, customer) {
     return new Promise((resolve, reject) => {
         connection.query('INSERT INTO user (user_name, role_id, customer_id) VALUES (?, ?, ?);', [req.body.username, 0, customer[0].customer_id], function (err, results) {
@@ -32,6 +45,7 @@ function createUser(req, customer) {
     })
 }
 
+//Create record in account
 function createAccount(req, customer) {
     return new Promise((resolve, reject) => {
 
@@ -48,6 +62,7 @@ function createAccount(req, customer) {
     })
 }
 
+//Create Customer record
 function createCustomer(req, pass) {
     return new Promise((resolve, reject) => {
         connection.query('INSERT INTO customer (customer_name, password) VALUES (?, ?);', [req.body.username, pass.toString('hex')], function (err, results) {
@@ -61,6 +76,7 @@ function createCustomer(req, pass) {
     })
 }
 
+//Check if customer exists and get the record by finding the customer_name
 function checkCustomer(req) {
     return new Promise((resolve, reject) => {
         //Check if Customer already exists
@@ -75,8 +91,10 @@ function checkCustomer(req) {
     });
 }
 
+//Run queries and create final response
 async function processResults(req) {
 
+    //Create arrays to be populated
     var password;
     var customerCheck = [];
     var customerCreate;
@@ -131,7 +149,7 @@ async function processResults(req) {
 }
 
 /* POST listing. */
-router.post('/', function (req, res, next) {
+router.post('/', isAuthenticated, function (req, res, next) {
     processResults(req).then((data) => {
         res.json(data);
     })

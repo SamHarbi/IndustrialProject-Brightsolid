@@ -20,6 +20,7 @@ function isAuthenticated(req, res, next) {
     else res.redirect("https://brightsolid-monoserver-7q9js.ondigitalocean.app/login.html");
 }
 
+//Get resources that are not compliant
 function getNonCompliantResource(req) {
     return new Promise((resolve, reject) => {
         connection.connect();
@@ -36,7 +37,7 @@ function getNonCompliantResource(req) {
     });
 }
 
-//SELECT * FROM `resource` WHERE resource_type_id IN (SELECT resource_type_id FROM rule WHERE rule_id NOT IN (SELECT rule_id FROM non_compliance WHERE rule_id NOT IN (SELECT rule_id FROM exception) ) AND rule_id = ?) AND account_id = ?; 
+//Select resources that are compliant but not because of an exception
 function getCompliantResource(req) {
     return new Promise((resolve, reject) => {
         connection.query('SELECT * FROM `resource` WHERE resource_id NOT IN (SELECT resource_id FROM non_compliance) AND resource_id NOT IN (SELECT resource_id FROM exception) AND resource_type_id IN (SELECT resource_type_id FROM rule WHERE rule_id = ?) AND account_id = ?; ', [req.body.id, req.session.accountID], (err, row, fields) => {
@@ -52,6 +53,7 @@ function getCompliantResource(req) {
     });
 }
 
+//get compliant resources with an exception 
 function getExceptionResources(req) {
     return new Promise((resolve, reject) => {
         connection.query('SELECT * FROM exception WHERE resource_id IN (SELECT resource_id FROM `resource` WHERE resource_id NOT IN (SELECT resource_id FROM non_compliance) AND resource_id IN (SELECT resource_id FROM exception) AND resource_type_id IN (SELECT resource_type_id FROM rule WHERE rule_id = ?) AND account_id = ?); ', [req.body.id, req.session.accountID], (err, row, fields) => {
@@ -67,6 +69,7 @@ function getExceptionResources(req) {
     });
 }
 
+//Run queries and create final response
 async function processResults(req) {
 
     //Create arrays to be populated

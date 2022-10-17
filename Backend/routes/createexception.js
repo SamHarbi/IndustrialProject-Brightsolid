@@ -169,6 +169,7 @@ async function processResults(req) {
     var oldExceptionData = [];
     var audit = "";
 
+    //Get Data from DB and upon an error add error data
     try {
         oldExceptionData = await getOldExceptionData(req);
     } catch (err) {
