@@ -31,6 +31,7 @@
         //Call for createTable function
         createTable();
 
+        //Function to check if user is logged in
         async function getCheckLogin() {
             fetch("https://brightsolid-monoserver-7q9js.ondigitalocean.app/Backend/whoami")
                 .then(res => res.json())
@@ -92,6 +93,7 @@
                 .then(drawChart())
         }
 
+        //Function to get total number of Non-Compliant resources
         async function getNoncompliant() {
             fetch("https://brightsolid-monoserver-7q9js.ondigitalocean.app/Backend/noncompliantresources")
                 .then(res => res.json())
@@ -109,6 +111,7 @@
                 })
         }
 
+        //Function to get total number of Compliant resources
         async function getCompliant() {
             fetch("https://brightsolid-monoserver-7q9js.ondigitalocean.app/Backend/compliantresources")
                 .then(res => res.json())
@@ -126,6 +129,7 @@
                 })
         }
         
+        //Function to store ID of rule in localStorage and then open Detailed Report page
         function openDetail() {
 
             //JQuery statement to pull ID thejn post
@@ -309,6 +313,7 @@
     <!--Scripts for functions-->
     <script>
         
+        //Draw Chart (Provided by Google Charts)
         function drawChart() {
             console.log(noncompliant);
             console.log(compliant);
@@ -398,6 +403,7 @@
 
         }
         
+        //Call for createTable function
         let temp1 = createTable();
         
     </script>
