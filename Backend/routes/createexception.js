@@ -27,7 +27,7 @@ let exceptionAction = 0;
 // middleware to test if authenticated - copied from https://www.npmjs.com/package/express-session user login example
 function isAuthenticated(req, res, next) {
     if (req.session.user) next()
-    else next('/')
+    else res.redirect("https://brightsolid-monoserver-7q9js.ondigitalocean.app/login.html");
 }
 
 /*
