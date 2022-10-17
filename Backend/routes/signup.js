@@ -1,5 +1,5 @@
 /*
-A Secured Route that takes a POST request to create a new customer record
+A Secured Route that takes a POST request to create a new customer record. Only admins with a user_id of 1 can access 
 */
 require('dotenv').config() //.env files for local testing
 
@@ -17,7 +17,7 @@ connection.connect();
 
 // middleware to test if authenticated - copied from https://www.npmjs.com/package/express-session user login example
 function isAuthenticated(req, res, next) {
-    if (req.session.user && req.session.roleID == 1) next()
+    if (req.session.user && req.session.roleID == 1) next() //Only an admin with an ID of 1 is allowed to access this page
     else res.redirect("https://brightsolid-monoserver-7q9js.ondigitalocean.app/login.html");
 }
 

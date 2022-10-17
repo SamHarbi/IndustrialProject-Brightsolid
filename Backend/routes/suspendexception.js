@@ -11,6 +11,12 @@ const dayjs = require('dayjs');
 const mysql = require('mysql2');
 var router = express.Router();
 
+//Setup Databse Connection
+connectionSetup = require('../database.js');
+connection = connectionSetup.databaseSetup();
+connection.connect();
+
+//Setup day.js
 var customParseFormat = require('dayjs/plugin/customParseFormat');
 dayjs.extend(customParseFormat);
 
@@ -20,7 +26,7 @@ function isAuthenticated(req, res, next) {
     else next('/')
 }
 
-//max(exception_id)
+//Select the latest made exception for an account (for a certain rule)
 function getException(req) {
     return new Promise((resolve, reject) => {
         connection.query('SELECT * FROM exception WHERE exception_id IN (SELECT max(exception_id) FROM exception WHERE resource_id = ? AND rule_id = ? AND customer_id IN (SELECT customer_id FROM account WHERE account_id = ? ));', [req.body.resourceID, req.body.ruleID, req.body.accountID], (err, row, fields) => {
@@ -36,6 +42,7 @@ function getException(req) {
     });
 }
 
+//Set exception to be inactive
 function suspendException(req, exec) {
     return new Promise((resolve, reject) => {
         connection.query('UPDATE exception SET active = 0 WHERE exception_id = ?', [exec[0].exception_id], (err, row, fields) => {
@@ -85,12 +92,15 @@ function createAudit(req, exep) {
     });
 }
 
+//Run queries and create final response
 async function processResults(req) {
 
+    //Create arrays to be populated
     var exception = [];
     var suspend = "";
     var data = "";
 
+    //Get Data from DB and upon an error add error data
     try {
         exception = await getException(req);
     } catch (err) {
