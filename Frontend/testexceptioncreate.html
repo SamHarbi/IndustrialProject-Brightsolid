@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<body>
+    <h1>Test Creating an exception for a result</h1>
+    <form action="https://brightsolid-monoserver-7q9js.ondigitalocean.app/Backend/createexception" method="post">
+        <label for="ruleID"><p>Rule ID (Should be preset)</p></label>
+        <input type="text" name="ruleID" required>
+
+        <label for="resourceID"><p>Resource ID</p></label>
+        <input type="text" name="resourceID" required>
+
+        <label for="justification"><p>Justification</p></label>
+        <input type="text" name="justification" required>
+
+        <label for="accountID"><p>Account ID of customer</p></label>
+        <input type="text" name="accountID" required>
+
+        <label for="addedTime"><p>Time in Months</p></label>
+        <input type="number" name="addedTime" required>
+
+        <button type="submit">Submit</button>
+    </form>
+</body>

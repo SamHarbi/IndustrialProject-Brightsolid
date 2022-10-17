@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+    <meta charset="utf-8" />
+    <title>BrightSolid</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&family=Roboto&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="styleReport.css">
+
+    <!-- This code was taken and adapted for our project from the google charts API -->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script type="text/javascript">
+        var pull = window.localStorage.getItem('id');
+        var resourceID;
+        //var role =
+
+        createTable();
+        getCheckLogin();
+
+        async function getCheckLogin() {
+            fetch("https://brightsolid-monoserver-7q9js.ondigitalocean.app/Backend/whoami")
+                .then(res => res.json())
+                .then(data => {
+
+                    var readin = JSON.stringify(data);
+                    var array = JSON.parse(readin);
+
+                    console.log(array[0]);
+                    console.log(array.user);
+
+                    if (array.user == null) {
+                        console.log("NOT LOGGED IN");
+                        window.location.replace("https://brightsolid-monoserver-7q9js.ondigitalocean.app/login.html");
+                    } else {
+                        document.getElementById("username-tag").innerHTML = "Hello " + array.user;
+                    }
+
+                })
+        }
+
+        function createTable() {
+
+            //Ajax post request, which will push ID to url provided
+            $.ajax({
+                url: 'https://brightsolid-monoserver-7q9js.ondigitalocean.app/Backend/detailreport',
+                type: "POST",
+                dataType: "json",
+                data: {
+                    id: pull
+                },
+                success: function (data) {
+                    var readin = JSON.stringify(data);
+                    var array = JSON.parse(readin);
+                    var txt = "";
+                    var i;
+                    var history = '"createHistoryTable()"';
+
+                    //For loop to go through all resources read in and add them to table
+                    for (i = 0; i < array.length; i++) {
+                        if (!isNaN(array[i].id)) {
+                            var cleanup = array[i]; //Cuts down on code in the line below
+                            txt += "<tr onclick=" + history + "><td>" + cleanup.id + "</td><td>" + cleanup.resource + "</td><td>" + cleanup.complianceState + "</td><td>" + cleanup.exception + "</td><td>" + cleanup.justification + "</td><td>" + cleanup.reviewdate + "</td><td>" +
+                                cleanup.lastupdated + "</td><td>" + cleanup.updatedby + "</td></tr>"
+                        }
+                    }
+
+                    //Once finished adding cells to 'txt', innerHTML is used to add to the table's body
+                    document.getElementById("insert").innerHTML = txt;
+                }
+            });
+
+        }
+
+        function createHistoryTable() {
+            //JQuery statement to pull ID from table row
+            jQuery($ => {
+                $('table tr').on('click', function () { //When table cell is clicked
+                    var select = $(this); //Get cell clicked
+                    resourceID = select.find("td:eq(0)").text(); //Set resourceID to first cell of row
+                });
+            });
+
+            //Ajax post request, which will push ID to url provided
+            $.ajax({
+                url: 'https://brightsolid-monoserver-7q9js.ondigitalocean.app/Backend/exceptionhistory',
+                type: "POST",
+                dataType: "json",
+                data: {
+                    resource_id: resourceID, ruleID: pull
+                },
+                success: function (data) {
+                    console.log(data);
+                    var readin = JSON.stringify(data);
+                    var array = JSON.parse(readin);
+                    var txt = "";
+                    var i;
+
+                    //For loop to go through all resources read in and add them to table
+                    for (i = 0; i < array.length; i++) {
+                        //if (!isNaN(array[i].id)) {
+                        var cleanup = array[i]; //Cuts down on code in the line below
+                        txt += "<tr><td>" + cleanup.user_id + "</td><td>" + cleanup.action + "</td><td>" + cleanup.action_dt + "</td><td>" + cleanup.new_exception_value + "</td><td>" + cleanup.new_justification + "</td><td>" + cleanup.new_review_date + "</td></tr>"
+                        //}
+                    }
+
+                    //Once finished adding cells to 'txt', innerHTML is used to add to the table's body
+                    document.getElementById("insertHistory").innerHTML = txt;
+                }
+            });
+        }
+
+    </script>
+
+</head>
+
+<body id="Font">
+
+    <header id="darkHeader">
+        <img id="logo" src="BrightSolid.png" />
+
+        <div class="logout">
+            <p class="user" id="username-tag">Hello *USER*</p>
+
+            <!--Log out button for a logged in user-->
+            <button id="logout" class="btn" onclick="window.location='https://brightsolid-monoserver-7q9js.ondigitalocean.app/Backend/logout'">Log Out</button>
+        </div>
+    </header>
+
+    <main>
+
+        <div>
+            <!-- Return Button -->
+            <a href="index.html" input class="btn btn-light btn-lg" type="button" value="Return" id="return-btn">Return</a>
+
+            <!--Dark Mode Toggle Button-->
+            <button id="tog" class="access btn btn-light" onclick="darkMode()">Toggle dark mode</button>
+
+            <!--Font Resizing Buttons-->
+            <span id="FontSizeTog">
+                <button id="a3" class="access btn btn-light" onclick="ExtraLarge()">200%</button>
+                <button id="a2" class="access btn btn-light" onclick="Large()">150%</button>
+                <button id="a1" class="access btn btn-light" onclick="Default()">100%</button>
+            </span>
+
+            <br>
+        </div>
+
+        <h1 id="ruleTitle" class="report-title">Compliance Rule X: Detailed Report</h1>
+
+        <div class="tableContainer">
+            <div class="section" id="report-table">
+                <table id="cells">
+                    <thead>
+                        <tr>
+                            <th width="5%">ID</th>
+                            <th width="15%">Resource</th>
+                            <th width="15%">Compliance</th>
+                            <th width="15%">Exception</th>
+                            <th width="20%">Justification</th>
+                            <th width="10%">Review Date</th>
+                            <th width="10%">Last Updated</th>
+                            <th width="10%">Updated By</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="insert">
+                    </tbody>
+                </table>
+            </div>
+            <div id="report-btn">
+                <button id="ref" class="btn btn-light" onclick="createTable()">Refresh</button>
+                <input id="res" class="btn btn-light" type="reset" value="Reset Sort">
+            </div>
+        </div>
+
+        <br>
+        <div class="container">
+
+            <div class="row">
+                <div class="col-lg">
+                    <div id="exception-history" class="section">
+
+                        <!-- Just display exception history for now -->
+                        <h2><b><u>Exception History</u></b></h2>
+                        <div id="exception-table">
+                            <table id="exception-cells">
+                                <thead>
+                                    <tr>
+                                        <th width="5%">User ID</th>
+                                        <th width="10%">Action</th>
+                                        <th width="10%">Date of Action</th>
+                                        <th width="30%">Exception</th>
+                                        <th width="35%">Justification</th>
+                                        <th width="10%">Review Date</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody id="insertHistory">
+                                </tbody>
+
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="col-sm">
+                    <div id="exception-management" class="section">
+                        <form action="" method="post" id="manageException">
+                            <b>
+                                <p align="right" id="formRule">Rule ID</p>
+                            </b>
+
+                            <div class="form-group">
+                                <label for="action">Action</label>
+                                <br>
+                                <select class="custom-select">
+                                    <option selected>Choose Action</option>
+                                    <option value="1" onclick="createException()">Create/Update Exception</option>
+                                    <option value="2" onclick="suspendException()">Suspend Exception</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="account-id">
+                                    <label for="accountID">Account ID</label><br>
+                                    <input type="text" id="accountID" name="accountID" />
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="resource-id">
+                                    <label for="resourceID">Resource ID</label><br>
+                                    <input type="text" id="resourceID" name="resourceID" />
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="addedTime">
+                                    <label for="addedTime">For How Long (Months)?</label><br>
+                                    <input type="text" id="addedTime" name="addedTime" />
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="justification">
+                                        <label for="justification">Justification</label><br>
+                                        <textarea id="justification" name="justification"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <input type="text" type="hidden" style="display: none;" value="" id="hiddenRule" name="ruleID">
+                            <script>
+                                document.getElementById("hiddenRule").value = window.localStorage.getItem('id');
+                            </script>
+                            <button type="submit">Submit</button>
+
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <br>
+
+    </main>
+
+
+</body>
+
+<script>
+    document.getElementById("ruleTitle").innerHTML = "Compliance Rule " + pull + ": Detailed Report";
+    document.getElementById("formRule").innerHTML = "Rule " + pull + " Exception Management";
+
+    //Default font size script
+    function Default() {
+        var element = document.getElementById("Font");
+        element.style.fontSize = "1em";
+    }
+
+    //Large font size script
+    function Large() {
+        var element = document.getElementById("Font");
+        element.style.fontSize = "1.5em";
+    }
+
+    //Extra large font size script
+    function ExtraLarge() {
+        var element = document.getElementById("Font");
+        element.style.fontSize = "2em";
+    }
+
+    //Dark Mode script
+    function darkMode() {
+        var body = document.body;
+        body.classList.toggle("dark-modeBody");
+
+        var body = document.getElementById("logo");
+        body.classList.toggle("dark-modeLogo");
+
+        var header = document.getElementById("darkHeader");
+        header.classList.toggle("dark-modeHeader");
+
+        var reportTable = document.getElementById("report-table");
+        reportTable.classList.toggle("dark-modeTable");
+
+        var exceptionTable = document.getElementById("exception-table");
+        exceptionTable.classList.toggle("dark-modeTable");
+
+        var toggle = document.getElementById("tog");
+        toggle.classList.toggle("dark-modeButtons");
+
+        var reset = document.getElementById("res");
+        reset.classList.toggle("dark-modeButtons");
+
+        var refresh = document.getElementById("ref");
+        refresh.classList.toggle("dark-modeButtons");
+
+        var returnButton = document.getElementById("return-btn");
+        returnButton.classList.toggle("dark-modeButtons");
+
+        var logout = document.getElementById("logout");
+        logout.classList.toggle("dark-modeLogOut");
+
+        var a1 = document.getElementById("a1");
+        a1.classList.toggle("dark-modeButtons");
+
+        var a2 = document.getElementById("a2");
+        a2.classList.toggle("dark-modeButtons");
+
+        var a3 = document.getElementById("a3");
+        a3.classList.toggle("dark-modeButtons");
+
+        var reportButtons = document.getElementById("report-btn");
+        reportButtons.classList.toggle("dark-modeButtons");
+
+        var cell = document.getElementById('cells');
+        cell.classList.toggle("dark-modeCellReport");
+
+        var exceptionCell = document.getElementById('exception-cells');
+        exceptionCell.classList.toggle("dark-modeCellException");
+
+        var exceptionHistory = document.getElementById('exception-history');
+        exceptionHistory.classList.toggle("dark-modeExceptionHistory");
+
+        var exceptionManagement = document.getElementById('exception-management');
+        exceptionManagement.classList.toggle("dark-modeExceptionManagement");
+
+        var modal = document.getElementById('modalDark');
+        modal.classList.toggle("dark-modeModal");
+
+    }
+
+    // Exception Management Scripts
+    // Create Exception
+    function createException() {
+        var form = document.getElementById("manageException");
+        form.action = "https://brightsolid-monoserver-7q9js.ondigitalocean.app/Backend/createexception";
+    }
+
+    // Suspend Exception
+    function suspendException() {
+        var form = document.getElementById("manageException");
+        form.action = "https://brightsolid-monoserver-7q9js.ondigitalocean.app/Backend/suspendexception";
+    }
+</script>
+
+</html>

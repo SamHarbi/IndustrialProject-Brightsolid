@@ -1,5 +1,407 @@
 <!DOCTYPE html>
-<body>
-    <h1>This is being Hosted on Digital Ocean</h1>
-    <p>Temp page for testing server setup</p>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+    <!--Metadata and links-->
+    <meta charset="utf-8" />
+    <title>BrightSolid</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&family=Roboto&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
+        integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="style.css">
+
+    <!--Scripting for Google Charts API-->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script type="text/javascript">
+
+        //Variables to insert into graph
+        let compliant = 0;
+        let noncompliant = 0;
+        let comPercent = 0;
+
+        //Call for createTable function
+        createTable();
+
+        async function getCheckLogin() {
+            fetch("https://brightsolid-monoserver-7q9js.ondigitalocean.app/Backend/whoami")
+                .then(res => res.json())
+                .then(data => {
+
+                    var readin = JSON.stringify(data);
+                    var array = JSON.parse(readin);
+
+                    console.log(array[0]);
+                    console.log(array.user);
+
+                    if(array.user == null)
+                    {
+                        console.log("NOT LOGGED IN");
+                        window.location.replace("https://brightsolid-monoserver-7q9js.ondigitalocean.app/login.html");
+                    }
+                    else{
+                        document.getElementById("username-tag").innerHTML = "Hello " + array.user;
+                        
+                    }
+
+                })
+        }
+
+        //Function to fill the table with rules
+        async function createTable() {
+
+            //Fetch command to take in rules 
+            fetch("https://brightsolid-monoserver-7q9js.ondigitalocean.app/Backend/summary")
+                .then(getCheckLogin())
+                .then(res => res.json())
+                .then(data => {
+
+                    //Variables for insertion into the table
+                    var readin = JSON.stringify(data);
+                    var array = JSON.parse(readin);
+                    var i;
+                    var txt = "";
+                    var jumpTo = '"openDetail()"' //Due to quotations, this is added separately to the table cells (test.html to be replaced)
+
+                    //For loop to go through all rules read in and add them to table
+                    for (i = 0; i < array.length; i++) {
+                        var cleanup = array[i]; //Cuts down on code in the line below
+                        txt += "<tr onclick=" + jumpTo + "><td>" + cleanup.id + "</td><td>" + cleanup.ruleName + "</td><td>" + cleanup.complianceState + "</td></tr>"
+                    }
+
+                    //Once finished adding cells to 'txt', innerHTML is used to add to the table's body
+                    document.getElementById("insert").innerHTML = txt;
+                })
+                .then(getNoncompliant())
+                .then(getCompliant())
+                .then(function(){
+                    comPercent = parseFloat(((compliant / (compliant + noncompliant)) * 100).toFixed(1)); //Percentage calculation
+                
+                    //Chart creation
+                    google.charts.load("current", { packages: ["corechart"] });
+                    google.charts.setOnLoadCallback(drawChart);
+                })
+                .then(drawChart())
+        }
+
+        async function getNoncompliant() {
+            fetch("https://brightsolid-monoserver-7q9js.ondigitalocean.app/Backend/noncompliantresources")
+                .then(res => res.json())
+                .then(data => {
+
+                    var readin = JSON.stringify(data);
+                    var array = JSON.parse(readin);
+
+                    noncompliant = 0;
+
+                    for (i = 0; i < array.length; i++) {
+                        noncompliant += 1;
+                    }
+
+                })
+        }
+
+        async function getCompliant() {
+            fetch("https://brightsolid-monoserver-7q9js.ondigitalocean.app/Backend/compliantresources")
+                .then(res => res.json())
+                .then(data => {
+
+                    var readin = JSON.stringify(data);
+                    var array = JSON.parse(readin);
+
+                    compliant = 0;
+
+                    for (i = 0; i < array.length; i++) {
+                        compliant += 1;
+                    }
+
+                })
+        }
+        
+        function openDetail() {
+
+            //JQuery statement to pull ID thejn post
+            jQuery($ => {
+                $('table tr').on('click', function () { //When table cell is clicked
+                    var select = $(this); //Get cell clicked
+                    var push = select.find("td:eq(0)").text(); //Set push to first cell of row
+
+                    window.localStorage.setItem('id', push);
+                    document.location = 'detailed_report.html';
+                });
+            });
+        }
+
+    </script>
+
+</head>
+
+<body id="Font">
+
+    <!--Header containing logo and log out option-->
+    <header id="darkHeader">
+        <img id="logo" src="BrightSolid.png" alt="BrightSolid Logo" />
+
+        <div class="logout">
+            <p class="user" id="username-tag">Hello *USER*</p>
+
+            <!--Log out button for a logged in user-->
+            <button id="logout" class="btn" onclick="window.location='https://brightsolid-monoserver-7q9js.ondigitalocean.app/Backend/logout'">Log Out</button>
+        </div>
+    </header>
+
+    <main>
+
+        <!--Head of page, just under website header-->
+        <div>
+
+            <div id="Toggles">
+                <!--Font Resizing Buttons-->
+                <button id="a1" class="btn btn-light" onclick="Default()">100%</button>
+                <button id="a2" class="btn btn-light" onclick="Large()">150%</button>
+                <button id="a3" class="btn btn-light" onclick="ExtraLarge()">200%</button>
+
+                <!--Dark Mode Toggle Button-->
+                <button id="tog" class="btn btn-light" onclick="darkMode()">Toggle dark mode</button>
+            </div>
+
+            <br>
+
+            <h1 class="title">Summary Dashboard</h1>
+        </div>
+
+        <!--Left page element, containing filter button, refresh button and a table of rules and their compliance state-->
+        <div id="left">
+            
+            <p id="instruct">Click on the rule you want to open the Detailed Summary for.</p>
+
+            <!--Sort button to order table-->
+            <button id="fil" class="btn btn-light"
+                onclick="document.getElementById('filter').style.display='block'">Filter</button>
+
+            <!--Div for table-->
+            <div class="section" id="table">
+                <table id="cells">
+
+                    <!--Table headers-->
+                    <thead>
+                        <tr>
+                            <th width="5%">ID</th>
+                            <th width="65%">Rule Name</th>
+                            <th width="30%">Compliance State</th>
+                        </tr>
+                    </thead>
+
+                    <!--Table contents-->
+                    <tbody id="insert">
+                    </tbody>
+                </table>
+            </div>
+
+            <!--Refresh button to fetch latest version of table-->
+            <div id="refresh">
+                <button id="ref" class="btn btn-light" onclick="createTable()">Refresh</button>
+            </div>
+        </div>
+
+        <!--Right page element containing compliance graph-->
+        <div id="right">
+
+            <h1 id="totalTitle" class="title">Total Compliance</h1>
+
+            <!--Percentage label-->
+            <div id="label">
+                <p id="percent">0%</p>
+                <p id="overall">Overall Compliance</p>
+            </div>
+
+            <!--Donut Chart of Total Complaince-->
+            <div id="donutchart"></div>
+
+
+        </div>
+
+        <!--Modal that appears when the user presses 'Filter'-->
+        <div id="filter" class="w3-modal w3-animate-opacity">
+            <div id="modalDark" class="w3-modal-content">
+
+                <header class="w3-container">
+                    <span class="w3-button w3-large w3-display-topright close"
+                        onclick="document.getElementById('filter').style.display='none'">&times;</span>
+                    <h1 class="modalHeader">Filter</h1>
+                </header>
+
+                <div class="modalBody">
+
+                    <!--Radio buttons to filter Compliance States-->
+                    <div class="filter">
+                        <input type="radio" id="all" name="filter" checked="checked" />
+                        <label for="all">All Rules</label>
+                    </div>
+
+                    <div class="filter">
+                        <input type="radio" id="com" name="filter" />
+                        <label for="com">Compliant Rules Only</label>
+                    </div>
+
+                    <div class="filter">
+                        <input type="radio" id="non" name="filter" />
+                        <label for="non">Non-Compliant Rules Only</label>
+                    </div>
+
+                </div>
+
+
+
+                <header class="w3-container">
+                    <h1 class="modalHeader">Sort Items</h1>
+                </header>
+
+                <div class="modalBody">
+
+                    <!--Radio buttons to sort by ID or Compliance-->
+                    <div class="sort">
+                        <input type="radio" id="none" name="sort" checked="checked" />
+                        <label for="none">None</label>
+                    </div>
+
+                    <div class="sort">
+                        <input type="radio" id="asc" name="sort" />
+                        <label for="asc">By ID (Ascending)</label>
+                    </div>
+
+                    <div class="sort">
+                        <input type="radio" id="des" name="sort" />
+                        <label for="des">By ID (Descending)</label>
+                    </div>
+
+                    <div class="sort">
+                        <input type="radio" id="comnon" name="sort" />
+                        <label for="comnon">By Compliance</label>
+                    </div>
+
+                    <div class="sort">
+                        <input type="radio" id="noncom" name="sort" />
+                        <label for="noncom">By Non-Compliance</label>
+                    </div>
+                </div>
+
+
+                <div class="modalFooter">
+
+                    <!--Apply button to submit sort/filter options-->
+                    <input class="btn btn-warning" type="submit" value="Apply"
+                        onclick="document.getElementById('filter').style.display='none'">
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!--Scripts for functions-->
+    <script>
+        
+        function drawChart() {
+            console.log(noncompliant);
+            console.log(compliant);
+
+            var data = google.visualization.arrayToDataTable([
+                ['Compliance Status', 'Number of Compliant Resources'],
+                ['Compliant', compliant],
+                ['Non-Compliant', noncompliant],
+
+            ]);
+
+            //Chart options
+            var options = {
+                backgroundColor: 'transparent',
+                pieHole: 0.7,
+                colors: ['#3ace50', '#ff0000'],
+                legend: { position: "bottom", textStyle: { color: "#F1BA56", fontSize: 20 } },
+                pieSliceText: "none",
+            };
+
+            //Insert percentage into percent p element
+            document.getElementById("percent").innerHTML = comPercent + "%";
+
+            //Add Google Chart to page
+            var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
+            chart.draw(data, options);
+        }
+
+        //Variable to target fonts for font size functions
+        var element = document.getElementById("Font");
+
+        //Default font size script
+        function Default() {
+            element.style.fontSize = "1em";
+        }
+
+        //Large font size script
+        function Large() {
+            element.style.fontSize = "1.5em";
+        }
+
+        //Extra large font size script
+        function ExtraLarge() {
+            element.style.fontSize = "2em";
+        }
+
+        //Dark Mode script
+        function darkMode() {
+            var body = document.body;
+            body.classList.toggle("dark-modeBody");
+
+            var body = document.getElementById("logo");
+            body.classList.toggle("dark-modeLogo");
+
+            var header = document.getElementById("darkHeader");
+            header.classList.toggle("dark-modeHeader");
+
+            var dataTable = document.getElementById("table");
+            dataTable.classList.toggle("dark-modeTable");
+
+            var toggle = document.getElementById("tog");
+            toggle.classList.toggle("dark-modeButtons");
+
+            var filter = document.getElementById("fil");
+            filter.classList.toggle("dark-modeButtons");
+
+            var logout = document.getElementById("logout");
+            logout.classList.toggle("dark-modeLogOut");
+
+            var a1 = document.getElementById("a1");
+            a1.classList.toggle("dark-modeButtons");
+
+            var a2 = document.getElementById("a2");
+            a2.classList.toggle("dark-modeButtons");
+
+            var a3 = document.getElementById("a3");
+            a3.classList.toggle("dark-modeButtons");
+
+            var refresh = document.getElementById("ref");
+            refresh.classList.toggle("dark-modeButtons");
+
+            var cell = document.getElementById('cells');
+            cell.classList.toggle("dark-modeCell");
+
+            var modal = document.getElementById('modalDark');
+            modal.classList.toggle("dark-modeModal");
+
+        }
+        
+        let temp1 = createTable();
+        
+    </script>
+
 </body>
+
+</html>

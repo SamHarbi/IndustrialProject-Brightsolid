@@ -1,5 +1,9 @@
 #!/usr/bin/env node
 
+/*  
+  This is a express pre-generated file containing a lot of the setup for the server
+*/
+
 /**
  * Module dependencies.
  */
